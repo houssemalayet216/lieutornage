@@ -1,0 +1,567 @@
+
+ {% extends '@Front/Default/template.html.twig' %}
+
+{% block title %} Contacter {% endblock %}
+
+	{% block stylesheet %}
+		<link href="{{asset('frontFolder/css/integration.css')}}" rel="stylesheet">
+
+
+    <style>
+    a.btn_1.rounded, .btn_1.rounded {
+     -webkit-border-radius: 3px !important; 
+    -moz-border-radius: none;
+    -ms-border-radius: none;
+     border-radius: 3px !important;  
+     padding-top: 15px;
+     padding-bottom: 15px;
+}
+
+
+    </style>
+	{% endblock %}
+
+{% block pageContainer %}
+
+<div id="breadcrumb">
+			<div class="container">
+				<ul>
+					<li><a href="#">Accueil</a></li>
+					
+					<li>Contact</li>
+				</ul>
+			</div>
+		</div>
+		<!--/hero_in-->
+
+	
+		<!--/contact_info-->
+
+		<div class="bg_color_1">
+			<div class="container margin_80_55">
+				<div class="row justify-content-between">
+					<div class="col-lg-5">
+						
+                     
+                   
+
+                <h4 class="headline margin-bottom-30">Contactez-nous</h4>
+
+                <div class="sidebar-textbox">
+                    <p>Le moyen le plus simple  et  le plus rapide pour louer ou rechercher  un lieu de tournage.</p>
+
+                    <ul class="contact-details">
+                        <li><i class=" icon_set_1_icon-91"></i> <strong>Téléphone:</strong> <span>+216 71 123 456</span></li>
+                        <li><i class="icon_set_1_icon-95"></i> <strong>Fax:</strong> <span>+216 71 123 456 </span></li>
+                        <li><i class=" icon_set_1_icon-63"></i> <strong>Web:</strong> <span><a style="color:#274abb;" href="http://sqli-services.com">http://sqli-services.com</a></span></li>
+                        <li><i class="icon_set_1_icon-84"></i> <strong>E-Mail:</strong> <span><a style="color:#274abb;" href="mailto:contact@m-logistique.com">contact@m-tournage.com</a></span></li>
+                    </ul>
+                </div>
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+					
+
+
+				
+					<div class="col-lg-6">
+                         
+                         <div id="message-contact" style="margin-bottom:30px;">
+
+                         </div>
+
+
+						<h4>Laissez-nous votre message</h4>
+						
+						<div id="message-contact"></div>
+						<form method="post" action="{{path('contacter_admin')}}" id="contactform" autocomplete="off">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label>Nom</label>
+										<input class="form-control" type="text" id="nom" name="nom">
+										<span class="text-danger" id="data.nom"></span>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label>Prénom</label>
+										<input class="form-control" type="text" id="prenom" name="prenom">
+										<span class="text-danger" id="data.prenom"></span>
+									</div>
+								</div>
+							</div>
+							<!-- /row -->
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label>Votre e-mail(*) :</label>
+										<input class="form-control" type="email" id="email" name="email">
+										<span class="text-danger" id="data.email"></span>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label>Telephone</label>
+										<input class="form-control" type="text" id="telephone" name="telephone">
+										<span class="text-danger" id="data.telephone"></span>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label>Objet</label>
+								<input class="form-control" type="text" id="objet" name="objet" />
+								<span class="text-danger" id="data.objet"></span>
+							</div>
+
+
+							<!-- /row -->
+							<div class="form-group">
+								<label>Votre message(*) :</label>
+								<textarea class="form-control" id="message" name="message" style="height:150px;"></textarea>
+								<span class="text-danger" id="data.message"></span>
+							</div>
+							
+							<p class="add_top_30"><button type="submit" value="Contacter" class="btn_1 rounded" id="submit-contact">Envoyer <i id="spin-add-actualite"></i></button></p>
+						</form>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+
+
+
+
+
+
+{% endblock %}
+
+{% block javascript %}
+	<script type="text/javascript">
+	function myMap() {
+
+	var mapProp= {
+  center:new google.maps.LatLng(51.508742,-0.120850),
+  zoom:5,
+};
+var map = new google.maps.Map(document.getElementById("map_contact"),mapProp);
+}
+
+  </script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLt9sscIhiyMPobtcQz-nNfYjSm5bB0hI&callback=myMap" async defer></script>
+
+<script>
+
+
+
+
+ $('#submit-contact').click(function(e){
+                  e.preventDefault();
+                    $('#submit-contact').prop('disabled',true);
+                  $("#spin-add-actualite").addClass('fa fa-spinner fa-spin fa-register');
+
+
+                    var nom=$('#nom').val();
+                 
+                  var prenom=$('#prenom').val();// to get the value
+                   
+                   var telephone=$('#telephone').val();
+
+                   var objet=$('#objet').val();
+
+                   var message=$('#message').val();
+
+                  var email=$('#email').val();
+
+
+                  
+                  
+                
+                    
+                  
+                var errorOffreArray=["data.nom","data.prenom","data.telephone","data.email","data.objet","data.message"];
+
+                     
+                    var formoffre = document.getElementById("contactform");
+
+
+
+
+
+                    
+                    if(nom=="")
+                  {
+                       document.getElementById('data.nom').textContent='Ce champ ne doit pas etre vide ';
+                     $("#spin-add-actualite").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#submit-contact').prop('disabled',false); 
+                  }
+                  
+
+                    if(prenom=="")
+                  {
+                       document.getElementById('data.prenom').textContent='Ce champ ne doit pas entre vide ';
+                     $("#spin-add-actualite").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#submit-contact').prop('disabled',false); 
+                  }
+
+
+
+                    if(email=="")
+                  {
+                       document.getElementById('data.email').textContent='Ce champ ne doit pas entre vide ';
+                     $("#spin-add-actualite").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#submit-contact').prop('disabled',false); 
+                  }
+
+                    if(telephone=="")
+                  {
+                       document.getElementById('data.telephone').textContent='Ce champ ne doit pas entre vide ';
+                     $("#spin-add-actualite").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#submit-contact').prop('disabled',false); 
+                  }
+
+
+                       if(objet=="")
+                  {
+                       document.getElementById('data.objet').textContent='Ce champ ne doit pas entre vide ';
+                     $("#spin-add-actualite").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#submit-contact').prop('disabled',false); 
+                  }
+
+
+                      if(message=="")
+                  {
+                       document.getElementById('data.message').textContent='Ce champ ne doit pas entre vide ';
+                     $("#spin-add-actualite").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#submit-contact').prop('disabled',false); 
+                  }
+
+
+
+
+
+
+
+                        $('#nom').change(function(){
+                  
+                 if($.trim(document.getElementById('data.nom').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.nom').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#prenom').change(function(){
+                  
+                 if($.trim(document.getElementById('data.prenom').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.prenom').textContent="";
+                                  }
+                    
+                                 });
+
+
+                    
+           
+
+
+
+                     
+
+
+                                 $('#email').change(function(){
+                  
+                 if($.trim(document.getElementById('data.email').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.email').textContent="";
+                                  }
+                    
+                                 });
+
+                               
+                                $('#telephone').change(function(){
+                  
+                 if($.trim(document.getElementById('data.telephone').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.telephone').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#objet').change(function(){
+                  
+                 if($.trim(document.getElementById('data.objet').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.objet').textContent="";
+                                  }
+                    
+                                 });
+
+                                  $('#message').change(function(){
+                  
+                 if($.trim(document.getElementById('data.message').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.message').textContent="";
+                                  }
+                    
+                                 });
+
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                 if(nom!=="" &&prenom!=="" &&email!==""&&telephone!==''&&objet!=='' &&message!=='')
+               {
+               
+
+                      $.ajax({
+                       dataType:"json",
+                       url:$("#contactform").attr('action'),
+                       type:$("#contactform").attr('method'),
+                        data:new FormData(formoffre),
+                       contentType:false,
+                       processData:false,
+                       cache:false,
+                       success:function (data,status,object)
+                       {
+
+                       
+                       var message=data.message;
+                       if(data.success==true)
+                          {
+
+
+                         
+                               errorOffreArray.forEach(function(error){
+                                  if($.trim(document.getElementById(error).textContent) !== "")
+
+                                  {
+                                    document.getElementById(error).textContent="";
+                                  }
+                               });
+                             
+                                 $('#message-contact').html('<div class="alert alert-success alert-dismissible" role="alert">'+
+ ' <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+message+'</div>');
+                           
+                              $('#contactform')[0].reset();
+                            
+
+                           
+
+                                $("#spin-add-actualite").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#submit-contact').prop('disabled',false); 
+                            
+
+                          }
+
+                          else{
+
+                           
+
+                             $('#message-contact').html('<div class="alert alert-danger alert-dismissible" role="alert">'+
+ ' <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+message+'</div>');
+
+
+                                      $("#spin-add-actualite").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#submit-contact').prop('disabled',false); 
+
+
+                            if(data.errors)
+                            {
+
+                              $("#spin-add-actualite").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#submit-contact').prop('disabled',false); 
+                             
+                             console.log(data.errors);
+
+                              data.errors.forEach(function(error)
+                              {
+
+                               document.getElementById(error.elementId).textContent=error.errorMessage;
+                              });
+
+
+                               $("#spin-add-actualite").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#submit-contact').prop('disabled',false);  
+
+                            }
+
+                          }
+                                
+
+                        
+                        
+                          
+                          
+                          },
+                          error:function (data,status,object)
+                          {
+                             
+
+                          
+                          $('#message-contact').html('<div class="alert alert-danger alert-dismissible" role="alert">'+
+ ' <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+data.message+'</div>');
+
+
+
+                         $("#spin-add-actualite").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#submit-contact').prop('disabled',false); 
+                          }
+
+
+
+
+
+
+
+
+                       });
+
+
+
+
+
+
+
+
+
+
+
+                    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+{% endblock %}

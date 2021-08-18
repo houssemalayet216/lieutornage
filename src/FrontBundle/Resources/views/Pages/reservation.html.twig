@@ -1,0 +1,962 @@
+{% extends '@Front/Default/template.html.twig' %}
+
+{% block title %} Réservation  {% endblock %}
+	{% block stylesheet %}
+		<link href="{{asset('frontFolder/css/integration.css')}}" rel="stylesheet">
+
+		
+	{% endblock %}
+
+{% block pageContainer %}
+
+<div id="breadcrumb">
+			<div class="container">
+				<ul>
+					<li><a href="#">Accueil</a></li>
+					
+					<li>Reservation</li>
+				</ul>
+			</div>
+		</div>
+
+
+{% set i = 0 %}
+
+		<div class="bg_color_1">
+			<div class="container margin_60_35">
+				<div class="row">
+					<div class="col-lg-8">
+						<div class="box_cart">
+						
+						<div class="form_title">
+							<h3><strong>{%set i = i + 1 %} {{i}}</strong>Vos coordonnées</h3>
+							
+						</div>
+						<div class="step">
+
+							<form  method="POST" action="{{path('confirmer-reservation')}}" id="form-reservation">
+							<div class="row">
+
+                            <input type="hidden" value="{{annonce.id}}" id="annonce-id" name="annonce-id" />
+                            <input type="hidden" value="{{app.user.id}}" name="user-id" />
+
+
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label>Nom</label>
+									<input type="text" class="form-control" id="nom"  value="{{app.user.nom}}"  name="nom">
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label>Prénom</label>
+									<input type="text" class="form-control" value="{{app.user.prenom}}" id="prenom" name="prenom">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label>Email</label>
+									<input type="email" id="email" name="email" value="{{app.user.email}}" class="form-control">
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label>Téléphone</label>
+									<input type="email" id="telephone" value="{{app.user.telephone}}" name="telephone" class="form-control">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label>Adresse</label>
+									<input type="text" id="adresse" value="{{app.user.adresse}}"   name="adresse" class="form-control">
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label>Ville</label>
+									<input type="text" id="ville" name="ville" value="{{app.user.ville}}"  class="form-control">
+								</div>
+							</div>
+						</div>
+                        
+                        	<div class="row">
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label>Cp</label>
+									<input type="text" id="cp" name="cp" value="{{app.user.cp}}"  class="form-control">
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label>Nom société</label>
+									<input type="text" id="societe"  value="{{app.user.societe}}"  name="societe" class="form-control">
+								</div>
+							</div>
+						</div>
+
+
+
+
+
+
+
+
+						</div>
+						<hr>
+						<!--End step -->
+
+						<div class="form_title">
+							<h3><strong>{%set i = i + 1 %} {{i}}</strong>Détails réservations</h3>
+
+							
+						</div>
+						<div class="step">
+						     
+                          <div id="message-disponibilite"></div>
+
+							<div class="row">
+								<div class="col-lg-6">
+									<labe>Date Début</labe>
+									<div class="form-group">
+										<input class="form-control dates" type="text" id="dates-debut" value="{{debut}}" name="dates-debut" placeholder="Dates debut">
+										<span class="text-danger" id="data.debut"></span>
+									</div>
+								</div>
+							
+
+
+
+							
+								<div class="col-lg-6">
+									<labe>Date Fin</labe>
+									<div class="form-group">
+										<input class="form-control dates" type="text" id="dates-fin" value="{{fin}}" name="dates-fin" placeholder="Dates fin">
+
+										<span class="text-danger" id="data.fin"></span>
+									</div>
+								</div>
+							</div>
+
+							<input type="hidden" value="" id="premier-prix" name="tarif-total" />
+                             <input type="hidden" value="{{annonce.typeTarification}}" id="typeTarification" /> 
+
+						</div>
+						<hr>
+						<!--End step -->
+                         
+                        {% if annonce.equipement |length > 0  %}
+
+						<div class="form_title" style="margin-bottom:20px;">
+							<h3><strong>{%set i = i + 1 %} {{i}}</strong>Equipements</h3>
+                             
+
+
+						
+						</div>
+						<div class="step">
+							
+							    <div class="row">
+                             {% for  eq in annonce.equipement  %}
+                            <div class="col-md-4">
+                  <div class="checkboxest">
+                        <label class="container_check">{{eq.titre}}
+                          <input type="checkbox" class="eq_common" value="{{eq.id}}" name="eq[]">
+                          <span class="checkmark"></span>
+                        </label>
+                    </div>
+                  </div>
+                          {% endfor %}
+                      
+              </div>
+
+
+
+
+
+						</div>
+						<hr>
+						{% endif %}
+                         
+
+                         {% if annonce.service |length > 0  %}
+						<div class="form_title" style="margin-bottom:20px;">
+							<h3><strong>{%set i = i + 1 %} {{i}}</strong>Services</h3>
+						
+						</div>
+						<div class="step">
+						 
+						     <div class="row">
+                               
+                                 {% for ser in annonce.service  %}
+                            <div class="col-md-4">
+                  <div class="checkboxest">
+                        <label class="container_check">{{ser.titre}}
+                          <input type="checkbox" class="ser_common" value="{{ser.id}}" name="ser[]">
+                          <span class="checkmark"></span>
+                        </label>
+                    </div>
+                  </div>
+                          {% endfor %}
+
+
+
+
+
+
+
+                  
+                       
+
+
+              </div>	
+						 
+
+
+
+
+
+						</div>
+
+					{% endif %}
+						
+						
+						</div>
+					</div>
+					<!-- /col -->
+					
+					<aside class="col-lg-4" id="sidebar">
+						<div class="box_detail">
+							<div id="total_cart">
+								Total <span class="float-right" id="prix-total"></span>
+							</div>
+							<ul class="cart_details">
+								<li>De <span id="date-debut-final">{{debut}}</span></li>
+								<li>A <span id="date-fin-final">{{fin}}</span></li>
+								<li>Services<span id="nbrService">0</span></li>
+								<li>Equipements <span id="nbrEquipment">0</span></li>
+							</ul>
+							<button type="submit" id="confirmer-btn" class="btn_1 full-width purchase">Confirmer</button>
+							
+						</div>
+					</aside>
+
+				</form>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+
+{% block javascript %}
+	<script>
+	$('.dates').daterangepicker({
+
+		"locale": {
+        "format": "DD/MM/YYYY"},
+		"singleDatePicker": true,
+		"autoApply": true,
+		parentEl:'#input_date',
+		timePicker: false,
+        minDate:'today',
+		
+		"linkedCalendars": false,
+		"showCustomRangeLabel": false
+	}, function(start, end, label) {
+	  console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+	});
+	 </script>
+
+	 <script type="text/javascript">
+
+$( document ).ready(function() {
+ var deb=$('#dates-debut').val();
+    var fn=$('#dates-fin').val();
+calculerPrix(deb,fn);
+
+
+
+ $('#dates-fin').change(function(){
+    
+     
+    var debut=$('#dates-debut').val();
+    var fin=$('#dates-fin').val();
+    var id=$('#annonce-id').val();
+
+    if(debut =='' || debut == null)
+    {
+
+    document.getElementById('data.debut').textContent='Champ obligatoire ';
+
+     
+
+    }
+
+    $('#dates-debut').change(function(){
+                  
+                 if($.trim(document.getElementById('data.debut').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.debut').textContent="";
+                                  }
+                    
+                                 });
+
+
+ if($.trim(document.getElementById('data.fin').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.fin').textContent="";
+                                  }
+
+
+
+
+
+ var from = debut.split("/");
+var db = new Date(from[2], from[1] , from[0]);
+
+var fromf = fin.split("/");
+var fn = new Date(fromf[2], fromf[1] , fromf[0]);
+
+
+
+var cp=compareDate(db,fn);
+console.log(cp)
+
+if(cp==true)
+{
+  $('#confirmer-btn').attr('disabled','disabled');
+  document.getElementById('data.fin').textContent='Champs incorrects . ';
+
+}else{
+$('#confirmer-btn').removeAttr('disabled'); 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    if(cp==false&&debut !==null && fin !==null){
+
+    	
+        $.ajax({
+         url:"{{path('verifier_disponibilite')}}",
+         method:"POST",
+         data:{debut:debut,fin:fin,id:id},
+         success:function (data,status,object)
+            {
+             
+            
+            if(data.success==true)
+            {
+             
+                $('#date-debut-final').html(debut);
+                $('#date-fin-final').html(fin);
+             calculerPrix(debut,fin);
+             $('#confirmer').removeAttr('disabled');
+            
+
+            }else{
+
+            $('#message-disponibilite').html('<div class="alert alert-danger alert-dismissible fade show" role="alert">'
+  +data.message+
+  '<button type="button" class="close" data-dismiss="alert" aria-label="Close">'+
+    '<span aria-hidden="true">&times;</span>'+
+  '</button></div>');
+
+             $('#confirmer').attr('disabled','disabled');
+
+
+
+            }
+          
+          
+
+
+            }
+
+        });
+
+    }	
+
+
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+});
+
+
+function diffdate(d1,d2,u){
+div=1
+switch(u){
+ case 's': div=1000;
+ 			 break;
+ case 'm': div=1000*60
+			 break;
+ case 'h': div=1000*60*60
+			 break;
+ case 'd': div=1000*60*60*24
+			 break;
+}
+ 
+var Diff = d2.getTime() - d1.getTime();
+return Math.ceil((Diff/div))
+}
+
+
+
+
+
+
+        
+        function calculerPrix(debutstring,finstring)
+        {
+
+        /* var prix=$('#premier-prix').val()*/ ;
+        var prix={{annonce.tarif}};
+         var type=$('#typeTarification').val() ;
+          
+         
+          var from = debutstring.split("/")
+var db = new Date(from[2], from[1] , from[0]);
+
+var fromf = finstring.split("/")
+var fn = new Date(fromf[2], fromf[1] , fromf[0]);
+
+
+        
+
+
+
+
+
+       
+
+
+         if(type=='Par heure')
+         {
+           var unite= 'h';
+          var nombreHeures=diffdate(db,fn,unite);
+          var tarif= parseInt(prix);
+
+          var reservation=tarif*nombreHeures;
+
+          $('#prix-total').html(reservation +'DT');
+          $('#premier-prix').val(reservation);
+
+         }else if (type=='Par jour'){
+
+
+         	var unite= 'd';
+          var nombreJours=diffdate(db,fn,unite);
+          console.log(nombreJours);
+          var tarif= parseInt(prix);
+           var reservation;
+          if(nombreJours==0)
+          {
+             reservation=tarif;
+          }
+
+           reservation=tarif*nombreJours;
+
+          $('#prix-total').html(reservation +'DT');
+          $('#premier-prix').val(reservation);
+
+
+         }else if (type=='Par semaine')
+         {
+
+
+
+          	var unite= 'd';
+          var nombreJours=diffdate(db,fn,unite);
+           var tarif= parseInt(prix);
+           var reservation;
+           var nombreSemains;
+          if(nombreJours<=7)
+          {
+            reservation=tarif;
+          }else{
+          	nombreSemains=Math.round(nombreJours/7);
+          	reservation=nombreSemains*tarif;
+
+          }
+
+          
+         
+
+
+          $('#prix-total').html(reservation +'DT');
+          $('#premier-prix').val(reservation);
+
+
+
+
+         }else{
+
+           	var unite= 'd';
+          var nombreJours=diffdate(db,fn,unite);
+           var tarif= parseInt(prix);
+           var reservation;
+           var nombreMois;
+          if(nombreJours<=30)
+          {
+            reservation=tarif;
+          }else{
+          	nombreMois=Math.round(nombreJours/30);
+          	reservation=nombreMois*tarif;
+
+          }
+
+          
+         
+
+
+          $('#prix-total').html(reservation +'DT');
+          $('#premier-prix').val(reservation);
+
+         }
+
+
+        }
+
+
+
+
+
+
+
+
+function calculerService()
+{
+
+
+
+            nbCaseCochees = $("[name='ser[]']:checked").length;
+            $('#nbrService').html(nbCaseCochees);
+     
+            console.log(nbCaseCochees);
+
+
+}
+
+
+function calculerEquipement()
+{
+
+
+
+            nbCaseCochees =   $("[name='eq[]']:checked").length
+            $('#nbrEquipment').html(nbCaseCochees);
+
+            console.log(nbCaseCochees);
+     
+
+
+
+}
+
+
+
+
+
+
+$('.ser_common').click(function(){
+calculerService();
+
+});
+$('.eq_common').click(function(){
+	calculerEquipement();
+});
+
+
+
+
+
+
+
+
+	 </script>
+
+<script>
+
+
+ $("#confirmer-btn").click(function(e) {
+
+        e.preventDefault();
+          var formResrvation=document.getElementById("form-reservation");
+
+    var nom=$('#nom').val();
+    var prenom=$('#prenom').val();
+    var email=$('#email').val();
+    var telephone=$('#telephone').val();
+    var adresse=$('#adresse').val();
+    var ville=$('#ville').val();
+    var cp=$('#ville').val();
+
+    var dateDebut=$('#dates-debut').val();
+    var dateFin=$('#dates-fin').val();
+
+
+
+     if(dateDebut =='' || dateDebut == null)
+    {
+
+    document.getElementById('data.debut').textContent='Champ obligatoire ';
+
+     
+
+    }
+
+    $('#dates-debut').change(function(){
+                  
+                 if($.trim(document.getElementById('data.debut').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.debut').textContent="";
+                                  }
+                    
+                                 });
+
+
+
+     if(dateFin =='' || dateFin == null)
+    {
+
+    document.getElementById('data.fin').textContent='Champ obligatoire ';
+
+     
+
+    }
+
+    $('#dates-fin').change(function(){
+                  
+                 if($.trim(document.getElementById('data.fin').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.fin').textContent="";
+                                  }
+                    
+                                 });
+
+
+
+    if(nom =='' || nom == null)
+    {
+
+    document.getElementById('data.nom').textContent='Champ obligatoire ';
+
+     
+
+    }
+
+    $('#dates-fin').change(function(){
+                  
+                 if($.trim(document.getElementById('data.fin').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.fin').textContent="";
+                                  }
+                    
+                                 });
+
+
+    if(prenom =='' || prenom == null)
+    {
+
+    document.getElementById('data.prenom').textContent='Champ obligatoire ';
+
+     
+
+    }
+
+    $('#prenom').change(function(){
+                  
+                 if($.trim(document.getElementById('data.prenom').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.prenom').textContent="";
+                                  }
+                    
+                                 });
+
+
+    if(email =='' || email == null)
+    {
+
+    document.getElementById('data.email').textContent='Champ obligatoire ';
+
+     
+
+    }
+
+    $('#email').change(function(){
+                  
+                 if($.trim(document.getElementById('data.email').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.email').textContent="";
+                                  }
+                    
+                                 });
+
+    if(telephone =='' || telephone == null)
+    {
+
+    document.getElementById('data.telephone').textContent='Champ obligatoire ';
+
+     
+
+    }
+
+    $('#telephone').change(function(){
+                  
+                 if($.trim(document.getElementById('data.telephone').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.telephone').textContent="";
+                                  }
+                    
+                                 });
+
+    if(ville =='' || ville == null)
+    {
+
+    document.getElementById('data.ville').textContent='Champ obligatoire ';
+
+     
+
+    }
+
+    $('#ville').change(function(){
+                  
+                 if($.trim(document.getElementById('data.ville').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.ville').textContent="";
+                                  }
+                    
+                                 });
+
+    if(adresse =='' || adresse == null)
+    {
+
+    document.getElementById('data.adresse').textContent='Champ obligatoire ';
+
+     
+
+    }
+
+    $('#adresse').change(function(){
+                  
+                 if($.trim(document.getElementById('data.adresse').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.adresse').textContent="";
+                                  }
+                    
+                                 });
+
+    if(cp =='' || cp == null)
+    {
+
+    document.getElementById('data.cp').textContent='Champ obligatoire ';
+
+     
+
+    }
+
+    $('#cp').change(function(){
+                  
+                 if($.trim(document.getElementById('data.cp').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.cp').textContent="";
+                                  }
+                    
+                                 });
+
+
+
+
+
+
+
+
+
+
+ var from = dateDebut.split("/");
+var db = new Date(from[2], from[1] , from[0]);
+
+var fromf = dateFin.split("/");
+var fn = new Date(fromf[2], fromf[1] , fromf[0]);
+
+
+
+var cpd=compareDate(db,fn);
+console.log(cpd)
+
+if(cpd==true)
+{
+  $('#confirmer-btn').attr('disabled','disabled');
+  document.getElementById('data.fin').textContent='Champs incorrects . ';
+
+}else{
+$('#confirmer-btn').removeAttr('disabled'); 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+if(cpd==false&&nom != '' && prenom != '' && email != '' && telephone != '' && ville != '' && adresse != '' && cp != '' &&dateDebut != null && dateFin != null ){
+
+
+
+
+                      $('#form-reservation')[0].submit();
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+    });
+
+
+
+
+
+
+
+
+
+
+
+function compareDate(db,df)
+{
+
+var compare=db>df;
+return compare;
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+	
+
+ 
+
+ 
+
+{% endblock %}	

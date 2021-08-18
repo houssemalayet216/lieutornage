@@ -1,0 +1,127 @@
+
+
+ {% extends '@Front/Default/template.html.twig' %}
+
+{% block title %} Details {% endblock %}
+	{% block stylesheet %}  
+<link href="{{asset('frontFolder/css/integration.css')}}" rel="stylesheet">
+<link href="{{asset('frontFolder/css/lieu.css')}}" rel="stylesheet">
+	 {% endblock %}
+
+{% block pageContainer %}
+
+<div id="breadcrumb">
+			<div class="container">
+				<ul>
+					<li><a href="#">Accuille</a></li>
+					
+					<li>Proposer Lieu</li>
+				</ul>
+			</div>
+		</div>
+
+
+			<div class="container margin_80_55">
+                
+                
+
+
+              
+{% if error is defined %}
+    <div class="text-center alert alert-danger " style="margin-bottom:30px;">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+{% endif %}
+
+
+
+                <div class="row">
+				<div class="col-xl-8 col-lg-8">
+				<div class="box_general_3 cart">
+					
+					<div class="form_title">
+						<h3><strong>1</strong>S'inscrire</h3>
+						<p>
+							crée un compte.
+						</p>
+					</div>
+					<div class="step">
+						 {{ render(url('register_lieu_page')) }}
+					</div>
+				
+					<!--End step -->
+
+					
+					<!--End step -->
+					
+				</div>
+				</div>
+				<!-- /col -->
+				<aside class="col-xl-4 col-lg-4" id="sidebar">
+					<div class="box_general_3 booking">
+				      
+
+      <div class="row">
+     <form action="{{ path("proposition_login_check") }}" method="post">
+               
+               
+                   
+                     {% if csrf_token is defined %}
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                    {% endif %}
+
+                <div class="form-group">
+                    <label>Email</label>
+
+                    <input type="text"  name="_username" value="{%if last_username is defined %}{{ last_username }} {%endif%}" required="required" class="form-control"  placeholder=" Email" >
+                   
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                      <input type="password" name="_password" class="form-control" required="required" placeholder="Password"   >
+
+                   
+                </div>
+                <div class="clearfix add_bottom_30">
+                    <div class="checkboxes float-left">
+                        <label class="container_check">Remember me
+                          <input type="checkbox">
+                          <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div class="float-right mt-1"><a id="forgot" href="javascript:void(0);">Mot de passe oublié ?</a></div>
+                </div>
+                <button type="submit" class="btn_1 rounded full-width">Connexion </button>
+               
+            </form>
+
+          </div>
+
+					</div>
+					<!-- /box_general -->
+				</aside>
+				<!-- /asdide -->
+			</div>
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+		    </div>		
+
+
+
+
+
+
+{% endblock %}

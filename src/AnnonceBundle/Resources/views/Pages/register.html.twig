@@ -1,0 +1,190 @@
+	{{ form_start(form, {'method': 'post', 'action': path('register_lieu_page'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+
+                 <div class="row">
+			     <div class="col-md-12">
+				<div class="form-group">
+					<label>Type compte</label>
+					  {{form_widget(form.typeCompte,{'id':'type-register' , 'attr': {'class': 'form-control', 'placeholder': 'Type compte' } })}}
+					
+				</div>
+                    <span class="text-danger"> {{ form_errors(form.typeCompte) }}</span>
+                </div>
+            </div>
+
+
+
+
+                 <div class="row">
+                 	<div class="col-md-12">
+				<div class="form-group">
+					<label>Nom societe</label>
+					 {{form_widget(form.societe,{'id':'societe-register' , 'attr': {'class': 'form-control', 'placeholder': 'Nom société' } })}}
+					
+				</div>
+
+				 <span class="text-danger">{{ form_errors(form.societe) }}</span>
+			</div>
+			</div>
+
+
+                <div class="row">
+                	<div class="col-md-12">
+               <div class="form-group">
+					<label>Civilite</label>
+					 {{form_widget(form.civilite,{'id':'civilite-register' , 'attr': {'class': 'form-control', 'placeholder': 'Civilite' } })}}
+					
+				</div>
+				 <span class="text-danger">{{ form_errors(form.civilite) }}</span>
+			</div>
+
+			</div>
+
+                
+
+                <div class="row">
+                	<div class="col-md-6">
+				<div class="form-group">
+					<label>Nom</label>
+					 {{form_widget(form.nom,{'id':'nom-register' , 'attr': {'class': 'form-control', 'placeholder': 'Nom' } })}}
+				
+				</div>
+				 <span class="text-danger">{{ form_errors(form.nom) }}</span>
+			</div>
+
+                 
+                 <div class="col-md-6">
+               <div class="form-group">
+					<label>Prenom</label>
+					 {{form_widget(form.prenom,{'id':'prenom-register' , 'attr': {'class': 'form-control', 'placeholder': 'Prenom' } })}}
+				
+				</div>
+				 <span class="text-danger">{{ form_errors(form.prenom) }}</span>
+			</div>
+
+			</div>
+                    
+                  <div class="row">
+                  	<div class="col-md-6">
+                    <div class="form-group">
+					<label>Fonction</label>
+					 {{form_widget(form.fonction,{'id':'fonction-register' , 'attr': {'class': 'form-control', 'placeholder': 'Fonction' } })}}
+					
+				</div>
+				 <span class="text-danger">{{ form_errors(form.fonction) }}</span>
+			</div>
+                   
+
+
+                   <div class="col-md-6">
+				<div class="form-group">
+					<label>Ville</label>
+					 {{form_widget(form.ville,{'id':'ville-register' , 'attr': {'class': 'form-control', 'placeholder': 'Ville' } })}}
+					
+				</div>
+				 <span class="text-danger">{{ form_errors(form.ville) }}</span>
+			</div>
+
+			</div>
+
+
+
+                    
+                     <div class="row">
+                     	<div class="col-md-6">
+                    <div class="form-group">
+					<label>Adresse</label>
+					 {{form_widget(form.adresse,{'id':'adresse-register' , 'attr': {'class': 'form-control', 'placeholder': 'Adresse' } })}}
+				
+				</div>
+				 <span class="text-danger">{{ form_errors(form.adresse) }}</span>
+			</div>
+
+                  <div class="col-md-6">
+                  <div class="form-group">
+					<label>Code postale</label>
+					 {{form_widget(form.cp,{'id':'cp-register' , 'attr': {'class': 'form-control', 'placeholder': 'Code postale' } })}}
+				
+				</div>
+				 <span class="text-danger">{{ form_errors(form.cp) }}</span>
+			</div>
+			</div>
+
+
+
+
+
+                  <div class="row">
+                	<div class="col-md-12">
+               <div class="form-group">
+					<label>Téléphone</label>
+					 {{form_widget(form.telephone,{'id':'civilite-register' , 'attr': {'class': 'form-control', 'placeholder': 'Téléphone' } })}}
+					
+				</div>
+				 <span class="text-danger">{{ form_errors(form.telephone) }}</span>
+			</div>
+
+			</div>
+
+
+
+
+
+
+
+
+
+
+                  <div class="row">
+
+                      <div class="col-md-6">
+			<div class="form-group">
+					<label>Username</label>
+					 {{form_widget(form.username,{'id':'username-register' , 'attr': {'class': 'form-control', 'placeholder': 'Username' } })}}
+				
+				</div>
+				 <span class="text-danger">{{ form_errors(form.username) }}</span>
+			</div>
+
+
+
+
+                  	<div class="col-md-6">
+				<div class="form-group">
+					<label>Email</label>
+					 {{form_widget(form.email,{'id':'email-register' , 'attr': {'class': 'form-control', 'placeholder': 'Email' } })}}
+					
+				</div>
+				 <span class="text-danger">{{ form_errors(form.email) }}</span>
+			</div>
+
+
+          
+
+			</div>
+
+			   <div class="row">
+                 <div class="col-md-6">
+				<div class="form-group">
+					<label>Mot de passe </label>
+					 {{form_widget(form.plainPassword.first,{'id':'password-register' , 'attr': {'class': 'form-control', 'placeholder': 'Password' } })}}
+					
+				</div>
+				 <span class="text-danger">{{ form_errors(form.plainPassword.first) }}</span>
+			</div>
+
+			    <div class="col-md-6">
+				<div class="form-group">
+					<label>Confirmer votre mot de passe</label>
+						 {{form_widget(form.plainPassword.second,{'id':'Confirm-register' , 'attr': {'class': 'form-control', 'placeholder': 'Confirmer password' } })}}
+					
+				</div>
+				 <span class="text-danger">{{ form_errors(form.plainPassword.second) }}</span>
+			</div>
+
+              </div>
+
+
+				<div id="pass-info" class="clearfix" style="margin-bottom:0;"></div>
+				 <div class="text-center"><button  class="btn_1 full-width">S'inscrire</button></div>
+				
+			  {{ form_end(form) }}

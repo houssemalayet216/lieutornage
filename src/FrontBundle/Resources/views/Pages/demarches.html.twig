@@ -1,0 +1,245 @@
+ {% extends '@Front/Default/template.html.twig' %}
+
+{% block title %} Démarches {% endblock %}
+	{% block stylesheet %}
+		<link href="{{asset('frontFolder/css/integration.css')}}" rel="stylesheet">
+		<style>
+		.card-min-height {
+    min-height:500px;
+	       }
+
+	       	.paginate-margin {
+    margin-left: 450px;
+	       }
+
+ @media (max-width: 767px)
+{
+.paginate-margin {
+    margin-left: 0;
+}
+}
+	       </style>
+	{% endblock %}
+
+{% block pageContainer %}
+
+<div id="breadcrumb">
+			<div class="container">
+				<ul>
+					<li><a href="#">Accueil</a></li>
+					
+					<li>Démarches</li>
+				</ul>
+			</div>
+		</div>
+
+
+
+
+
+	<div class="container margin_60_35">
+			
+			<!-- /custom-search-input-2 -->
+			
+			<div class="isotope-wrapper">
+			<div class="row">
+
+            <div class="col-md-12" style="text-align:center;">
+
+
+
+
+
+
+                  <div class="costum-gallery" style="width:100%;">
+
+   <a target="_blank" href="{{asset('tournage.pdf')}}">
+   <figure class="image"><img alt="Mitglieder" src="{{asset('frontFolder/img/demarche/m1.png')}}" style="width: 300px; height: 225px;">
+    <figcaption>Demande d’autorisation
+     </figcaption>
+  </figure>
+</a>
+
+
+    <a target="_blank" href="{{asset('aide.pdf')}}">
+   <figure class="image"><img alt="Mitglieder" src="{{asset('frontFolder/img/demarche/m2.png')}}" style="width: 300px; height: 225px;">
+    <figcaption>Aides 
+      </figcaption>
+  </figure>
+</a>
+
+ 
+   <a target="_blank" href="{{asset('assurance.pdf')}}"> 
+  <figure class="image"><img alt="Mitglieder" src="{{asset('frontFolder/img/demarche/m3.jpg')}}" style="width: 300px; height: 225px;">
+    <figcaption>Police d’assurance</figcaption>
+  </figure>
+</a>
+  
+  
+
+ 
+
+<figure class="image"><img alt="Mitglieder" src="{{asset('frontFolder/img/demarche/m4.png')}}" style="width: 300px; height: 225px;">
+    <figcaption>Convention de location </figcaption>
+  </figure>
+
+ 
+
+
+   <figure class="image"><img alt="Mitglieder" src="{{asset('frontFolder/img/demarche/m5.jpg')}}" style="width: 300px; height: 225px;">
+    <figcaption>Cahier de charge /fiches techniques </figcaption>
+  </figure>
+
+
+  <figure class="image"><img alt="Mitglieder" src="{{asset('frontFolder/img/demarche/m6.png')}}" style="width: 300px; height: 225px;">
+    <figcaption dir="rtl">Droit d’auteur 
+      </figcaption>
+  </figure>
+
+
+   <figure class="image"><img alt="Mitglieder" src="{{asset('frontFolder/img/demarche/m7.png')}}" style="width: 300px; height: 225px;">
+    <figcaption>Fiscalité et taxe</figcaption>
+  </figure>
+
+
+
+  <figure class="image"><img alt="Mitglieder" src="{{asset('frontFolder/img/demarche/m9.jpg')}}" style="width: 300px; height: 225px;">
+    <figcaption>Contrat de travail</figcaption>
+  </figure>
+
+
+  <figure class="image"><img alt="Mitglieder" src="{{asset('frontFolder/img/demarche/m8.jpg')}}" style="width: 300px; height: 225px;">
+    <figcaption>Douanes et entrées sur le territoire</figcaption>
+  </figure>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+         
+
+
+
+
+             
+
+
+           
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				<!-- /box_grid -->
+			</div>
+		
+
+
+
+
+
+
+
+			</div>
+			<!-- /isotope-wrapper -->
+			
+			
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+{% block javascript %}
+
+{% endblock %}

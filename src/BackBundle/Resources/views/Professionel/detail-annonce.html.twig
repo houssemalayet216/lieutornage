@@ -1,0 +1,407 @@
+{% extends '@Back/Default/templateProfessionel.html.twig' %}
+{%block stylesheet %}
+ <link href="{{asset('frontFolder/css/slider-pro.min.css')}}" rel="stylesheet">
+
+<style>
+
+
+.sidebar-textbox {
+    display: inline-block;
+    width: 100%;
+    padding-right: 40px;
+}
+
+.sidebar-textbox ul.contact-details {
+    list-style: none;
+    padding: 5px 0 0 0;
+}
+
+.sidebar-textbox ul.contact-details li {
+    text-align: left;
+    padding-left: 60px;
+    position: relative;
+    width: 100%;
+    display: inline-block;
+    margin: 10px 0;
+}
+
+.sidebar-textbox ul.contact-details li i {
+    height: 100%;
+    position: absolute;
+    left: 0;
+    font-size: 24px;
+    color: #333;
+   
+}
+
+.sidebar-textbox ul.contact-details li strong {
+    display: block;
+    color: #333;
+}
+
+.sidebar-textbox ul.contact-details strong {
+    font-weight: 500;
+}
+
+.sidebar-textbox span {
+    color: #666;
+    display: inline-block;
+}
+
+
+
+
+
+
+
+
+</style>
+
+
+
+
+
+
+{% endblock %}
+
+
+
+{% block section_haider %}
+<section class="content-header">
+    
+      <ol class="breadcrumb">
+
+        <li><a href="#"><i class="fa fa-dashboard"></i>Tableau de bord</a></li>
+        <li class="active">Détails annonce</li>
+      </ol>
+    </section>
+{%endblock%}
+
+ {%block pageContainer %} 
+ 
+
+
+
+<section class="content">
+ <div class="row">
+<div class="col-md-12">
+
+  <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#tab_1" data-toggle="tab">Information générale</a></li>
+              <li><a href="#tab_2" data-toggle="tab">Gallerie</a></li>
+              <li><a href="#tab_3" data-toggle="tab">Caractéristique & spécification</a></li>
+               {% set images=annonce.gallerie|first %}
+             
+              <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane active" id="tab_1">
+            
+                  <div class="row">
+                  <div class="col-md-5">
+                  <div class="product-img">
+                    <img src="{{asset('Uploads/')}}{{images.image}}" class="img-fluid" width="300" alt="Product Image">
+                  </div>
+              </div>
+                   <div class="col-md-7">
+                   <div style="display:inline">  <h3>{{annonce.titre}}</h3><span class="label label-info">{{annonce.tarif}} DT / {{annonce.typeTarification}}</span> </div>
+                  <p style="margin-top:20px;font-size:18px;font-weight:400"> {{annonce.description}} </p>
+                
+
+
+
+
+
+
+                <div class="sidebar-textbox">
+                <ul class="contact-details">
+                        <li><i class="fa fa-map-o"></i> <strong>Adresse:</strong> <span>{{annonce.ville}} ,{{annonce.adresse}} ,{{annonce.cp}}</span></li>
+                        <li><i class="fa fa-mobile" style="font-size:32px;"></i> <strong>Téléphone:</strong> <span>{{annonce.user.telephone}} </span></li>
+                        <li><i class="fa fa-envelope-o"></i> <strong>Email:</strong> <span><a style="color:#274abb;" href="http://sqli-services.com">{{annonce.user.email}}</a></span></li>
+                    </ul>
+                </div>
+
+
+                 
+              </div>
+          </div>
+              
+          
+
+
+
+
+
+       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                 
+                
+             
+
+
+
+              </div>
+              <!-- /.tab-pane -->
+              <div class="tab-pane " id="tab_2"  >
+                <div class="row">
+                    <div class="col-md-offset-2  col-md-8">
+                   <div id="Img_carousel" class="slider-pro" style="width: 100%; max-width: 960px;">
+                <div class="sp-slides">
+                
+                 {% for images in annonce.gallerie   %}
+                    <div class="sp-slide">
+                        <img alt="Image" class="sp-image" src="{{asset('Uploads/')}}{{images.image}}"
+                        data-src="{{asset('Uploads/')}}{{images.image}}" 
+                        data-small="{{asset('Uploads/')}}{{images.image}}" 
+                        data-medium="{{asset('Uploads/')}}{{images.image}}" 
+                        data-large="{{asset('Uploads/')}}{{images.image}}" 
+                        data-retina="{{asset('Uploads/')}}{{images.image}}">
+                    </div>
+                  {% endfor %}
+
+                   
+                </div>
+                <div class="sp-thumbnails">
+                  {% for photos in annonce.gallerie  %}
+                    <img alt="Image" class="sp-thumbnail" src="{{asset('Uploads/')}}{{photos.image}}">
+                         {% endfor %}
+                
+                </div>
+            </div>  
+
+            </div></div> 
+            
+
+
+
+              </div>
+              <!-- /.tab-pane -->
+              <div class="tab-pane" id="tab_3">
+                
+
+             
+               
+               <table class="table table-responsive">
+                  <tr><td><strong>Surface Totale</strong></td><td>{{annonce.surfaceTotale}}</td></tr>
+                  <tr><td><strong>Surface de piéce</strong></td><td>{{annonce.surfacePiece}}</td></tr>
+                  <tr><td><strong>Nombre de pièce</strong></td><td>{{annonce.nbrPiece}}</td></tr>
+                  <tr><td><strong>Nombre de niveau</strong></td><td>{{annonce.nbrNiveau}}</td></tr>
+                   {%if annonce.environment|length >0 %}
+                   <tr><td><strong>Environment</strong></td><td>
+                      {% for env in annonce.environment %}
+                    <span>{{env.titre}}</span><br/>
+                    
+                    {% endfor %}
+                     </td></tr>
+                   {% endif %}
+
+                   {%if annonce.decoration |length >0 %}
+                   <tr><td><strong>Decorations</strong></td><td>
+                      {% for dec in annonce.decoration %}
+                    <span>{{dec.titre}}</span><br/>
+                    
+                      {% endfor %}
+                      </td></tr>
+                   {% endif %}
+
+
+
+                   {%if annonce.equipement |length >0 %}
+                   <tr><td><strong>Equipement</strong></td><td>
+                      {% for eq in annonce.equipement %}
+                    <span>{{eq.titre}}</span><br/>
+                    
+                      {% endfor %}
+                      </td></tr>
+                   {% endif %}
+
+
+                   {%if annonce.service |length >0 %}
+                   <tr><td><strong>Services</strong></td><td>
+                      {% for ser in annonce.service %}
+                    <span>{{ser.titre}}</span><br/>
+                    
+                      {% endfor %}
+                      </td></tr>
+                   {% endif %}
+                   
+                </table>
+                
+                
+                
+               
+
+
+               
+              </div>
+
+
+           
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              <!-- /.tab-pane -->
+            
+            <!-- /.tab-content -->
+          </div>
+
+
+
+
+
+</div>
+</div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+{% block aside %}
+
+
+{% endblock %}
+
+
+{% block javascript %}
+
+
+
+  
+  
+ 
+
+
+
+
+  <script src="{{asset('frontFolder/js/jquery.sliderPro.min.js')}}"></script>
+<script >
+
+
+
+  $( '#Img_carousel' ).sliderPro({
+      width: 960,
+      height: 500,
+      fade: true,
+      arrows: true,
+      buttons: false,
+      fullScreen: false,
+      smallSize: 500,
+      startSlide: 0,
+      mediumSize: 1000,
+      largeSize: 3000,
+      thumbnailArrows: true,
+      autoplay: false
+    });
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+ <script>
+$(document).ready(function(){
+
+   $('#link-tableau').removeClass('active');
+  $('#link-reservation').removeClass('active');
+  $('#link-calendar').removeClass('active');
+  $('#link-message').removeClass('active');
+  $('#link-profile').removeClass('active');
+  $('#link-lieux').addClass('active');
+
+
+  
+});
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

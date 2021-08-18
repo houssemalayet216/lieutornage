@@ -1,0 +1,446 @@
+
+
+
+ {% extends '@Front/Default/template.html.twig' %}
+
+{% block title %} Details {% endblock %}
+	{% block stylesheet %}  
+
+<link href="{{asset('frontFolder/css/integration.css')}}" rel="stylesheet">
+ <link href="{{asset('frontFolder/css/slider-pro.min.css')}}" rel="stylesheet">
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" media="all" rel="stylesheet" type="text/css"/>
+ 
+
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+
+<style type="text/css">
+
+.contact-details li {
+margin-bottom:  10px;
+
+}
+
+
+.agent-title {
+    position: relative;
+    display: block;
+    margin-bottom: 30px;
+}
+
+
+.agent-title .agent-photo {
+    float: left;
+    display: block;
+}
+
+
+
+
+.agent-title .agent-photo img {
+    border-radius: 50%;
+    max-width: 72px;
+}
+
+.agent-widget h4 {
+    color: #333;
+    margin: 0px 0 6px 0;
+}
+
+.agent-details span {
+    color: #999;
+}
+
+.agent-details span i {
+    font-size: 18px;
+    position: relative;
+    top: 3px;
+    margin-right: 10px;
+}
+
+
+
+
+
+.agent-details {
+    margin-left: 92px;
+    display: block;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
+
+
+
+.contact-details i {
+color:#3f4079;
+font-size: 20px;
+top:-10px;
+
+}
+
+select.form-control:not([size]):not([multiple]) {
+     height:46px; 
+}
+
+.booking select {
+     display: block; 
+}
+
+
+.box_style_2 {
+    background: #fff;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    margin-bottom: 25px;
+    padding: 20px;
+    position: relative;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+
+.box_style_1 img {
+    
+    margin-top: 10px;
+   
+      border-radius: 50%;
+    max-width: 50px;
+}
+.box_style_2 i{
+	color:#3f4079;
+}
+
+.box_style_2 h4 {
+    font-size: 18px;
+
+}
+
+.box_style_2 a.phone, .box_style_4 a.phone {
+    font-size: 26px;
+    display: block;
+    margin-bottom: 30px;
+   
+}
+
+
+
+.box_style_1 {
+    background: #fff;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    border: 1px solid #ddd;
+    margin-bottom: 25px;
+    padding: 30px;
+    position: relative;
+    color: #666;
+}
+
+.box_style_1  h4{
+    -webkit-font-smoothing: antialiased;
+    color: #333;
+    font-size: 18px;
+}
+
+
+h4 span, h5 span, h6 span {
+    color: #e04f67;
+}
+
+.box_style_1 p {
+    margin: 0 0 20px 0;
+}
+
+hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid #ddd;
+}
+
+ul#contact-info {
+    list-style: none;
+    margin: 0 0 0 0;
+    padding: 0;
+}
+
+
+.box_style_1 a {
+    color: #51bce6;
+    text-decoration: none;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+</style>
+
+
+	 {% endblock %}
+
+{% block pageContainer %}
+
+<div id="breadcrumb">
+			<div class="container">
+				<ul>
+					<li><a href="#">Accueil</a></li>
+					<li><a href="#">Profile</a></li>
+					<li><a href="#">Derniers annonces</a></li>
+				</ul>
+			</div>
+		</div>
+
+
+			<div class="container margin_80_55">
+             	<div class="row ">
+				
+                 
+
+              <div class="col-md-8">
+
+              	<div class="row">
+
+              	{%for annonce in annonces %}
+
+                 {% set images=annonce.gallerie|first %}
+                   {% set categorie=annonce.categorie|first %}
+
+               <div class="col-md-6">
+                 <div class="box_grid">
+									<figure>
+										<a href="#0" class="wish_bt"></a>
+										<a href="{{path('details_page',{id:annonce.id})}}">
+
+											<img src="{{asset('Uploads/')}}{{images.image}}" class="img-fluid" alt="" width="800" height="533">
+
+
+											<div class="read_more"><span>Voir détails</span></div></a>
+										
+										<small>{{categorie.titre}}</small>
+									</figure>
+									<div class="wrapper">
+										
+										<h3 style="margin-bottom:10px;"><a href="{{path('details_page',{id:annonce.id})}}">{{annonce.titre}}</a></h3>
+										 {# <div class="cat_star"><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i></div> #}
+                                       
+							           <a href="#"><div style="margin-bottom:10px;"><span class="card-text-color"><i class="icon-location card-icon-color">  </i>{{annonce.adresse}} , {{annonce.ville}} ,{{annonce.cp}}  </span></div></a>
+
+                                          <div style="margin-bottom:10px;" ><span class="card-text-color"><i class="icon-home card-icon-color">  </i>{{annonce.surfaceTotale}}   </span></div>
+
+
+                                          <div class="card-div" style="margin-bottom:10px;margin-left:5px;"><span class="card-text-color"> <strong>{{annonce.tarif}} DT</strong> / {{annonce.typeTarification}} </span></div>
+
+										
+									</div>
+									<ul>
+										
+										<li><span class="card-text-color"><i class="icon-calendar-empty card-icon-color" ></i> il ya 2 jours</span></li>
+									</ul>
+								</div>
+
+                      </div>
+
+
+
+
+
+
+              {% endfor %}
+
+
+            </div>
+
+
+
+                             <div class="text-center nav-gation" style="margin-left:250px;">
+            <div  class="text-center">{{ knp_pagination_render(annonces) }}</div>
+          </div>
+                     
+
+
+
+
+
+              </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+					
+
+
+
+
+
+
+
+
+
+
+
+               <aside class="col-xl-4 col-lg-4" id="sidebar">
+					
+                    
+                   
+
+                   <div class="box_style_1">
+				<span class="tape"></span>
+				<div class="text-center" style="margin-bottom:30px;">
+
+					{% if user.photo != null %}
+						 <img src="{{asset('Uploads/')}}{{user.photo}}" alt="">
+						{%else%}
+                      <img src="http://logistique.sqli-services.com/media/cache/scale/rc/2qSEsayO/images/placeholders/user.png" alt="">
+					{% endif %}
+               <h4>{{user.civilite}}{{user.nom}} {{user.prenom}}</h4>
+                 <p>({{user.typeHote}})</p>
+            </div>
+
+
+				<hr>
+				<h4>Addresse <span><i class="icon-pin pull-right"></i></span></h4>
+				<p>
+					{{user.ville}} {{user.adresse}} {{user.cp}}
+				</p>
+				<hr>
+				<h4>Info <span><i class="icon-pin pull-right"></i></span></h4>
+				<ul id="contact-info">
+					<li>{{user.telephone}}</li>
+					<li><a href="#">{{user.email}}</a></li>
+				</ul>
+			</div>
+
+
+
+                     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+					<!-- /box_general -->
+				</aside>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		    </div>		
+
+
+
+
+
+
+{% endblock %}
+
+
+{% block javascript %}
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9vrkLJKSv1SFSa-_ojqx3s8Q-uHM4U5Q&libraries=places&"></script>
+
+	<script src="{{asset('frontFolder/js/map_single_hotel.js')}}"></script>
+
+	
+	
+ 
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+
+
+
+
+
+
+</script>
+{% endblock %}

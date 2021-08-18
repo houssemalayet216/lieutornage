@@ -1,0 +1,870 @@
+{% extends '@Admin/Default/templateAdmin.html.twig' %}
+{% block stylesheet %}
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.7/css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block section_haider %}
+<section class="content-header">
+     
+      <ol class="breadcrumb">
+
+        <li><a href="#"><i class="fa fa-dashboard"></i>Tableau de bord</a></li>
+        <li class="active">Références</li>
+      </ol>
+    </section>
+{%endblock%}
+
+ {%block pageContainer %} 
+ 
+
+ 
+
+
+
+ <section class="content">
+
+  <div class="row">
+<div class="col-md-12">
+
+
+
+<div class="box">
+            <div class="box-header">
+              <div style="display:flex;justify-content: space-between;">
+
+               <div class="col-md-2">
+                <select id="filter-select" class="form-control input-sm pull pull-right">
+              <option value="Tournage">Tournage</option>
+              <option value="Shooting">Shooting</option>
+              <option value="Evenement">Evenement</option>
+              </select>
+    
+
+            </div>
+             
+             <div class="pull pull-right">
+
+    {{ render(controller(
+        'AdminBundle:Default:ajouterReference'
+       
+    )) }}
+
+
+</div>
+
+
+
+
+
+
+
+
+
+          </div>
+            
+
+
+
+
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table id="tablereference" class="table table-bordered table-striped" >
+                <thead>
+                <tr>
+
+                  <th class="text-center">Image</th>
+                  <th class="text-center">Catégorie</th>
+                  <th class="text-center">Date sortie</th>
+                  <th class="text-center">Pays</th>
+                  <th class="text-center">DatePublication</th>
+                 
+                  <th class="text-center">Action</th>
+                </tr>
+                </thead>
+                
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+
+
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="modal fade" tabindex="-1" id="supprimerReferenceModal" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Supprimer référence</h4>
+      </div>
+      <div class="modal-body">
+        <p>Êtes-vous sûr de supprimer cet référence ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" id="supprimerRef"><span>Supprimer</span><i id="spin-supprimer-reference"></i></button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->  
+
+
+
+
+
+ 
+
+
+</section>
+
+
+
+{% endblock %}
+
+
+{%block aside %}
+{%endblock%}
+
+
+
+
+
+
+
+
+{% block javascript%}
+
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.7/js/fileinput.js" type="text/javascript"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.6/js/locales/fr.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.7/themes/fa/theme.js" type="text/javascript"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" type="text/javascript"></script>
+  
+<script>
+
+
+$("#file-1").fileinput({
+             language: "fr",
+             showUpload: false,
+           showRemove: false,
+            required: true,
+            theme: 'fa',
+            minFileCount: 1,
+            allowedFileExtensions: ['jpg', 'png', 'gif'],
+            overwriteInitial: false,
+            maxFileSize:2000
+           
+
+        });
+
+
+
+
+ $('#premier-sortie').datepicker({
+            format: 'd/m/yyyy'
+        });
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+
+       var tablereference;
+$(document).ready(function($){
+ tablereference=$("#tablereference").DataTable({
+     columnDefs: [
+     { "width": "15%", "targets": 0 },
+        { "width": "15%", "targets": 1 },
+        { "width": "15%", "targets": 2 },
+        { "width": "15%", "targets": 3 },
+         { "width": "15%", "targets": 4 },
+          { "width": "25%", "targets": 5 },
+   {"orderable": false, "targets": 5}
+  ],
+  'destroy':true,
+
+    'ajax':{"url":"{{path("liste_reference")}}"},
+    
+ 
+     'order': []
+});
+
+
+
+$('#link-tableau').removeClass('active');
+  $('#link-user').removeClass('active');
+  $('#link-message').removeClass('active');
+  $('#link-actualite').removeClass('active');
+ 
+  $('#link-reference').addClass('active');
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {% for flashMessage in app.session.flashbag.get('ModificationSuccess') %}
+
+
+                           toastr.success('{{flashMessage}}','Success',{
+                                      
+                                     "closeButton": false,
+                                       "debug": false,
+                                        "newestOnTop": false,
+                                        "progressBar": true,
+                                        "positionClass": "toast-top-right",
+                                         "preventDuplicates": false,
+                                         "onclick": null,
+                                          "showDuration": "300",
+                                          "hideDuration": "1000",
+                                           "timeOut": "5000",
+                                           "extendedTimeOut": "1000",
+                                           "showEasing": "swing",
+                                           "hideEasing": "linear",
+                                           "showMethod": "fadeIn",
+                                          "hideMethod": "fadeOut"
+                              
+
+
+                                        });
+
+  
+
+  
+   
+
+        {% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+});
+
+
+
+
+
+$('#filter-select').change(function(){
+
+var filter=$(this).val();
+
+
+
+ tablereference.destroy();
+
+
+
+   tablereference=$("#tablereference").DataTable({
+     columnDefs: [
+    {
+        targets: -1,
+        className: 'dt-body-left',
+        
+    },{ "orderable": false, "targets": 8 }
+  ],
+  'destroy':true,
+   
+    'ajax':{"url": "{{path("liste_reference")}}","type": "POST","data": {"etat":filter}},
+     'order': []
+});
+
+
+
+
+
+
+
+});
+
+
+
+
+ $('#btn-add-reference').click(function(e){
+                  e.preventDefault();
+                    $('#btn-add-reference').prop('disabled',true);
+                  $("#spin-add-reference").addClass('fa fa-spinner fa-spin fa-register');
+
+
+                    var titre=$('#titre-reference').val();
+                 
+                  var description=$('#editor1').val();
+                  var type=$('#type-reference').val();
+                  var datesorie=$('#premier-sortie').val();
+                  
+                
+                    
+                  
+                var errorOffreArray=["data.titre","data.description","data.image","data.type","data.premiersortie"];
+
+                     
+                    var formoffre = document.getElementById("add-reference-form");
+
+
+
+
+
+                    
+                    if(titre=="")
+                  {
+                       document.getElementById('data.titre').textContent='Ce champ ne doit pas etre vide ';
+                     $("#spin-add-reference").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn-add-reference').prop('disabled',false); 
+                  }
+                  
+
+                    if(description=="")
+                  {
+                       document.getElementById('data.description').textContent='Ce champ ne doit pas entre vide ';
+                     $("#spin-add-reference").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn-add-reference').prop('disabled',false); 
+                  }
+
+
+                  
+
+
+                 
+                  
+
+                    if(type=="")
+                  {
+                       document.getElementById('data.type').textContent='Ce champ ne doit pas entre vide ';
+                     $("#spin-add-reference").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn-add-reference').prop('disabled',false); 
+                  }
+
+
+                     if(datesorie=="")
+                  {
+                       document.getElementById('data.premiersortie').textContent='Ce champ ne doit pas entre vide ';
+                     $("#spin-add-reference").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn-add-reference').prop('disabled',false); 
+                  }
+
+
+
+
+
+
+
+
+                        $('#titre-reference').change(function(){
+                  
+                 if($.trim(document.getElementById('data.titre').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.titre').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#editor1').change(function(){
+                  
+                 if($.trim(document.getElementById('data.description').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.description').textContent="";
+                                  }
+                    
+                                 });
+
+
+                    
+           
+
+
+
+                     
+
+
+                                 $('#type-reference').change(function(){
+                  
+                 if($.trim(document.getElementById('data.type').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.type').textContent="";
+                                  }
+                    
+                                 });
+
+
+
+                                  $('#premier-sortie').change(function(){
+                  
+                 if($.trim(document.getElementById('data.type').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.type').textContent="";
+                                  }
+                    
+                                 });
+
+                      
+
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                 if(titre!=="" &&description!=="" &&type!==""&&datesorie!=null)
+               {
+               
+
+                      $.ajax({
+                       dataType:"json",
+                       url:$("#add-reference-form").attr('action'),
+                       type:$("#add-reference-form").attr('method'),
+                        data:new FormData(formoffre),
+                       contentType:false,
+                       processData:false,
+                       cache:false,
+                       success:function (data,status,object)
+                       {
+
+                       
+                       var message=data.message;
+                       if(data.success==true)
+                          {
+
+
+                         
+                               errorOffreArray.forEach(function(error){
+                                  if($.trim(document.getElementById(error).textContent) !== "")
+
+                                  {
+                                    document.getElementById(error).textContent="";
+                                  }
+                               });
+                             
+                               
+                            $('#myModalReference').modal('hide');
+                                tablereference.ajax.reload(null,true);
+                              $('#add-reference-form')[0].reset();
+                            
+
+                            toastr.success(message,'Success', {
+                                      
+                                      "closeButton": false,
+                                       "debug": false,
+                                        "newestOnTop": false,
+                                        "progressBar": true,
+                                        "positionClass": "toast-top-right",
+                                         "preventDuplicates": false,
+                                         "onclick": null,
+                                          "showDuration": "300",
+                                          "hideDuration": "1000",
+                                           "timeOut": "5000",
+                                           "extendedTimeOut": "1000",
+                                           "showEasing": "swing",
+                                           "hideEasing": "linear",
+                                           "showMethod": "fadeIn",
+                                        "hideMethod": "fadeOut"
+                              
+
+
+                               });
+
+                                $("#spin-add-reference").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn-add-reference').prop('disabled',false); 
+                            
+
+                          }
+
+                          else{
+
+                             toastr.error(message,'Error', {
+                                      
+                                      "closeButton": false,
+                                       "debug": false,
+                                        "newestOnTop": false,
+                                        "progressBar": true,
+                                        "positionClass": "toast-top-right",
+                                         "preventDuplicates": false,
+                                         "onclick": null,
+                                          "showDuration": "300",
+                                          "hideDuration": "1000",
+                                           "timeOut": "5000",
+                                           "extendedTimeOut": "1000",
+                                           "showEasing": "swing",
+                                           "hideEasing": "linear",
+                                           "showMethod": "fadeIn",
+                                        "hideMethod": "fadeOut"
+                              
+
+
+                               });
+
+                                      $("#spin-add-reference").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn-add-reference').prop('disabled',false); 
+
+
+                            if(data.errors)
+                            {
+
+                              $("#spin-add-reference").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn-add-reference').prop('disabled',false); 
+                             
+                             console.log(data.errors);
+
+                              data.errors.forEach(function(error)
+                              {
+
+                               document.getElementById(error.elementId).textContent=error.errorMessage;
+                              });
+
+
+                               $("#spin-add-refrence").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn-add-reference').prop('disabled',false);  
+
+                            }
+
+                          }
+                                
+
+                        
+                        
+                          
+                          
+                          },
+                          error:function (data,status,object)
+                          {
+                             
+
+                           toastr.error(data.message,'Error', {
+                                      
+                                      "closeButton": false,
+                                       "debug": false,
+                                        "newestOnTop": false,
+                                        "progressBar": true,
+                                        "positionClass": "toast-top-right",
+                                         "preventDuplicates": false,
+                                         "onclick": null,
+                                          "showDuration": "300",
+                                          "hideDuration": "1000",
+                                           "timeOut": "5000",
+                                           "extendedTimeOut": "1000",
+                                           "showEasing": "swing",
+                                           "hideEasing": "linear",
+                                           "showMethod": "fadeIn",
+                                        "hideMethod": "fadeOut"
+                              
+
+
+                               });
+
+
+
+
+                         $("#spin-add-reference").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn-add-reference').prop('disabled',false); 
+                          }
+
+
+
+
+
+
+
+
+                       });
+
+
+
+
+
+
+
+
+
+
+
+                    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  });
+
+
+
+
+
+
+
+
+
+
+
+
+$('#close-modale-add').on("click",function(){
+  $('#add-reference-form')[0].reset();
+  var errorfArray=["data.titre","data.description","data.image","data.type","data.premiersortie"];
+
+  errorfArray.forEach(function(error){
+
+                               if($.trim(document.getElementById(error).textContent) !== "")
+
+                                  {
+                                    document.getElementById(error).textContent="";
+                                  }
+
+                              });
+
+
+
+});
+
+
+
+
+
+$('#close-up-add-modale').on("click",function(){
+  $('#add-reference-form')[0].reset();
+ var errorfArray=["data.titre","data.description","data.image","data.type","data.premiersortie"];
+
+  errorfArray.forEach(function(error){
+
+                               if($.trim(document.getElementById(error).textContent) !== "")
+
+                                  {
+                                    document.getElementById(error).textContent="";
+                                  }
+
+                              });
+                             
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function supprimerReference(id){
+
+if(id){
+  $("#supprimerRef").unbind('click').bind('click',function(){
+   
+     $('#supprimerRef').prop('disabled',true);
+    $("#spin-supprimer-reference").addClass('fa fa-spinner fa-spin fa-register');
+
+       $.ajax({
+                       
+                       url:"{{path('delete_reference')}}",
+                       type:'POST',
+                       data:{id:id},
+                       success:function (data,status,object)
+                       {
+
+                        var message=data.message;
+                       if(data.success==true)
+                          {
+
+                           $("#spin-supprimer-reference").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#supprimerRef').prop('disabled',false);
+
+                           $('#supprimerReferenceModal').modal('hide');
+                               tablereference.ajax.reload(null,false);
+                                
+                              
+
+                               toastr.success(message,'Success', {
+                                      
+                                      "closeButton": false,
+                                       "debug": false,
+                                        "newestOnTop": false,
+                                        "progressBar": true,
+                                        "positionClass": "toast-top-right",
+                                         "preventDuplicates": false,
+                                         "onclick": null,
+                                          "showDuration": "300",
+                                          "hideDuration": "1000",
+                                           "timeOut": "5000",
+                                           "extendedTimeOut": "1000",
+                                           "showEasing": "swing",
+                                           "hideEasing": "linear",
+                                           "showMethod": "fadeIn",
+                                        "hideMethod": "fadeOut"
+                              
+
+
+                               });
+
+                              
+
+                          }else{
+                          
+                             
+                           $("#spin-supprimer-reference").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#supprimerRef').prop('disabled',false);
+                             $('#supprimerReferenceModal').modal('hide');
+
+                               toastr.error(message,'Error', {
+                                      
+                                      "closeButton": false,
+                                       "debug": false,
+                                        "newestOnTop": false,
+                                        "progressBar": true,
+                                        "positionClass": "toast-top-right",
+                                         "preventDuplicates": false,
+                                         "onclick": null,
+                                          "showDuration": "300",
+                                          "hideDuration": "1000",
+                                           "timeOut": "5000",
+                                           "extendedTimeOut": "1000",
+                                           "showEasing": "swing",
+                                           "hideEasing": "linear",
+                                           "showMethod": "fadeIn",
+                                        "hideMethod": "fadeOut"
+                              
+
+
+                               });
+
+                         
+
+
+                          }
+
+              
+
+                       }
+
+
+
+                       });
+
+
+
+    });
+
+    }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

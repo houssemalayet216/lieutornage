@@ -1,0 +1,172 @@
+ {% extends '@Back/Default/templateParticulier.html.twig' %}
+{% block section_haider %}
+<section class="content-header">
+      
+      
+    </section>
+{%endblock%}
+
+ {%block pageContainer %} 
+ 
+  <div class="row">
+<div class="col-md-12">
+
+  
+          <div class="box box-primary">
+            <div class="box-body">
+              
+              <div id="calendar"></div>
+            </div>
+          
+          </div>
+        
+   
+
+  <div class="modal fade" tabindex="-1" id="Modalviewcalendar" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Voir Réservation</h4>
+      </div>
+      <div class="modal-body">
+       
+          <div class="table-responsive">
+            <table class="table">
+             <div id="divviewcalendar">
+              
+             </div>
+
+            </table>
+          </div>
+      </div>
+      <div class="modal-footer">
+       
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+
+{% endblock %}
+
+  {%block aside %}
+  {% endblock %}
+
+
+   {% block javascript %}
+
+      <script>
+          $(document).ready(function(){
+
+   $('#link-lieux').removeClass('active');
+  $('#link-reservation').removeClass('active');
+  $('#link-profile').removeClass('active');
+  $('#link-message').removeClass('active');
+  $('#link-tableau').removeClass('active');
+  $('#link-calendar').addClass('active');
+
+
+
+
+
+
+
+
+
+
+
+
+
+              var calendar =$('#calendar').fullCalendar({
+
+                 
+                header:{
+                 left:'prev,next today',
+                 center:'title',
+                 right:'month,agendaWeek,agendaDay'
+                },
+                events:'{{path("reservation_reçues_calendar")}}',
+                disableDragging: true,
+                editable: false,
+                slotEventOverlap:true,
+
+                eventRender: function(event, element) {
+                if(event.etat == "En cour") {
+                    element.css('background-color', '#3c8dbc');
+                }else{
+                   element.css('background-color', '#e85a63');
+                  
+                }
+
+              },
+                
+                
+                 eventClick:function(event)
+                {
+                  
+                      var id=event.id;
+                       
+                        $('#Modalviewcalendar').modal('show');
+                  
+
+                 
+                  $.ajax({
+                         url:"{{path('detail_reservation_calendar_particulier')}}",
+                         type:"POST",
+                          data:{id:id},
+
+                         success:function(data)
+                         {
+                          
+                          $('#divviewcalendar').html(data.output);
+                         
+
+                         }
+                        });
+
+
+
+                }
+
+
+                });
+                });
+
+
+
+
+
+</script>
+
+   {% endblock %}

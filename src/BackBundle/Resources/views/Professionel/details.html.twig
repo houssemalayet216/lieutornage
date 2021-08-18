@@ -1,0 +1,624 @@
+
+
+ {% extends '@Back/Default/templateParticulier.html.twig' %}
+
+ {%block stylesheet %}
+
+ <link href="{{asset('frontFolder/css/integration.css')}}" rel="stylesheet">
+ <link href="{{asset('frontFolder/css/slider-pro.min.css')}}" rel="stylesheet">
+
+
+<style type="text/css">
+
+.contact-details li {
+margin-bottom:  10px;
+
+}
+
+
+
+
+
+
+
+ul.bullets {
+    line-height: 1.8;
+    margin-bottom: 0;
+}
+
+ul.bullets li {
+    position: relative;
+    padding-left: 20px;
+}
+
+
+ul.bullets li:before {
+    font-style: normal;
+    font-weight: normal;
+    font-family: 'ElegantIcons';
+    font-size: 14px;
+    content: "\5c";
+    color: #ccc;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+
+
+select.form-control:not([size]):not([multiple]) {
+     height:46px; 
+}
+
+.booking select {
+     display: block; 
+}
+
+
+ul{
+
+	list-style: none;
+}
+</style>
+
+
+
+
+{% endblock %}
+
+
+{% block PageContainer %}
+
+
+
+  <div class="content-wrapper">
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">Tableau de bord</a>
+        </li>
+        <li class="breadcrumb-item active">Détails annonces</li>
+      </ol>
+  
+
+
+<div class="row ">
+				<div class=" offset-md-1 col-xl-10 col-lg-10  "  >
+					<nav id="secondary_nav">
+						<div class="container">
+							<ul class="clearfix">
+								<li><a href="#section_1" class="active">Informations générale</a></li>
+								<li><a href="#section_2">Avis</a></li>
+							
+							</ul>
+						</div>
+					</nav>
+					<div id="section_1">
+						<div class="box_general_3">
+							<div class="profile">
+								<div class="row">
+
+									 {% set images=annonce.gallerie|first %}
+									<div class="col-lg-5 col-md-4">
+										<figure>
+											<img src="{{asset('Uploads/')}}{{images.image}}" alt="" class="img-fluid">
+										</figure>
+									</div>
+									<div class="col-lg-7 col-md-8">
+										{# <small>Primary care - Internist</small> #}
+										<div style="display:flex;justify-content: space-between;"><h1 style="margin-bottom:0px;">{{annonce.titre}}</h1>   </div>
+
+										 
+
+                        
+										<span class="rating">
+											<i class="fa fa-star voted"></i>
+											<i class="fa fa-star voted"></i>
+											<i class="fa fa-star voted"></i>
+											<i class="fa fa-star voted"></i>
+											<i class="fa fa-star"></i></span>
+										
+									
+
+ 
+											 
+
+
+											  <ul class="contact-details">
+
+                                                <li>
+												<i class="pe-7s-map-marker"></i> <strong>Adresse:</strong>
+												{{annonce.ville}}, {{annonce.adresse}} ,{{annonce.cp}} 
+												
+											</li>
+                                           
+
+                        <li><i class=" icon_set_1_icon-91"></i> <strong>Téléphone:</strong> <span>{{annonce.user.telephone}}</span></li>
+                      
+                        <li><i class="icon_set_1_icon-84"></i> <strong>E-Mail:</strong> <span><a style="color:#274abb;" href="mailto:contact@m-logistique.com">{{annonce.user.email}}</a></span></li>
+
+                      <li><span><b>{{annonce.tarif}} DT {{annonce.typeTarification}}</b></span></li>
+                       
+                    </ul>
+
+
+												
+										
+									</div>
+								</div>
+							</div>
+                              
+                            	<hr>
+
+
+                               <div class="indent_title_in">
+								<i class="pe-7s-photo"></i>
+								<h3>Gallerie</h3>
+								
+							</div>
+							<div class="wrapper_indent">
+								 <div id="Img_carousel" class="slider-pro">
+                <div class="sp-slides">
+                
+                 {% for images in annonce.gallerie   %}
+                    <div class="sp-slide">
+                        <img alt="Image" class="sp-image" src="{{asset('Uploads/')}}{{images.image}}"
+                        data-src="{{asset('Uploads/')}}{{images.image}}" 
+                        data-small="{{asset('Uploads/')}}{{images.image}}" 
+                        data-medium="{{asset('Uploads/')}}{{images.image}}" 
+                        data-large="{{asset('Uploads/')}}{{images.image}}" 
+                        data-retina="{{asset('Uploads/')}}{{images.image}}">
+                    </div>
+                  {% endfor %}
+
+                   
+                </div>
+                <div class="sp-thumbnails">
+                	{% for photos in annonce.gallerie  %}
+                    <img alt="Image" class="sp-thumbnail" src="{{asset('Uploads/')}}{{photos.image}}">
+                         {% endfor %}
+                
+                </div>
+            </div>
+
+								
+								
+								<!-- /row-->
+							</div>
+							<!-- /wrapper indent -->
+
+							<hr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							
+							<!-- /profile -->
+							<div class="indent_title_in">
+								<i class="pe-7s-news-paper"></i>
+								<h3>Description</h3>
+								
+							</div>
+							<div class="wrapper_indent">
+								<p>{{annonce.description}}.</p>
+								
+								
+								<!-- /row-->
+							</div>
+							<!-- /wrapper indent -->
+
+							<hr>
+
+							<div class="indent_title_in">
+							   <i class="pe-7s-home"></i>
+								<h3>Caractéristique</h3>
+								
+							</div>
+							<div class="wrapper_indent">
+								<div class="row">
+							      <div class="col-md-6">
+								<div style="display:flex;    line-height: 1.5rem;
+    "> <span><strong>Suface Totale</strong></span> <span style="color: #717171;margin-left:15px;"> {{annonce.surfaceTotale}}</span></div>
+								<div style="display:flex;    line-height: 1.5rem;
+   "><span><strong>Surface du piéce</strong></span> <span style="color: #717171;margin-left:15px;"> {{annonce.surfacePiece}}</span></div>
+							</div>
+
+							<div class="col-md-6">
+									<div style="display:flex;    line-height: 1.5rem;
+    color: #717171;"> <span><strong>Nombre de pièce</strong></span>  <span style="color: #717171;margin-left:15px;"> {{annonce.nbrPiece}}</span></div>
+								<div style="display:flex;    line-height: 1.5rem;
+    color: #717171;"><span><strong>Nombre de niveau</strong></span> <span style="color: #717171;margin-left:15px;"> {{annonce.nbrNiveau}}</span></div>
+							</div>
+						</div>
+
+							</div>
+							<!--  End wrapper indent -->
+
+							<hr>
+                            {% if  annonce.environment |length > 0 or annonce.decoration |length > 0 or annonce.equipement |length > 0 or annonce.service |length > 0   %}
+							<div class="indent_title_in">
+								<i class="pe-7s-note2"></i>
+								<h3>Spécification</h3>
+								
+							</div>
+							<div class="wrapper_indent">
+								
+                             <div class="row">
+                                {% if annonce.environment |length > 0  %}
+								<div class="col-md-3">
+								 <h6>Environments</h6>
+								 <ul class="bullets">
+								 	{% for env in annonce.environment %}
+											<li>{{env.titre}} </li>
+											
+
+											{% endfor %}
+										</ul>
+								</div>
+
+							{% endif %}
+
+
+                                {% if annonce.decoration |length > 0  %}
+                                <div class="col-md-3">
+								 <h6>Decorations</h6>
+								 <ul class="bullets">
+											{% for dec in annonce.decoration %}
+											<li>{{dec.titre}} </li>
+											
+
+											{% endfor %}
+										</ul>
+										</ul>
+								</div>
+							{% endif %}
+
+
+
+                               {% if annonce.equipement |length > 0  %}
+								<div class="col-md-3">
+								 <h6>Equipements</h6>
+								 <ul class="bullets">
+										
+                                        {% for eq in annonce.equipement %}
+											<li>{{eq.titre}} </li>
+											
+
+											{% endfor %}
+
+										</ul>
+								</div>
+
+								{%endif%}
+
+
+
+                               {% if annonce.service |length > 0  %}
+								<div class="col-md-3">
+								 <h6>Services</h6>
+								 <ul class="bullets">
+											
+											  {% for sr in annonce.service %}
+											<li>{{sr.titre}} </li>
+											
+
+											{% endfor %}
+
+
+
+										</ul>
+								</div>
+
+							{% endif %}
+
+
+
+							</div>
+
+							</div>  
+
+                
+
+
+                           <hr>
+
+                       {% endif %}
+
+							
+
+							<div class="indent_title_in">
+								<i class="pe-7s-map-2"></i>
+								<h3>Localisation</h3>
+								
+							</div>
+							<div class="wrapper_indent">
+								
+                             
+									<div id="map" class="map map_single add_bottom_30"></div>
+								
+								</div>
+
+
+								 <hr>
+                           
+
+							
+
+
+
+
+
+
+
+                      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							
+						
+						</div>
+						<!-- /section_1 -->
+					</div>
+					<!-- /box_general -->
+
+					<div id="section_2">
+						<div class="box_general_3">
+							<div class="reviews-container">
+								<div class="row">
+									<div class="col-lg-3">
+										<div id="review_summary">
+											<strong>4.7</strong>
+											<div class="rating">
+												<i class="fa fa-star voted"></i><i class="fa fa-star voted"></i><i class="fa fa-star voted"></i><i class="fa fa-star voted"></i><i class="fa fa-star"></i>
+											</div>
+											<small>Based on 4 reviews</small>
+										</div>
+									</div>
+									<div class="col-lg-9">
+										<div class="row">
+											<div class="col-lg-10 col-9">
+												<div class="progress">
+													<div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+												</div>
+											</div>
+											<div class="col-lg-2 col-3"><small><strong>5 stars</strong></small></div>
+										</div>
+										<!-- /row -->
+										<div class="row">
+											<div class="col-lg-10 col-9">
+												<div class="progress">
+													<div class="progress-bar" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+												</div>
+											</div>
+											<div class="col-lg-2 col-3"><small><strong>4 stars</strong></small></div>
+										</div>
+										<!-- /row -->
+										<div class="row">
+											<div class="col-lg-10 col-9">
+												<div class="progress">
+													<div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+												</div>
+											</div>
+											<div class="col-lg-2 col-3"><small><strong>3 stars</strong></small></div>
+										</div>
+										<!-- /row -->
+										<div class="row">
+											<div class="col-lg-10 col-9">
+												<div class="progress">
+													<div class="progress-bar" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+												</div>
+											</div>
+											<div class="col-lg-2 col-3"><small><strong>2 stars</strong></small></div>
+										</div>
+										<!-- /row -->
+										<div class="row">
+											<div class="col-lg-10 col-9">
+												<div class="progress">
+													<div class="progress-bar" role="progressbar" style="width: 0" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+												</div>
+											</div>
+											<div class="col-lg-2 col-3"><small><strong>1 stars</strong></small></div>
+										</div>
+										<!-- /row -->
+									</div>
+								</div>
+								<!-- /row -->
+
+								<hr>
+
+								<div class="review-box clearfix">
+									<figure class="rev-thumb"><img src="http://via.placeholder.com/150x150.jpg" alt="">
+									</figure>
+									<div class="rev-content">
+										<div class="rating">
+											<i class="fa fa-star voted"></i><i class="fa fa-star voted"></i><i class="fa fa-star voted"></i><i class="fa fa-star voted"></i><i class="fa fa-star"></i>
+										</div>
+										<div class="rev-info">
+											Admin – April 03, 2016:
+										</div>
+										<div class="rev-text">
+											<p>
+												Sed eget turpis a pede tempor malesuada. Vivamus quis mi at leo pulvinar hendrerit. Cum sociis natoque penatibus et magnis dis
+											</p>
+										</div>
+									</div>
+								</div>
+								<!-- End review-box -->
+
+								<div class="review-box clearfix">
+									<figure class="rev-thumb"><img src="http://via.placeholder.com/150x150.jpg" alt="">
+									</figure>
+									<div class="rev-content">
+										<div class="rating">
+											<i class="fa fa-star voted"></i><i class="fa fa-star voted"></i><i class="fa fa-star voted"></i><i class="fa fa-star voted"></i><i class="fa fa-star"></i>
+										</div>
+										<div class="rev-info">
+											Ahsan – April 01, 2016
+										</div>
+										<div class="rev-text">
+											<p>
+												Sed eget turpis a pede tempor malesuada. Vivamus quis mi at leo pulvinar hendrerit. Cum sociis natoque penatibus et magnis dis
+											</p>
+										</div>
+									</div>
+								</div>
+								<!-- End review-box -->
+
+								<div class="review-box clearfix">
+									<figure class="rev-thumb"><img src="http://via.placeholder.com/150x150.jpg" alt="">
+									</figure>
+									<div class="rev-content">
+										<div class="rating">
+											<i class="fa fa-star voted"></i><i class="fa fa-star voted"></i><i class="fa fa-star voted"></i><i class="fa fa-star voted"></i><i class="fa fa-star"></i>
+										</div>
+										<div class="rev-info">
+											Sara – March 31, 2016
+										</div>
+										<div class="rev-text">
+											<p>
+												Sed eget turpis a pede tempor malesuada. Vivamus quis mi at leo pulvinar hendrerit. Cum sociis natoque penatibus et magnis dis
+											</p>
+										</div>
+									</div>
+								</div>
+								<!-- End review-box -->
+							</div>
+							<!-- End review-container -->
+						</div>
+					</div>
+					<!-- /section_2 -->
+				</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     </div>
+ </div>
+
+
+
+{% endblock %}
+
+
+{% block javascript %}
+
+
+	
+	
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9vrkLJKSv1SFSa-_ojqx3s8Q-uHM4U5Q&libraries=places&"></script>
+	<script src="{{asset('frontFolder/js/map_single_hotel.js')}}"></script>
+
+	<script src="{{asset('frontFolder/js/jquery.sliderPro.min.js')}}"></script>
+<script type="text/javascript">
+	$( document ).ready(function( $ ) {
+		$( '#Img_carousel' ).sliderPro({
+			width: 960,
+			height: 500,
+			fade: true,
+			arrows: true,
+			buttons: false,
+			fullScreen: false,
+			smallSize: 500,
+			startSlide: 0,
+			mediumSize: 1000,
+			largeSize: 3000,
+			thumbnailArrows: true,
+			autoplay: false
+		});
+
+});
+	</script>
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

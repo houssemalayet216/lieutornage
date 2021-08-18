@@ -1,0 +1,123 @@
+{% extends '@Front/Default/template.html.twig' %}
+
+{% block title %} Comment ça marche  {% endblock %}
+
+	{% block stylesheet %}
+		<link href="{{asset('frontFolder/css/integration.css')}}" rel="stylesheet">
+
+<style>
+      a.box_feat i {
+      	color: #6dcff6;
+      }
+      </style>
+
+
+
+	{% endblock %}
+
+{% block pageContainer %}
+
+<div id="breadcrumb">
+			<div class="container">
+				<ul>
+					<li><a href="#">Accueil</a></li>
+					
+					<li>Comment ça marche</li>
+				</ul>
+			</div>
+		</div>
+          
+         
+			
+					 
+
+					
+			<div class="container margin_80_55">
+				  <div class="main_title_2">
+				<span><em></em></span>
+				<h3>Recherchez le lieu parfait</h3>
+			
+
+				
+			</div>
+				
+				<div class="row">
+					
+					<div class="col-lg-12">
+						  
+
+
+
+						<p class="p-services" style="margin-bottom:30px;">
+                          
+                        Vous êtes un professionnel du cinéma, vous souhaitez trouver rapidement le lieu que vous recherchez pour vos différents projets (tournage de long métrage, film, shooting) .  </p>
+                        
+                        </div>
+
+
+
+                     <div  style="margin-bottom:30px;" class="text-center"><h4>Notre processus simple et rapide</h4></div>
+                     
+
+                    <div class="row">
+
+
+
+                    <div class="col-lg-4 col-md-6">
+					<a class="box_feat" href="#0">
+						<i class="icon_set_1_icon-63"></i>
+						<h3>Recherche simple</h3>
+						<p>Vous pouvez effectuer la recherche de votre lieu par vous-même : Saisissez les dates de début et de fin de tournage ainsi qu’une description complète de votre besoin pour soumettre votre demande de location au propriétaire du lieu qui vous intéresse.</p>
+					</a>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<a class="box_feat" href="#0">
+						<i class="icon_set_1_icon-42"></i>
+						<h3>Recherche rapide</h3>
+						<p style="height:160px;">Nous pouvons également vous aider à trouver rapidement le lieu que vous recherchez, il suffit de nous donner quelques infos sur votre projet.</p>
+					</a>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<a class="box_feat" href="{{path('contacter_page')}}">
+						<i class="icon_set_1_icon-57"></i>
+						<h3>Contactez-nous</h3>
+						<p style="height:160px;">Gagnez du temps et  contactez-nous dès maintenant, parlez-nous de votre projet de  tournage de  film ou  shooting .</p>
+					</a>
+				</div>
+
+
+
+
+						
+					</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+				</div>
+				<!--/row-->
+			</div>
+			<!--/container-->
+	
+
+
+
+
+
+
+{% endblock %}
+
+{% block javascript %}
+
+{% endblock %}

@@ -1,0 +1,121 @@
+{% extends '@Front/Default/template.html.twig' %}
+
+{% block title %} Actualités  {% endblock %}
+	{% block stylesheet %}
+		<link href="{{asset('frontFolder/css/integration.css')}}" rel="stylesheet">
+		<link   href="{{asset('frontFolder/css/blog.css')}}" rel="stylesheet"  >
+
+			<style>
+		.card-min-height {
+    min-height:500px;
+	       }
+
+	       	.paginate-margin {
+    margin-left: 450px;
+	       }
+
+ @media (max-width: 767px)
+{
+.paginate-margin {
+    margin-left: 0;
+}
+}
+	       </style>
+	{% endblock %}
+
+{% block pageContainer %}
+
+<div id="breadcrumb">
+			<div class="container">
+				<ul>
+					<li><a href="#">Accueil</a></li>
+					
+					<li>Actualités</li>
+				</ul>
+			</div>
+		</div>
+
+	<div class="container margin_60_35">
+			<div class="row">
+				<div class="col-lg-9">
+
+                  {%for act in annonces%}
+
+					<article class="blog wow fadeIn">
+						<div class="row no-gutters">
+							<div class="col-lg-7">
+								<figure>
+									<a href="{{path('detail_actualite_page',{id:act.id})}}"><img src="{{asset('Uploads/')}}{{act.image}}" alt="">
+										<div class="preview"><span>Voir détails</span></div>
+									</a>
+								</figure>
+							</div>
+							<div class="col-lg-5">
+								<div class="post_info">
+									<small>{{act.datepublication|date('d/m/Y')}}</small>
+									<h3><a href="{{path('detail_actualite_page',{id:act.id})}}">{{act.titre}}</a></h3>
+									<p>{{act.description}}</p>
+								</div>
+							</div>
+						</div>
+					</article>
+					<!-- /article -->
+                    {% endfor %}
+					
+			 
+                  		             <div class="text-center nav-gation" style="margin-left:250px;">
+            <div  class="text-center">{{ knp_pagination_render(annonces) }}</div>
+          </div>
+                  
+					
+					<!-- /article -->
+
+				    
+					<!-- /pagination -->
+				</div>
+				<!-- /col -->
+
+				<aside class="col-lg-3">
+					<div class="widget">
+						<form>
+							<div class="form-group">
+								<input type="text" name="search" id="search" class="form-control" placeholder="Search...">
+							</div>
+							<button type="submit" id="submit" class="btn_1 rounded"> Chercher</button>
+						</form>
+					</div>
+					<!-- /widget -->
+				
+					<!-- /widget -->
+					<div class="widget">
+						<div class="widget-title">
+							<h4>Categories</h4>
+						</div>
+						<ul class="cats">
+							<li><a href="#">Nouveautés <span>(12)</span></a></li>
+							<li><a href="#">Evenments <span>(21)</span></a></li>
+						
+						</ul>
+					</div>
+					<!-- /widget -->
+					
+					<!-- /widget -->
+				</aside>
+				<!-- /aside -->
+			</div>
+			<!-- /row -->
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+	{% endblock %}

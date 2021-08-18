@@ -1,0 +1,144 @@
+.box_general_3 {
+    background-color: #fff;
+    padding: 30px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #e1e8ed;
+}
+
+.message {
+    background-color: #f8f8f8;
+    padding: 15px;
+    margin-bottom: 30px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.message p {
+    margin: 0;
+}
+
+.form_title {
+    position: relative;
+    padding-left: 55px;
+    margin-bottom: 10px;
+}
+
+.form_title h3 {
+    margin: 0;
+    padding: 0;
+    font-size: 21px;
+    font-size: 1.3125rem;
+}
+
+.form_title p {
+    color: #999;
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+    line-height: 14px;
+}
+
+.form_title h3 strong {
+    background-color: #e74e84;
+    text-align: center;
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 18px;
+    font-size: 1.125rem;
+    line-height: 42px;
+    text-align: center;
+    position: absolute;
+    left: 0;
+    top: -5px;
+}
+
+strong {
+    font-weight: 600;
+}
+
+@media (max-width: 991px)
+{
+.step {
+    padding-left: 0;
+}
+
+}
+
+
+.step {
+    padding: 20px 0 0 55px;
+    margin: 0 0 0 0;
+}
+
+
+.booking .title {
+    background-color: #3f4079;
+    color: #fff;
+    margin: -30px -30px 30px -30px;
+    padding: 20px 30px;
+    -webkit-border-radius: 5px 5px 0 0;
+    -moz-border-radius: 5px 5px 0 0;
+    -ms-border-radius: 5px 5px 0 0;
+    border-radius: 5px 5px 0 0;
+}
+
+.booking .title h3 {
+    font-size: 28px;
+    font-size: 1.75rem;
+    margin: 0;
+    color: #fff;
+}
+
+ul.treatments.checkout {
+    margin: 0;
+    padding: 0;
+}
+
+a.btn_1.full-width, .btn_1.full-width {
+    display: block;
+    text-align: center;
+    padding: 12px 45px;
+    font-size: 16px;
+    font-size: 1rem;
+    width: 100%;
+}
+
+a.btn_1, .btn_1 {
+    border: none;
+    color: #fff;
+    background: #e74e84;
+    cursor: pointer;
+    padding: 7px 20px;
+    display: inline-block;
+    outline: none;
+    font-size: 14px;
+    font-size: 0.875rem;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    -ms-border-radius: 25px;
+    border-radius: 25px;
+    font-weight: 500;
+}
+.theiaStickySidebar:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+

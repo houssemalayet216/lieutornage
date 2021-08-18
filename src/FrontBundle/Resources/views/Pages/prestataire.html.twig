@@ -1,0 +1,203 @@
+{% extends '@Front/Default/template.html.twig' %}
+
+{% block title %} Nos prestataires {% endblock %}
+	{% block stylesheet %}
+		<link href="{{asset('frontFolder/css/integration.css')}}" rel="stylesheet">
+		<style>
+		.card-min-height {
+    min-height:500px;
+	       }
+
+	       	.paginate-margin {
+    margin-left: 450px;
+	       }
+
+ @media (max-width: 767px)
+{
+.paginate-margin {
+    margin-left: 0;
+}
+}
+	       </style>
+	{% endblock %}
+
+{% block pageContainer %}
+
+<div id="breadcrumb">
+			<div class="container">
+				<ul>
+					<li><a href="#">Accueil</a></li>
+					
+					<li>Nos prestataires</li>
+				</ul>
+			</div>
+		</div>
+
+
+
+
+
+	<div class="container margin_60_35">
+		<div class="col-lg-12">
+				<div class="row no-gutters custom-search-input-2 inner">
+					<div class="col-lg-4">
+						<div class="form-group">
+							<input class="form-control" type="text" placeholder="Mot Clé">
+							<i class="icon_search"></i>
+						</div>
+					</div>
+					<div class="col-lg-3">
+						<div class="form-group">
+							<input class="form-control" type="text" placeholder="ville ou adresse ">
+							<i class="icon_pin_alt"></i>
+						</div>
+					</div>
+					<div class="col-lg-3">
+						<select class="wide">
+							<option>Catégories</option>	
+							<option>Habits et costumes</option>
+							<option>Véhicules</option>
+							<option>Accessoires</option>
+							<option>Insolite/vintage</option>
+							<option>Animaux</option>
+							<option>Services/Casting</option>
+						</select>
+					</div>
+					<div class="col-lg-2">
+						<input type="submit" class="btn_search" value="Chercher">
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			
+			<!-- /custom-search-input-2 -->
+			
+			<div class="isotope-wrapper">
+			<div class="row">
+
+            <div class="col-md-8">
+
+
+
+
+           <div class="costum-gallery" style="width:100%;">
+
+
+           	<a  href="#">
+   <figure class="image"><img alt="Mitglieder" src="{{asset('frontFolder/img/prestataires/m1.png')}}" style="width: 300px; height: 225px;">
+    <figcaption>Habits et costumes
+     </figcaption>
+  </figure>
+</a>
+
+
+    <a  href="#">
+   <figure class="image"><img alt="Mitglieder" src="{{asset('frontFolder/img/prestataires/m2.png')}}" style="width: 300px; height: 225px;">
+    <figcaption>Véhicules
+      </figcaption>
+  </figure>
+</a>
+
+ 
+   <a  href="#"> 
+  <figure class="image"><img alt="Mitglieder" src="{{asset('frontFolder/img/prestataires/m3.png')}}" style="width: 300px; height: 225px;">
+    <figcaption>Accessoires</figcaption>
+  </figure>
+</a>
+  
+  
+
+ 
+
+<figure class="image"><img alt="Mitglieder" src="{{asset('frontFolder/img/prestataires/m4.png')}}" style="width: 300px; height: 225px;">
+    <figcaption>Insolite/vintage </figcaption>
+  </figure>
+
+ 
+
+
+   <figure class="image"><img alt="Mitglieder" src="{{asset('frontFolder/img/prestataires/m5.png')}}" style="width: 300px; height: 225px;">
+    <figcaption>Animaux </figcaption>
+  </figure>
+
+
+  <figure class="image"><img alt="Mitglieder" src="{{asset('frontFolder/img/prestataires/m6.png')}}" style="width: 300px; height: 225px;">
+    <figcaption dir="rtl">Services/Casting
+      </figcaption>
+  </figure>
+
+
+           </div>
+
+
+
+
+
+
+
+
+            </div>
+
+            
+
+            <aside class="col-lg-4" id="sidebar">
+						<div class="box_detail booking" style="border:none;">
+
+         
+            	<a href="#" class=" add_top_30 btn_prestataire full-width purchase">Inscrivez-vous</a>
+			<a href="#" class="btn_prestataire full-width outline wishlist">Connexion </a>
+           </div>
+       </aside>
+
+
+
+
+
+
+
+
+
+
+				<!-- /box_grid -->
+			</div>
+		
+
+
+
+
+
+
+
+			</div>
+			<!-- /isotope-wrapper -->
+			
+			
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+{% block javascript %}
+
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends '@Front/Default/template.html.twig' %}
+      
+    
+   {% block body  %} <body id="login_bg"> {% endblock %} 
+
+
+
+   {% block stylesheet %}
+<style>
+   	main{
+   		background-color: transparent;
+   	}
+   	</style>
+
+   {% endblock %}
+
+
+
+    {% block pageContainer %}
+      
+
+
+
+       
+        <div>
+            {% block fos_user_content %}
+            {% endblock fos_user_content %}
+        </div>
+
+
+
+             
+
+
+  {% endblock %}
+
+
+{% block javascript %}
+
+  
+<script>
+$("#type-register").change(function(){
+
+type=$(this).val();
+if(type=='Professionel')
+{
+
+$("#identif").removeClass('typeHote');
+$("#identif").addClass('typeProfessionel');
+
+}else{
+$("#identif").removeClass('typeProfessionel');
+$("#identif").addClass('typeHote'); 
+}
+
+
+
+});
+
+
+
+
+</script>
+{% endblock %}

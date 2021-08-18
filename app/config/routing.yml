@@ -1,0 +1,51 @@
+admin:
+    resource: "@AdminBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+back:
+    resource: "@BackBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+filter:
+    resource: "@FilterBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+annonce:
+    resource: "@AnnonceBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+front:
+    resource: "@FrontBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
+
+
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+ 
+
+fos_user_registration_register:
+    path:      /register
+    defaults:  { _controller: AppBundle\Controller\RegistrationController::registerAction }
+
+admin_login:
+    path:  /admin/login
+    defaults: { _controller: FOSUserBundle:Security:login }
+
+admin_login_check:
+    path:  /admin/login_check
+    defaults: { _controller: FOSUserBundle:Security:check }
+
+admin_logout:
+    path:  /admin/logout
+    defaults: { _controller: FOSUserBundle:Security:logout }

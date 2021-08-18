@@ -1,0 +1,251 @@
+{% extends '@Admin/Default/templateAdmin.html.twig' %}
+{% block stylesheet %}
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.7/css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block section_haider %}
+<section class="content-header">
+     
+      <ol class="breadcrumb">
+
+        <li><a href="#"><i class="fa fa-dashboard"></i>Tableau de bord</a></li>
+        <li class="active">Modifier Annonce</li>
+      </ol>
+    </section>
+{%endblock%}
+
+ {%block pageContainer %} 
+ 
+
+ 
+
+
+
+ <section class="content">
+
+  <div class="row">
+<div class="col-md-12">
+
+
+  <div class="panel panel-default">
+              <div class="panel-heading">Modifier Annonce</div>
+              <div class="panel-body">
+
+
+
+                {{ form_start(form, {'method': 'post', 'action': path('modifier_actualite',{id:id}), 'attr': {'id':'modifier-actualite-form'}}) }}
+
+
+
+
+       <div class="col-md-12 form-group">
+                  <label for="username">Type :*</label>
+               {{form_widget(form.type ,{'id':'titre-actualite','attr':{'class': 'form-control','placeholder':'Type'}})}}                 
+                    <span class="text-danger" id="data.titre">{{form_errors(form.type)}}</span>     
+       </div> 
+
+
+     
+
+
+       
+
+
+  
+ <div class="col-md-12 form-group">
+                  <label for="username">Titre:*</label>
+                  {{form_widget(form.titre ,{'id':'titre-actualite','attr':{'class': 'form-control','placeholder':'Titre'}})}}                 
+                    <span class="text-danger" id="data.titre">{{form_errors(form.titre)}}</span>
+
+                 
+       </div>
+     
+
+
+
+  <div class="col-md-12 form-group">
+                  <label for="username">Description :*</label>
+                  {{form_widget(form.description ,{'id':'description-actualite','attr':{'class': 'form-control','placeholder':'Description','rows':8}})}}                 
+                    <span class="text-danger" id="data.description">{{form_errors(form.description)}}</span>
+
+                 
+       </div>
+
+
+
+
+ <div class="col-md-12">
+
+
+    <div class="form-group">
+
+                        <div class="file-loading"> 
+
+                           
+                            {{form_widget(form.image,{'id':'file-1-modifier-actualite' , 'attr': {'class': 'file'} })}} 
+
+
+                     </div>
+
+                     <span id="data.image" class="text-danger"></span>
+
+            </div>
+          </div>
+
+
+
+<div class="col-offset-md-6 col-md-12">
+   <button type="submit"  class="btn btn-info ">Enregistrer</button>
+</div>
+
+
+
+
+ {{ form_end(form) }}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              </div>
+            </div>
+          </div>
+
+
+</section>
+
+
+
+{% endblock %}
+
+
+{%block aside %}
+{%endblock%}
+
+
+
+
+
+
+
+
+{% block javascript%}
+
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.7/js/fileinput.js" type="text/javascript"></script>
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.6/js/locales/fr.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.7/themes/fa/theme.js" type="text/javascript"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" type="text/javascript"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+
+
+
+
+ $("#file-1-modifier-actualite").fileinput({
+             language: "fr",
+             showUpload: false,
+           showRemove: false,
+            required: true,
+            theme: 'fa',
+            minFileCount: 1,
+            allowedFileExtensions: ['jpg', 'png', 'gif'],
+            overwriteInitial: false,
+             initialPreview: [
+           
+             "<img class='kv-preview-data file-preview-image' src='{{asset('')}}Uploads/{{image}}'>",
+      
+           
+             ],
+        
+
+            maxFileSize:2000
+           
+
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+ <script>
+ $(document).ready(function(){
+ 
+$('#link-tableau').removeClass('active');
+  $('#link-user').removeClass('active');
+  $('#link-reference').removeClass('active');
+  $('#link-message').removeClass('active');
+ 
+  $('#link-actualite').addClass('active');
+
+
+ });
+ </script>
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

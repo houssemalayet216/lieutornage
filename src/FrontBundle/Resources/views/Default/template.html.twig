@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   
+    
+    <title>{%block title%}Tournage{% endblock %}</title>
+
+    <!-- Favicons-->
+    <link rel="shortcut icon" href="{{asset('frontFolder/img/favicon.ico')}}" type="image/x-icon">
+    <link rel="apple-touch-icon" type="image/x-icon" href="{{asset('frontFolder/img/apple-touch-icon-57x57-precomposed.png')}}">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="{{asset('frontFolder/img/apple-touch-icon-72x72-precomposed.png')}}">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="{{asset('frontFolder/img/apple-touch-icon-114x114-precomposed.png')}}">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="{{asset('frontFolder/img/apple-touch-icon-144x144-precomposed.png')}}">
+       
+    <!-- BASE CSS -->
+    <link href="{{asset('frontFolder/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('frontFolder/css/custom.css')}}" rel="stylesheet">
+    <link href="{{asset('frontFolder/css/style.css')}}" rel="stylesheet">
+	<link href="{{asset('frontFolder/css/vendors.css')}}" rel="stylesheet">
+
+	 <link href="{{asset('frontFolder/css/base.css')}}" rel="stylesheet">
+	<link    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.css" rel="stylesheet">
+	<link   href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" rel="stylesheet">
+
+
+	{% block stylesheet %}
+	{% endblock %}
+
+
+    <!-- YOUR CUSTOM CSS -->
+    
+
+</head>
+
+{% block body %} <body > {% endblock %}
+		
+	<div  id="page" >
+		
+    {%if  is_granted("IS_AUTHENTICATED_FULLY") %}
+
+
+    <header class="header menu_fixed">
+		<div id="preloader"><div data-loader="circle-side"></div></div><!-- /Page Preload -->
+		<div id="logo">
+			<a href="{{path('redirect_user')}}">
+			<!-- 	<img src="img/logo.png" width="150" height="36" data-retina="true" alt="" class="logo_normal"> -->
+				<img src="{{asset('frontFolder/img/lg.png')}}" width="150" height="36" data-retina="true" alt="" class="logo_sticky">
+			</a>
+		</div>
+		<ul id="top_menu">
+			 
+			 	<li>
+				<div class="dropdown dropdown-user">
+					<a href="#0" class="logged" data-toggle="dropdown" title="{{app.user.nom}} {{app.user.prenom}} ">
+
+					    {% if app.user.photo != null  %}
+						 <img src="{{asset('')}}Uploads/{{app.user.photo}}" class="img-rounded" alt=""/>
+						 {% else%}
+						<img src="{{asset('frontFolder/img/avatar.jpg')}}"  class="img-rounded" alt=""/>
+
+						{% endif %}
+                        <span><a href="#" style="color: #444;
+    padding: 0 8px 15px 8px;
+    font-size: 14px;
+    font-size: 0.875rem;
+    font-weight: 500;
+">{{app.user.nom}} {{app.user.prenom}}</a> </span>
+
+						</a>
+					<div class="dropdown-menu">
+						<ul>
+							<li><a href="#">Profile</a></li>
+							<li><a href="{{path('tableau_de_bord_page')}}">Tableau de bord</a></li>
+							<li><a href="{{path('fos_user_security_logout')}}">Déconnecter</a></li>
+						</ul>
+					</div>
+				</div>
+
+			</li>
+			
+
+		</ul>
+		<!-- /top_menu -->
+		<a href="#menu" class="btn_mobile">
+			<div class="hamburger hamburger--spin" id="hamburger">
+				<div class="hamburger-box">
+					<div class="hamburger-inner"></div>
+				</div>
+			</div>
+		</a>
+		<nav id="menu" class="main-menu">
+			<ul>
+				<li class="mega-drop-down" style="height:100%;"><span><a href="{{path('liste_Lieux')}}">Trouver un lieu</a></span>
+					
+
+
+                    	
+					<ul>
+						
+						<li>
+							<span><a href="{{path('recherche_par_categorie', {categorie:1})}}">Habitations</a></span>
+							<ul>
+							{% for   habitation in menu().habitations %}
+								<li><a href="{{path('recherche_par_sous_categorie', {sous_categorie:habitation.id})}}">{{habitation.titre}} </a></li>
+							{% endfor %}
+
+							    <li><a href="#0">Autres </a></li>
+								
+							</ul>
+							
+							
+						</li>
+					
+
+                         <li>
+							<span><a href="{{path('recherche_par_categorie', {categorie:3})}}">Commerces</a></span>
+							<ul>
+								{% for   commerce in menu().commerces %}
+								<li><a href="{{path('recherche_par_sous_categorie', {sous_categorie:commerce.id})}}">{{commerce.titre}} </a></li>
+							    {% endfor %}
+							</ul>
+						</li>
+
+
+
+						<li>
+							<span><a href="{{path('recherche_par_categorie', {categorie:4})}}">Lieux public</a></span>
+							<ul>
+								{% for   lieuxPublic in menu().lieuxPublics %}
+								<li><a href="{{path('recherche_par_sous_categorie', {sous_categorie:lieuxPublic.id})}}">{{lieuxPublic.titre}} </a></li>
+							{% endfor %}
+							</ul>
+						</li>
+
+
+						<li>
+							<span><a href="{{path('recherche_par_categorie', {categorie:5})}}">Lieux loisirs, sport</a></span>
+							<ul>
+								{% for   sport in menu().sports %}
+								<li><a href="{{path('recherche_par_sous_categorie', {sous_categorie:sport.id})}}">{{sport.titre}} </a></li>
+							{% endfor %}
+							</ul>
+						</li>
+
+
+						<li>
+							<span><a href="{{path('recherche_par_categorie', {categorie:6})}}">Loisirs / Festif </a></span>
+							<ul>
+								{% for   festif in menu().festifs %}
+								<li><a href="{{path('recherche_par_sous_categorie', {sous_categorie:festif.id})}}">{{festif.titre}} </a></li>
+							{% endfor %}
+								
+							</ul>
+						</li>
+
+
+						<li>
+							<span><a href="{{path('recherche_par_categorie', {categorie:7})}}">Lieux audiovisuel</a></span>
+							<ul>
+								{% for   audio in menu().audios %}
+								<li><a href="{{path('recherche_par_sous_categorie', {sous_categorie:audio.id})}}">{{audio.titre}} </a></li>
+							{% endfor %}
+							</ul>
+						</li>
+
+                       
+
+
+						
+
+
+						<li>
+							<span><a href="{{path('recherche_par_categorie', {categorie:9})}}">Affaires</a></span>
+							<ul>
+								{% for   affaire in menu().affaires %}
+								<li><a href="{{path('recherche_par_sous_categorie', {sous_categorie:affaire.id})}}">{{affaire.titre}} </a></li>
+							{% endfor %}
+
+							</ul>
+						</li>
+					
+
+						<li>
+							<span><a href="{{path('recherche_par_categorie', {categorie:11})}}">Extérieurs</a></span>
+							<ul>
+							{% for   exterieur in menu().exterieurs %}
+								<li><a href="{{path('recherche_par_sous_categorie', {sous_categorie:exterieur.id})}}">{{exterieur.titre}} </a></li>
+							{% endfor %}
+							</ul>
+						</li>
+
+						
+
+
+
+
+
+
+					</ul>
+			
+
+
+
+
+
+
+
+				</li>
+				<li><span><a href="{{path('proposer_lieu')}}">Proposer un lieu</a></span>
+					
+				</li>
+				<li><span><a href="{{path('services_page')}}">Services</a></span>
+
+				</li>
+
+                
+
+                <li><span><a href="{{path('references_page')}}">Démarches</a></span>
+
+				</li>
+                
+                 <li><span><a href="{{path('nosprestataire_page')}}">Nos prestataires</a></span>
+                 	
+
+				</li>
+
+				 <li><span><a href="{{path('annuaire_page')}}">Annuaire</a></span>
+                 	
+
+				</li>
+
+
+				<li><span><a href="{{path('contacter_page')}}">Contact</a></span>
+					
+				</li>
+				
+			</ul>
+		</nav>
+	</header>
+
+
+
+
+
+
+
+
+
+
+    {% else %}
+
+
+
+
+	<header class="header menu_fixed">
+		<div id="preloader"><div data-loader="circle-side"></div></div><!-- /Page Preload -->
+		<div id="logo">
+			<a href="{{path('home_page')}}">
+			<!-- 	<img src="img/logo.png" width="150" height="36" data-retina="true" alt="" class="logo_normal"> -->
+				<img src="{{asset('frontFolder/img/lg.png')}}" width="150" height="36" data-retina="true" alt="" class="logo_sticky">
+			</a>
+		</div>
+		<ul id="top_menu">
+			
+			<li><a href="{{path('fos_user_security_login')}}"  class="login" title="Se connecter">Se connecter</a></li>
+
+			<li><a href="{{path('fos_user_registration_register')}}"  class="wishlist_bt_top" title="S'inscrire">S'inscrire</a></li>
+
+			
+			{# <li><a href="#"   title="Confiez-nous votre recherche"><img src="{{asset('frontFolder/img/recherchea.png')}}" width="24px" height="24px;" style="margin-top:8px;" /></a></li> #}
+
+		</ul>
+		<!-- /top_menu -->
+		<a href="#menu" class="btn_mobile">
+			<div class="hamburger hamburger--spin" id="hamburger">
+				<div class="hamburger-box">
+					<div class="hamburger-inner"></div>
+				</div>
+			</div>
+		</a>
+		<nav id="menu" class="main-menu">
+			<ul>
+				<li class="mega-drop-down" style="height:100%;"><span><a href="{{path('liste_Lieux')}}">Trouver un lieu</a></span>
+					
+
+
+                    	
+					<ul>
+						
+						<li>
+							<span><a href="{{path('recherche_par_categorie', {categorie:1})}}">Habitations</a></span>
+							<ul>
+							{% for   habitation in menu().habitations %}
+								<li><a href="{{path('recherche_par_sous_categorie', {sous_categorie:habitation.id})}}">{{habitation.titre}} </a></li>
+							{% endfor %}
+
+							    <li><a href="#0">Autres </a></li>
+								
+							</ul>
+							
+							
+						</li>
+					
+
+                         <li>
+							<span><a href="{{path('recherche_par_categorie', {categorie:3})}}">Commerces</a></span>
+							<ul>
+								{% for   commerce in menu().commerces %}
+								<li><a href="{{path('recherche_par_sous_categorie', {sous_categorie:commerce.id})}}">{{commerce.titre}} </a></li>
+							    {% endfor %}
+							</ul>
+						</li>
+
+
+
+						<li>
+							<span><a href="{{path('recherche_par_categorie', {categorie:4})}}">Lieux public</a></span>
+							<ul>
+								{% for   lieuxPublic in menu().lieuxPublics %}
+								<li><a href="{{path('recherche_par_sous_categorie', {sous_categorie:lieuxPublic.id})}}">{{lieuxPublic.titre}} </a></li>
+							{% endfor %}
+							</ul>
+						</li>
+
+
+						<li>
+							<span><a href="{{path('recherche_par_categorie', {categorie:5})}}">Lieux loisirs, sport</a></span>
+							<ul>
+								{% for   sport in menu().sports %}
+								<li><a href="{{path('recherche_par_sous_categorie', {sous_categorie:sport.id})}}">{{sport.titre}} </a></li>
+							{% endfor %}
+							</ul>
+						</li>
+
+
+						<li>
+							<span><a href="{{path('recherche_par_categorie', {categorie:6})}}">Loisirs / Festif </a></span>
+							<ul>
+								{% for   festif in menu().festifs %}
+								<li><a href="{{path('recherche_par_sous_categorie', {sous_categorie:festif.id})}}">{{festif.titre}} </a></li>
+							{% endfor %}
+								
+							</ul>
+						</li>
+
+
+						<li>
+							<span><a href="{{path('recherche_par_categorie', {categorie:7})}}">Lieux audiovisuel</a></span>
+							<ul>
+								{% for   audio in menu().audios %}
+								<li><a href="{{path('recherche_par_sous_categorie', {sous_categorie:audio.id})}}">{{audio.titre}} </a></li>
+							{% endfor %}
+							</ul>
+						</li>
+
+                       
+
+
+						
+
+
+						<li>
+							<span><a href="{{path('recherche_par_categorie', {categorie:9})}}">Affaires</a></span>
+							<ul>
+								{% for   affaire in menu().affaires %}
+								<li><a href="{{path('recherche_par_sous_categorie', {sous_categorie:affaire.id})}}">{{affaire.titre}} </a></li>
+							{% endfor %}
+
+							</ul>
+						</li>
+					
+
+						<li>
+							<span><a href="{{path('recherche_par_categorie', {categorie:11})}}">Extérieurs</a></span>
+							<ul>
+							{% for   exterieur in menu().exterieurs %}
+								<li><a href="{{path('recherche_par_sous_categorie', {sous_categorie:exterieur.id})}}">{{exterieur.titre}} </a></li>
+							{% endfor %}
+							</ul>
+						</li>
+
+						
+
+
+
+
+
+
+					</ul>
+			
+
+
+
+
+
+
+
+				</li>
+				<li><span><a href="{{path('proposer_lieu')}}">Proposer un lieu</a></span>
+					
+				</li>
+				<li><span><a href="{{path('services_page')}}">Services</a></span>
+
+				</li>
+
+                <li><span><a href="{{path('references_page')}}">Démarches</a></span>
+
+				</li>
+                
+                 <li><span><a href="{{path('nosprestataire_page')}}">Nos prestataires</a></span>
+                 	
+
+				</li>
+
+				 <li><span><a href="{{path('annuaire_page')}}">Annuaire</a></span>
+                 
+
+				</li>
+
+
+				<li><span><a href="{{path('contacter_page')}}">Contact</a></span>
+					
+				</li>
+				
+			</ul>
+		</nav>
+	</header>
+
+
+{% endif %}
+	<!-- /header -->
+	
+	<main>
+		
+
+
+
+
+
+{% block pageContainer %}
+
+
+
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+		<!--/call_section-->
+	</main>
+	<!-- /main -->
+
+	<footer>
+		<div class="container margin_60_35">
+			<div class="row">
+				<div class="col-md-2">
+				<h5>Trouver un lieu</h5>
+				<h6 style="color:#fff;">Locataire</h6>
+				<ul class="links">
+						<li><a href="{{path('recherche_par_categorie', {categorie:1})}}">Habitations</a></li>
+						
+						<li><a href="{{path('recherche_par_categorie', {categorie:3})}}">Commerces</a></li>
+						<li><a href="{{path('recherche_par_categorie', {categorie:5})}}">Lieux loisirs, sport</a></li>
+                        <li><a href="{{path('recherche_par_categorie', {categorie:6})}}">Loisirs / Festif</a></li>
+					    <li><a href="{{path('recherche_par_categorie', {categorie:7})}}">Lieux audiovisuel</a></li>
+					    <li><a href="{{path('recherche_par_categorie', {categorie:8})}}">Affaires</a></li>
+                        <li><a href="{{path('recherche_par_categorie', {categorie:10})}}">Activités professionnelles</a></li>
+					    <li><a href="{{path('recherche_par_categorie', {categorie:4})}}">Lieux publics</a></li>
+					    <li><a href="{{path('recherche_par_categorie', {categorie:11})}}">Extérieurs</a></li>
+					 
+					</ul>
+				</div>
+
+                 <div class="col-md-3">
+                 	
+					<h5 style="color:#fff;margin-top:25px;">Proposer un lieu</h5>
+					<h6 style="color:#fff;">Loueur</h6>
+					<ul class="links">
+						
+						<li><a href="{{path('particulier_guide_page')}}">Comment ça marche ?</a></li>
+						<li><a href="{{path('fos_user_security_login')}}">S'identifier</a></li>
+                        <li><a href="{{path('fos_user_registration_register')}}">S'inscrire</a></li>
+					   
+					</ul>
+					
+				</div>
+
+					
+				
+                
+
+
+
+				<div class="col-md-2">
+					<h5>Liens utiles</h5>
+					<ul class="links">
+						
+						<li><a href="{{path('services_page')}}">Services</a></li>
+						<li><a href="{{path('references_page')}}">Références</a></li>
+						<li><a href="#">Nos prestataires</a></li>
+						<li><a href="{{path('annuaire_page')}}">Annuaires</a></li>
+						
+						
+					</ul>
+				</div>
+
+                
+
+
+
+				<div class="col-md-3">
+					<h5>Contact</h5>
+					<ul class="contacts">
+						<li><a href="tel://61280932400"><i class="ti-mobile"></i>  70 809 400</a></li>
+						<li><a href="mailto:info@Panagea.com"><i class="ti-email"></i> sqli-services@gmail.com</a></li>
+					</ul>
+					<div id="newsletter">
+					<h6>Newsletter</h6>
+					<div id="message-newsletter"></div>
+					<form method="post" action="#" name="newsletter_form" id="newsletter_form">
+						<div class="form-group">
+							<input type="email" name="email_newsletter" id="email_newsletter" class="form-control" placeholder="Votre adresse e-mail">
+							<input type="button" value="Envoyer" id="submit-newsletter">
+						</div>
+					</form>
+					</div>
+				</div>
+
+              <div class="col-md-2">
+					<h5>Aide</h5>
+					<ul class="links">
+						<li><a href="{{path('faq_page')}}">FAQ</a></li>
+						
+						
+					</ul>
+				</div>
+
+
+
+
+			</div>
+			<!--/row-->
+			<hr>
+			<div class="row">
+				<div class="col-lg-6">
+					<ul id="footer-selector">
+						<li>
+							<div class="styled-select" id="lang-selector">
+								<select>
+									<option value="English" >English</option>
+									<option value="French" selected>Français</option>
+									<option value="Spanish">Spanish</option>
+									<option value="Russian">Russian</option>
+								</select>
+							</div>
+						</li>
+					
+					</ul>
+				</div>
+				<div class="col-lg-6">
+					<ul id="additional_links">
+					
+						<li><span>© 2019 SQLI services</span></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!--/footer-->
+	</div>
+	<!-- page -->
+	
+	<!-- Sign In Popup -->
+	<div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide">
+		<div class="small-dialog-header">
+			<h3>Sign In</h3>
+		</div>
+		<form>
+			<div class="sign-in-wrapper">
+				<a href="#0" class="social_bt facebook">Login with Facebook</a>
+				<a href="#0" class="social_bt google">Login with Google</a>
+				<div class="divider"><span>Or</span></div>
+				<div class="form-group">
+					<label>Email</label>
+					<input type="email" class="form-control" name="email" id="email">
+					<i class="icon_mail_alt"></i>
+				</div>
+				<div class="form-group">
+					<label>Password</label>
+					<input type="password" class="form-control" name="password" id="password" value="">
+					<i class="icon_lock_alt"></i>
+				</div>
+				<div class="clearfix add_bottom_15">
+					<div class="checkboxes float-left">
+						<label class="container_check">Remember me
+						  <input type="checkbox">
+						  <span class="checkmark"></span>
+						</label>
+					</div>
+					<div class="float-right mt-1"><a id="forgot" href="javascript:void(0);">Forgot Password?</a></div>
+				</div>
+				<div class="text-center"><input type="submit" value="Log In" class="btn_1 full-width"></div>
+				<div class="text-center">
+					Don’t have an account? <a href="register.html">Sign up</a>
+				</div>
+				<div id="forgot_pw">
+					<div class="form-group">
+						<label>Please confirm login email below</label>
+						<input type="email" class="form-control" name="email_forgot" id="email_forgot">
+						<i class="icon_mail_alt"></i>
+					</div>
+					<p>You will receive an email containing a link allowing you to reset your password to a new preferred one.</p>
+					<div class="text-center"><input type="submit" value="Reset Password" class="btn_1"></div>
+				</div>
+			</div>
+		</form>
+		<!--form -->
+	</div>
+	<!-- /Sign In Popup -->
+	
+	<div id="toTop"></div><!-- Back to top button -->
+	
+	<!-- COMMON SCRIPTS -->
+    <script src="{{asset('frontFolder/js/jquery-2.2.4.min.js')}}"></script>
+    <script src="{{asset('frontFolder/js/common_scripts.js')}}"></script>
+    <script src="{{asset('frontFolder/js/main.js')}}"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+	<script>
+		
+
+$(function () {
+ $('.toggle-menu').click(function(){
+	$('.exo-menu').toggleClass('display');
+	
+ });
+ 
+});
+	</script>
+
+
+
+	{% block javascript %}
+
+	{% endblock %}
+		
+</body>
+</html>

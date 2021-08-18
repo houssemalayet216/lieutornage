@@ -1,0 +1,313 @@
+{% extends '@Admin/Default/templateAdmin.html.twig' %}
+{% block stylesheet %}
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.7/css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block section_haider %}
+<section class="content-header">
+     
+      <ol class="breadcrumb">
+
+        <li><a href="#"><i class="fa fa-dashboard"></i>Tableau de bord</a></li>
+        <li class="active">Messages</li>
+      </ol>
+    </section>
+{%endblock%}
+
+ {%block pageContainer %} 
+ 
+
+ 
+
+
+
+ <section class="content">
+
+  <div class="row">
+<div class="col-md-12">
+
+
+
+<div class="box">
+            <div class="box-header">
+           
+
+               <div class="col-md-2 pull pull-right">
+                <select id="filter-select" class="form-control input-sm ">
+              <option value="Nouveaux">Nouveaux</option>
+              <option value="Répondu">Répondu</option>
+              <option value="Vu">Vu</option>
+              </select>
+    
+
+            </div>
+             
+   
+
+
+
+
+
+
+
+
+
+         
+            
+
+
+
+
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table id="tablemessage" class="table table-bordered table-striped" >
+                <thead>
+                <tr>
+
+                  <th class="text-center">Utilisateur</th>
+                  <th class="text-center">Objet</th>
+                  <th class="text-center">Date</th>
+                  <th class="text-center">Status</th>
+                  <th class="text-center">Action</th>
+                </tr>
+                </thead>
+                
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+
+
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+</section>
+
+
+
+{% endblock %}
+
+
+{%block aside %}
+{%endblock%}
+
+
+
+
+
+
+
+
+{% block javascript%}
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+
+       var tablemessage;
+$(document).ready(function($){
+ tablemessage=$("#tablemessage").DataTable({
+     columnDefs: [
+    {
+        targets: -1,
+        className: 'dt-body-left',
+        
+    },{ "orderable": false, "targets": 4}
+  ],
+  'destroy':true,
+
+    'ajax':{"url":"{{path("liste_message")}}"},
+    
+ 
+     'order': []
+});
+
+
+$('#link-tableau').removeClass('active');
+  $('#link-user').removeClass('active');
+  $('#link-reference').removeClass('active');
+  $('#link-actualite').removeClass('active');
+ 
+  $('#link-message').addClass('active');
+
+
+
+
+
+
+
+
+
+
+
+
+$('#filter-select').change(function(){
+
+var filter=$(this).val();
+
+
+
+ tablemessage.destroy();
+
+
+
+   tableactualite=$("#tablemessage").DataTable({
+     columnDefs: [
+    {
+        targets: -1,
+        className: 'dt-body-left',
+        
+    },{ "orderable": false, "targets": 4 }
+  ],
+  'destroy':true,
+   
+    'ajax':{"url": "{{path("liste_message")}}","type": "POST","data": {"etat":filter}},
+     'order': []
+});
+
+
+
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

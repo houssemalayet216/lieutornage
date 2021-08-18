@@ -1,0 +1,763 @@
+{% extends '@Back/Default/templateParticulier.html.twig' %}
+{% block section_haider %}
+<section class="content-header">
+      <h1 class="text-center">
+        Modifier le Profile
+        
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i>Tableau de bord</a></li>
+        <li class="active">Modifier le Profile</li>
+      </ol>
+    </section>
+{%endblock%}
+
+  {%block pageContainer%} 
+
+  <section class="content">
+
+      <div class="row">
+      
+
+<div class="col-md-3">
+
+          <!-- Profile Image -->
+          <div class="box box-primary">
+            <div class="box-body box-profile">
+
+              {% if app.user.photo %}
+              <img class="profile-user-img img-responsive img-circle" src="{{asset('')}}Uploads/{{app.user.photo}}" alt="User profile picture">
+              
+                  {% elseif  app.user.civilite=='M.' %}
+                  <img class="profile-user-img img-responsive img-circle" src="{{asset('frontFolder/img/avatar.jpg')}}" alt="User profile picture">
+                {% else %}
+               <img class="profile-user-img img-responsive img-circle" src="{{asset('Uploads/femme.jpg')}}" alt="User profile picture">
+                  {% endif %}
+
+             
+
+              <h3 class="profile-username text-center">{{app.user.nom}} {{app.user.prenom}}</h3>
+
+              <p class="text-muted text-center">{%if app.user.fonction and app.user.societe %} {{app.user.fonction }} à {{app.user.societe}} {% endif %}</p>
+
+            
+
+             
+            </div>
+           
+          </div>
+        
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Information Générale</h3>
+            </div>
+        
+            <div class="box-body">
+             
+
+              <strong><i class="fa fa-map-marker margin-r-5"></i> Localisation</strong>
+
+              <p class="text-muted">{{app.user.ville}},{{app.user.adresse}},{{app.user.cp}}</p>
+
+              <hr>
+
+              <strong><i class="fa fa-phone margin-r-5"></i>Téléphone</strong>
+
+              <p class="text-muted">{{app.user.telephone}}</p>
+
+                <hr>
+
+              <strong><i class="fa fa-message margin-r-5"></i>E-mail</strong>
+
+              <p class="text-muted">{{app.user.email}}</p>
+              
+
+              
+            </div>
+           
+          </div>
+          
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class="col-md-9">
+          <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+            
+              <li class="active"><a href="#settings" data-toggle="tab">Profile</a></li>
+            </ul>
+            <div class="tab-content">
+           
+
+              <div class="active tab-pane" id="settings">
+                
+               
+                     {{ form_start(form, {'method': 'post', 'action': path('profile_page'), 'attr': {'id':'modifier-profile-professionel','novalidate':'novalidate'}}) }}
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Société :</label>
+                 {{form_widget(form.societe ,{'id':'societeprofessionel','attr':{'class': 'form-control','placeholder':'Société'}})}} 
+                       <span class="text-danger" id="data.societe"></span>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Fonction :</label>
+                 {{form_widget(form.fonction ,{'id':'fonctionprofessionel','attr':{'class': 'form-control','placeholder':'Fonction'}})}} 
+                       <span class="text-danger" id="data.fonction"></span>
+              </div>
+            </div>
+          </div>
+          <!-- /row-->
+          <div class="row">
+           
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Nom :*</label>
+                 {{form_widget(form.nom ,{'id':'nomprofessionel','attr':{'class': 'form-control','placeholder':'Nom'}})}} 
+                       <span class="text-danger" id="data.nom"></span>
+              
+              </div>
+            </div>
+
+
+
+
+          <div class="col-md-6">
+              <div class="form-group">
+                <label>Prénom :*</label>
+                   {{form_widget(form.prenom ,{'id':'prenomprofessionel','attr':{'class': 'form-control','placeholder':'Prénom'}})}} 
+                       <span class="text-danger" id="data.prenom"></span>
+              </div>
+            </div>
+
+
+
+
+
+
+
+
+          </div>
+
+
+
+                   <div class="row">
+
+
+                    <div class="col-md-6">
+              <div class="form-group">
+                <label>Civilité :*</label>
+                   {{form_widget(form.civilite ,{'id':'civiliteprofessionel','attr':{'class': 'form-control','placeholder':'Civilité'}})}} 
+                       <span class="text-danger" id="data.civilite"></span>
+              </div>
+            </div>
+
+
+
+
+
+
+            
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Ville :*</label>
+                 {{form_widget(form.ville ,{'id':'villeprofessionel','attr':{'class': 'form-control','placeholder':'Ville'}})}} 
+                       <span class="text-danger" id="data.ville"></span>
+              
+              </div>
+            </div>
+          </div>
+
+
+
+           <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Adresse :*</label>
+                   {{form_widget(form.adresse ,{'id':'adresseprofessionel','attr':{'class': 'form-control','placeholder':'Adresse'}})}} 
+                       <span class="text-danger" id="data.adresse"></span>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Code postale :*</label>
+                 {{form_widget(form.cp,{'id':'cpprofessionel','attr':{'class': 'form-control','placeholder':'Cp'}})}} 
+                       <span class="text-danger" id="data.cp"></span>
+              
+              </div>
+            </div>
+          </div>
+
+
+                      <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>E-mail :*</label>
+                     {{form_widget(form.email ,{'id':'emailprofessionel','attr':{'class': 'form-control','placeholder':'Email'}})}} 
+                       <span class="text-danger" id="data.email"></span>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+                    <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Nom d'utilisateur :*</label>
+                   {{form_widget(form.username ,{'id':'usernameprofessionel','attr':{'class': 'form-control','placeholder':'Nom utilisateur'}})}} 
+                       <span class="text-danger" id="data.username"></span>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Téléphone :*</label>
+                 {{form_widget(form.telephone,{'id':'telephoneprofessionel','attr':{'class': 'form-control','placeholder':'Téléphone'}})}} 
+                       <span class="text-danger" id="data.telephone"></span>
+              
+              </div>
+            </div>
+          </div>
+
+
+
+                    
+
+
+
+
+
+
+
+
+
+
+
+
+          <!-- /row-->
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Photo de profile :</label>
+                 {{form_widget(form.photo ,{'id':'photoclient','attr':{'class': 'form-control','placeholder':'Photo'}})}} 
+                       <span class="text-danger" id="data.photo"></span>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  
+                  <div class="row" >
+                    <div class="col-sm-offset-4 col-sm-8" style="margin-top:10px;">
+                      <button type="submit" class="btn btn-danger" id="btn-modifier-profile"><span>Modifier</span><i id="spin-particulier"></i></button>
+                    </div>
+                  </div>
+                {{ form_end(form) }}
+
+
+
+
+
+
+              </div>
+              <!-- /.tab-pane -->
+            </div>
+            <!-- /.tab-content -->
+          </div>
+          <!-- /.nav-tabs-custom -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  {% endblock %}
+  {%block aside %}
+  {%endblock%}
+
+
+ 
+
+
+
+
+{% block javascript %}
+
+
+
+
+
+
+<script>
+   $(document).ready(function(){
+   $('#link-lieux').removeClass('active');
+  $('#link-reservation').removeClass('active');
+  $('#link-calendar').removeClass('active');
+  $('#link-message').removeClass('active');
+  $('#link-tableau').removeClass('active');
+  $('#link-profile').addClass('active');
+
+ });
+
+   </script>
+
+
+
+
+
+<script type="text/javascript">
+                   $('#btn-modifier-profile').click(function(e){
+                  e.preventDefault();
+                    $('#btn-modifier-profile').prop('disabled',true);
+                  $("#spin-particulier").addClass('fa fa-spinner fa-spin fa-register');
+                   
+                     var username=$('#usernameprofessionel').val();
+                  var email=$('#emailprofessionel').val();
+                  var nom=$('#nomprofessionel').val();
+                  var prenom=$('#prenomprofessionel').val();
+                  var ville=$('#villeprofessionel').val();
+                  var adresse=$('#adresseprofessionel').val();
+                  var cp=$('#cpprofessionel').val();
+                  var civilite=$('#civiliteprofessionel').val();
+                  var telephone=$('#telephoneprofessionel').val();
+                  
+
+                  
+                   var errorClientArray=['data.civilite','data.nom','data.prenom','data.username','data.email','data.ville','data.adresse','data.cp','data.telephone'];
+                    var form = document.getElementById("modifier-profile-professionel");
+
+                    if(email=="")
+                  {
+                       document.getElementById('data.email').textContent='Ce champ ne doit pas être vide ';
+                     $("#spin-particulier").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn-modifier-profile').prop('disabled',false); 
+                  }
+                  
+
+                    if(username=="")
+                  {
+                       document.getElementById('data.username').textContent='Ce champ ne doit pas être vide ';
+                      $("#spin-particulier").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn-modifier-profile').prop('disabled',false);  
+                  }
+
+
+
+                      if(nom=="")
+                  {
+                       document.getElementById('data.nom').textContent='Ce champ ne doit pas être vide ';
+                      $("#spin-particulier").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn-modifier-profile').prop('disabled',false); 
+                  }
+                  
+
+                    if(prenom=="")
+                  {
+                       document.getElementById('data.prenom').textContent='Ce champ ne doit pas être vide ';
+                      $("#spin-particulier").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn-modifier-profile').prop('disabled',false); 
+                  }
+                    
+
+                        if(civilite=="")
+                  {
+                       document.getElementById('data.civilite').textContent='Ce champ ne doit pas être vide ';
+                     $("#spin-particulier").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn-modifier-profile').prop('disabled',false);  
+                  }
+                  
+
+                    if(ville=="")
+                  {
+                       document.getElementById('data.ville').textContent='Ce champ ne doit pas être vide ';
+                      $("#spin-particulier").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn-modifier-profile').prop('disabled',false);  
+                  }
+                  
+
+                      if(adresse=="")
+                  {
+                       document.getElementById('data.adresse').textContent='Ce champ ne doit pas être vide ';
+                      $("#spin-particulier").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn-modifier-profile').prop('disabled',false); 
+                  }
+                  
+
+                    if(cp=="")
+                  {
+                       document.getElementById('data.cp').textContent='Ce champ ne doit pas être vide ';
+                     $("#spin-particulier").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn-modifier-profile').prop('disabled',false);  
+                  }
+
+
+
+
+
+
+                        $('#emailprofessionel').change(function(){
+                  
+                 if($.trim(document.getElementById('data.email').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.email').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#usernameprofessionel').change(function(){
+                  
+                 if($.trim(document.getElementById('data.username').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.username').textContent="";
+                                  }
+                    
+                                 });
+
+  
+
+
+
+                   $('#nomprofessionel').change(function(){
+                  
+                 if($.trim(document.getElementById('data.nom').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.nom').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#prenomprofessionel').change(function(){
+                  
+                 if($.trim(document.getElementById('data.prenom').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.prenom').textContent="";
+                                  }
+                    
+                                 });
+
+
+
+                                   $('#civiliteprofessionel').change(function(){
+                  
+                 if($.trim(document.getElementById('data.civilite').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.civilite').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#villeprofessionel').change(function(){
+                  
+                 if($.trim(document.getElementById('data.ville').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.ville').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                   $('#adresseprofessionel').change(function(){
+                  
+                 if($.trim(document.getElementById('data.adresse').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.adresse').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#cpprofessionel').change(function(){
+                  
+                 if($.trim(document.getElementById('data.cp').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.cp').textContent="";
+                                  }
+                    
+                                 });
+
+
+
+                                 $('#telephoneprofessionel').change(function(){
+                  
+                 if($.trim(document.getElementById('data.telephone').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.telephone').textContent="";
+                                  }
+                    
+                                 });
+
+
+
+
+
+
+
+
+
+
+           if(email!==""&&username!==""&&nom!==""&&prenom!==""&&ville!==""&&adresse!==""&&cp!==""&&civilite!==""&&telephone!=="")
+
+             {
+                      $.ajax({
+                       dataType:"json",
+                       url:$("#modifier-profile-professionel").attr('action'),
+                       type:$("#modifier-profile-professionel").attr('method'),
+                        data:new FormData(form),
+                       contentType:false,
+                       processData:false,
+                       cache:false,
+                       success:function (data,status,object)
+                       {
+
+                      
+                       var message=data.message;
+                       if(data.success==true)
+                          {
+
+                              
+                         
+                               errorClientArray.forEach(function(error){
+                                  if($.trim(document.getElementById(error).textContent) !== "")
+
+                                  {
+                                    document.getElementById(error).textContent="";
+                                  }
+                               });
+                             
+                                  $("#spin-particulier").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn-modifier-profile').prop('disabled',false);
+                            
+
+                            document.location.reload(true);
+
+
+                            toastr.success(message,'Success', {
+                                      
+                                      "closeButton": false,
+                                       "debug": false,
+                                        "newestOnTop": false,
+                                        "progressBar": true,
+                                        "positionClass": "toast-top-right",
+                                         "preventDuplicates": false,
+                                         "onclick": null,
+                                          "showDuration": "300",
+                                          "hideDuration": "1000",
+                                           "timeOut": "5000",
+                                           "extendedTimeOut": "1000",
+                                           "showEasing": "swing",
+                                           "hideEasing": "linear",
+                                           "showMethod": "fadeIn",
+                                        "hideMethod": "fadeOut"
+                              
+
+
+                               });
+                            
+
+                          }
+
+                          else{
+
+                             toastr.error(message,'Error', {
+                                      
+                                      "closeButton": false,
+                                       "debug": false,
+                                        "newestOnTop": false,
+                                        "progressBar": true,
+                                        "positionClass": "toast-top-right",
+                                         "preventDuplicates": false,
+                                         "onclick": null,
+                                          "showDuration": "300",
+                                          "hideDuration": "1000",
+                                           "timeOut": "5000",
+                                           "extendedTimeOut": "1000",
+                                           "showEasing": "swing",
+                                           "hideEasing": "linear",
+                                           "showMethod": "fadeIn",
+                                        "hideMethod": "fadeOut"
+                              
+
+
+                               });
+
+
+
+
+                            if(data.errors)
+                            {
+                                 console.log(data.errors);
+
+                                $("#spin-particulier").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn-modifier-profile').prop('disabled',false);
+
+                              errorClientArray.forEach(function(error){
+
+                               if($.trim(document.getElementById(error).textContent) !== "")
+
+                                  {
+                                    document.getElementById(error).textContent="";
+                                  }
+
+                              });
+
+                              data.errors.forEach(function(error)
+                              {
+
+                               document.getElementById(error.elementId).textContent=error.errorMessage;
+                              });
+
+                            }
+
+                          }
+                                
+
+                        
+                       $("#spin-particulier").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn-modifier-profile').prop('disabled',false);
+                          
+
+                          },
+                          error:function (data,status,object)
+                          {
+                             console.log(data.message);
+                          }
+
+
+
+
+
+
+
+
+                       });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                     }
+
+
+
+
+
+
+
+
+
+
+
+                     $("#spin-particulier").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn-modifier-profile').prop('disabled',false);
+
+
+
+
+                  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

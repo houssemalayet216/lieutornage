@@ -1,0 +1,796 @@
+{% extends '@Front/Default/template.html.twig' %}
+
+{% block title %} Foire aux questions {% endblock %}
+
+	{% block stylesheet %}
+		<link href="{{asset('frontFolder/css/integration.css')}}" rel="stylesheet">
+
+       <style>
+
+       a{
+       	color: #007bff;
+       }
+
+
+       </style>
+   
+	{% endblock %}
+
+{% block pageContainer %}
+
+<div id="breadcrumb">
+			<div class="container">
+				<ul>
+					<li><a href="#">Accueil</a></li>
+					
+					<li>Foire aux questions</li>
+				</ul>
+			</div>
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+         <div class="container margin_60_35">
+		<div class="row">
+				<aside class="col-lg-3" id="sidebar">
+						<div class="box_style_cat" id="faq_box">
+							<ul id="cat_nav">
+								<li><a href="#generale" class="active"><i class="icon_document_alt"></i>Questions générales</a></li>
+								<li><a href="#loueurs"><i class="icon_document_alt"></i>Questions posées par les loueurs (propriétaires)   </a></li>
+								<li><a href="#professionels"><i class="icon_document_alt"></i> Questions posées par les professionnels du cinéma (locataires) </a></li>
+							
+							</ul>
+						</div>
+						<!--/sticky -->
+				</aside>
+				<!--/aside -->
+				
+				<div class="col-lg-9" id="faq">
+					<h4 class="nomargin_top">Questions générales</h4>
+					<div role="tablist" class="add_bottom_45 accordion_2" id="generale">
+						<div class="card">
+							<div class="card-header" role="tab">
+								<h5 class="mb-0">
+									<a data-toggle="collapse" href="#collapseOne_payment" aria-expanded="true"><i class="indicator ti-minus"></i>Qui sommes-nous ?</a>
+								</h5>
+							</div>
+
+							<div id="collapseOne_payment" class="collapse show" role="tabpanel" data-parent="#generale">
+								<div class="card-body">
+									<p>
+                                      
+                                     <span style="color:#fc5b62;"> nom de site </span> est une plateforme de mise en relation, accessible à l’adresse <a href="http://sqli-services.com/hss/Tournage/web/">http://sqli-services.com/hss/Tournage/web/</a> , permettant aux particuliers ou professionnels de mettre en location leur bien pour un tournage, shooting ou évènement culturel</p>
+                                     <p> Vous souhaitez mettre en location votre bien sur nom de site, consultez notre page </p>
+
+
+									</p>
+								</div>
+							</div>
+						</div>
+						<!-- /card -->
+						<div class="card">
+							<div class="card-header" role="tab">
+								<h5 class="mb-0">
+									<a class="collapsed" data-toggle="collapse" href="#collapseTwo_payment" aria-expanded="false">
+										<i class="indicator ti-plus"></i>   L'utilisation du site nom de site est-elle payante ?
+									</a>
+								</h5>
+							</div>
+							<div id="collapseTwo_payment" class="collapse" role="tabpanel" data-parent="#generale">
+								<div class="card-body">
+									<p>
+                                      L’inscription, la publication et la recherche d’annonce sont totalement gratuites.
+                                      A chaque location effective, <span style="color:#fc5b62;"> nom de site </span> applique une commission de 7 % TTC pour les loueurs et de 10% pour les professionnels du cinéma.
+
+									</p>
+								</div>
+							</div>
+						</div>
+						<!-- /card -->
+						<div class="card">
+							<div class="card-header" role="tab">
+								<h5 class="mb-0">
+									<a class="collapsed" data-toggle="collapse" href="#collapseThree_payment" aria-expanded="false">
+										<i class="indicator ti-plus"></i>Est-ce obligatoire de créer un compte nom de site ?
+									</a>
+								</h5>
+							</div>
+							<div id="collapseThree_payment" class="collapse" role="tabpanel" data-parent="#generale">
+								<div class="card-body">
+									<p>
+                                     
+                                     Le simple accès au site ne nécessite ni code d’accès ni identifiant.<br>
+Celui-ci devient impératif afin de pouvoir réserver ou proposer à la location un espace pour des événements.
+
+                                   
+
+
+									</p>
+								</div>
+							</div>
+						</div>
+
+
+
+
+
+
+
+                   		<div class="card">
+							<div class="card-header" role="tab">
+								<h5 class="mb-0">
+									<a class="collapsed" data-toggle="collapse" href="#collapse4_payment" aria-expanded="false">
+										<i class="indicator ti-plus"></i>Comment créer mon compte nom de site ?
+									</a>
+								</h5>
+							</div>
+							<div id="collapse4_payment" class="collapse" role="tabpanel" data-parent="#generale">
+								<div class="card-body">
+									<p>
+                                     
+                                    C’est très simple, il suffit de cliquer sur le bouton "Inscription", de remplir le formulaire, d’accepter les conditions générales de vente et d’utilisation.
+
+                                   
+
+
+									</p>
+								</div>
+							</div>
+						</div>
+
+
+
+
+							<div class="card">
+							<div class="card-header" role="tab">
+								<h5 class="mb-0">
+									<a class="collapsed" data-toggle="collapse" href="#collapse5_payment" aria-expanded="false">
+										<i class="indicator ti-plus"></i>Comment puis-je contacter nom de site ?
+									</a>
+								</h5>
+							</div>
+							<div id="collapse5_payment" class="collapse" role="tabpanel" data-parent="#generale">
+								<div class="card-body">
+									<p>
+                                     
+                                  <span style="color:#fc5b62;"> nom de site </span> est joignable :
+									</p>
+									<ul style="display:inline-block;">
+                                    <li>par mail à l’adresse suivante : <a href="#">contact@m-tournage.com </a></li>
+                                    <li>par téléphone du lundi au vendredi de 10h à 13h puis de 14h à 18h au +216 71 123 456</li>
+                                    <li>par le module de tchat du site <a href="http://sqli-services.com/hss/Tournage/">http://sqli-services.com/hss/Tournage/web/ </a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+
+
+						<div class="card">
+							<div class="card-header" role="tab">
+								<h5 class="mb-0">
+									<a class="collapsed" data-toggle="collapse" href="#collapse6_payment" aria-expanded="false">
+										<i class="indicator ti-plus"></i>Qu'est-ce qu'un le professionnel du cinéma nom de site ?
+									</a>
+								</h5>
+							</div>
+							<div id="collapse6_payment" class="collapse" role="tabpanel" data-parent="#generale">
+								<div class="card-body">
+									<p>
+                                     
+                                    Le professionnel du cinéma est un utilisateur, ayant réservé un lieu du tournage, services (Matériel de tournage ou d’animaux Costumes & accessoires Véhicules)  dédié à la location d’un tournage  par l’intermédiaire du site.
+<b>Le professionnel du cinéma </b> doit impérativement être titulaire d’un compte personnel <span style="color:#fc5b62;"> nom de site </span>.
+
+
+                                   
+
+
+									</p>
+								</div>
+							</div>
+						</div>
+
+
+
+
+
+
+
+
+							<div class="card">
+							<div class="card-header" role="tab">
+								<h5 class="mb-0">
+									<a class="collapsed" data-toggle="collapse" href="#collapse7_payment" aria-expanded="false">
+										<i class="indicator ti-plus"></i> Qu'est-ce qu'un loueur nom de site?
+									</a>
+								</h5>
+							</div>
+							<div id="collapse7_payment" class="collapse" role="tabpanel" data-parent="#generale">
+								<div class="card-body">
+									<p>
+                                     
+                                    Le loueur est un utilisateur, particulier ou professionnel, ayant déposé et mis en ligne une annonce sur le site.<br>
+                                    Le loueur doit être majeur.<br>
+Le loueur doit impérativement être titulaire d’un compte personnel <span style="color:#fc5b62;">  nom de site </span>.
+
+                                   
+
+
+									</p>
+								</div>
+							</div>
+						</div>
+
+
+
+
+
+
+
+						
+					</div>
+					
+					
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+					<h4 class="nomargin_top">Questions posées par les loueurs (propriétaires) </h4>
+					<div role="tablist" class="add_bottom_45 accordion_2" id="loueurs">
+
+
+						<div class="card">
+							<div class="card-header" role="tab">
+								<h5 class="mb-0">
+									<a data-toggle="collapse" href="#collapseOne_tips" aria-expanded="true"><i class="indicator ti-plus"></i> Que se passe-t-il si un professionnel du cinéma annule sa réservation ?</a>
+								</h5>
+							</div>
+
+							<div id="collapseOne_tips" class="collapse" role="tabpanel" data-parent="#loueurs">
+								<div class="card-body">
+									<p>Sauf accord préalable et dérogatoire entre le <b>loueur, le professionnel du cinéma (locataire) </b> et <span style="color:#fc5b62;"> nom de site </span>, les conditions d’annulation applicables au professionnel du cinéma, stipulées par le loueur dans le règlement intérieur de son annonce,  sont les suivantes pour le professionnel du cinéma :<br>
+Conditions d’annulation <span style="color: #007bff;">Flexibles, Modérées ou Strictes </span> .<br>
+Elles sont définies par le loueur lors de la publication de son annonce dans le règlement intérieur. Par défaut ce sont les conditions modérées qui s’appliquent. <br>
+Le règlement intérieur de chaque annonce spécifie les conditions d’annulation adoptées par le loueur.
+</p>
+<h6 style="text-decoration:underline;">Tant que la réservation n’a pas été confirmée et payée, le professionnel du cinéma reste libre d’annuler sa réservation, sans aucun frais</h6>
+
+<h5 style="color: #007bff;">Conditions d’annulation flexibles</h5>
+
+
+
+									<p>En cas de demande d’annulation d’une réservation confirmée et réglée, le  professionnel du cinéma sera remboursé dans les conditions suivantes : <br>
+
+                                   Si la Réservation validée est annulée au moins 15 (quinze) jours avant le début de la Période de location, le professionnel du cinéma sera remboursé de la totalité du Prix de Location, de l’assurance obligatoire, de l’hébergement et des frais de ménage le cas échéant à l’exclusion des frais de commission nom de site qui resteront à la charge du professionnel du cinéma.<br>
+
+                                   Si la Réservation validée est annulée entre 14 et 7 jours calendaires avant la Période de location, le professionnel du cinéma ne sera remboursé que de 60% du Prix de Location et de l’hébergement le cas échéant, d l’intégralité des frais d’assurance obligatoires et de ménage le cas échéant, à l’exclusion des frais de commission <span style="color: #007bff;"> nom de site </span> qui resteront à la charge du professionnel du cinéma. <br>
+
+                                    Si la Réservation validée est annulée moins de 7 (sept) jours avant le début de la Période de location, le professionnel du cinéma  ne recevra aucun remboursement du Prix de Location et de l’hébergement (ce prix restant acquis à le loueur), de la commission  <span style="color: #007bff;"> nom de site </span>, mais il sera remboursé des frais d’assurance et de ménage le cas-échéant.
+
+									</p>
+
+									<h5 style="color: #007bff;">Conditions d’annulation modérées</h5>
+
+									<p>En cas de demande d’annulation d’une réservation confirmée et réglée, le professionnel du cinéma sera remboursé dans les conditions suivantes :<br>
+
+                                    Si la Réservation validée est annulée plus de 30 (trente) jours calendaires avant le début de la Période de location, le professionnel du cinéma sera remboursé à 100% du Prix de la Location, des frais d’assurance obligatoires, des frais de ménage et d’hébergement le cas échéant. Le professionnel du cinéma  ne sera pas remboursé de la Commission perçue par la société SQLI services.<br>
+
+                                    Si la Réservation validée est annulée entre 30 (trente) jours et 15 (quinze) jours calendaires avant le début de la Période de location, le professionnel du cinéma sera remboursé à 50% du Prix de Location, de l’hébergement le cas échéant. Le professionnel du cinéma sera remboursé à 100% des frais d’assurance obligatoire et de ménage le cas échéant. Le professionnel du cinéma  ne sera pas remboursé de la Commission perçue par la société <span style="color: #007bff;">nom de site </span>.<br>
+
+                                    Si la Réservation validée est annulée moins de 15 (quinze) jours calendaires avant le début de la Période de location, le professionnel du cinéma ne sera pas remboursé du Prix de Location, de l’hébergement le cas échéant. Le professionnel du cinéma sera remboursé à 100% des frais d’assurance obligatoire et de ménage le cas échéant. Le professionnel du cinéma ne sera pas remboursé de la Commission perçue par la société  <span style="color: #007bff;">nom de site </span>.
+
+
+
+									</p>
+
+									<h5 style="color: #007bff;">Conditions d’annulation strictes</h5>
+
+									<p>En cas de demande d’annulation d’une réservation confirmée et réglée, le professionnel du cinéma  sera remboursé dans les conditions suivantes : <br>
+                                     
+                                     Si la Réservation validée est annulée plus de 60 (soixante) jours calendaires avant le début de la Période de location, le professionnel du cinéma sera remboursé 50% du Prix de Location et de l’hébergement le cas échéant. Il sera remboursé à 100% des frais d’assurance obligatoire et des frais de ménage le cas échéant. Le professionnel du cinéma  ne sera pas remboursé de la Commission perçue par la société <span style="color: #007bff;"> SQL services </span>. <br>
+
+                                     
+                                     Si la Réservation validée est annulée moins de 60 (soixante) jours calendaires avant le début de la Période de location, le professionnel du cinéma ne sera pas remboursé du Prix de Location, de l’hébergement le cas échéant. Le professionnel du cinéma sera remboursé à 100% des frais d’assurance obligatoires et des frais de ménage le cas échéant. Le professionnel du cinéma  ne sera pas remboursé de la Commission perçue par la société <span style="color: #007bff;"> nom de site </span>.<br>
+
+                                     Un professionnel du cinéma annulant régulièrement des Réservations pourra être exclu du Site et, le cas échéant, de l’Application, dans les conditions prévues dans les CGU.
+
+
+
+									</p>
+ 
+                                    
+								</div>
+							</div>
+						</div>
+						<!-- /card -->
+						<div class="card">
+							<div class="card-header" role="tab">
+								<h5 class="mb-0">
+									<a class="collapsed" data-toggle="collapse" href="#collapseTwo_tips" aria-expanded="false">
+										<i class="indicator ti-plus"></i> Puis-je annuler une réservation validée ?
+									</a>
+								</h5>
+							</div>
+							<div id="collapseTwo_tips" class="collapse" role="tabpanel" data-parent="#loueurs">
+								<div class="card-body">
+									<b style="text-decoration:underline;">Tant que la réservation n’a pas été confirmée et payée, Un LOUEUR reste libre d’annuler une demande de réservation, sans aucun frais.</b>
+
+									<p>Un loueur a la possibilité d’annuler une Réservation confirmée et réglée par le professionnel du cinéma dans les conditions suivantes :</p> <br>
+                                    <ul style="display:inline-block;">
+                                     <li>Si l’annulation intervient<b> au moins 30 (trente) jours calendaires avant le début de la période de location  </b>, l’hôte ne percevra aucune somme et se verra déduire de son prochain loyer versé par <span style="color:#fc5b62;"> nom site </span> les frais d’annulation (8,50 € HT)
+Si l’annulation de l’Hôte intervient <b> entre 29 (vingt-neuf) et 15 (quinze) jours calendaires avant le début de la période de location </b>, le loueur ne percevra aucune somme. Il se verra déduire, de son prochain loyer versé par nom de site, une pénalité de 50€ ainsi que les Frais d’Annulation (8,50 € HT).
+</li>
+
+
+                                     <li>Si l’annulation intervient <b> moins de 15 (quinze) jours calendaires avant le début de la période de location </b>, le loueur  ne percevra aucune somme. Il se verra déduire, de son prochain loyer versé par nom de site, une pénalité de 100€ ainsi que les Frais d’Annulation (8,50  HT)
+
+</li>
+                                    </ul>
+
+                                    <p>En outre, le loueur annulant régulièrement des Réservations pourra être exclu du Site et, le cas échéant, de l’Application</p>
+
+								</div>
+							</div>
+						</div>
+						<!-- /card -->
+						<div class="card">
+							<div class="card-header" role="tab">
+								<h5 class="mb-0">
+									<a class="collapsed" data-toggle="collapse" href="#collapseThree_tips" aria-expanded="false">
+										<i class="indicator ti-plus"></i>   Suis-je protégé(e) en cas de dommage et/ou dégradations à la suite de la location ?
+									</a>
+								</h5>
+							</div>
+							<div id="collapseThree_tips" class="collapse" role="tabpanel" data-parent="#loueurs">
+								<div class="card-body">
+									<p>
+                                    
+                                    En publiant une annonce vous garantissez que l’espace proposé sur le site<a href="http://sqli-services.com/hss/Tournage/web/"> http://sqli-services.com/hss/Tournage/web/ <a> est assuré pour les risques afférents à la location.
+
+									</p>
+								</div>
+							</div>
+						</div>
+
+
+
+                      <div class="card">
+							<div class="card-header" role="tab">
+								<h5 class="mb-0">
+									<a class="collapsed" data-toggle="collapse" href="#collapse4_tips" aria-expanded="false">
+										<i class="indicator ti-plus"></i> Que faire en cas de dommage après la location et qui contacter ?
+									</a>
+								</h5>
+							</div>
+							<div id="collapse4_tips" class="collapse" role="tabpanel" data-parent="#loueurs">
+								<div class="card-body">
+									<p>Dans l’intérêt des deux parties, il est recommandé de prévoir un état de lieux d’entrée et de sortie.<br>
+Ces états des lieux contiendront un inventaire des meubles, équipements matériels et objets.<br>
+A défaut d’état des lieux, 
+</p>
+								</div>
+							</div>
+						</div>
+
+
+
+						<div class="card">
+							<div class="card-header" role="tab">
+								<h5 class="mb-0">
+									<a class="collapsed" data-toggle="collapse" href="#collapse5_tips" aria-expanded="false">
+										<i class="indicator ti-plus"></i> Comment optimiser et gérer mes annonces ?
+									</a>
+								</h5>
+							</div>
+							<div id="collapse5_tips" class="collapse" role="tabpanel" data-parent="#loueurs">
+								<div class="card-body">
+									<p>Plusieurs éléments sont importants aux yeux des professionnels du cinéma : <br>
+<span style="color:#fc5b62;">nom de site </span> étant un site collaboratif, il est important de mettre une photo de vous en profil et de prendre le temps de vous présenter (dans le profil de votre tableau de bord) afin que les professionnels du cinéma se sentent en confiance.<br>
+Une annonce doit être la plus claire et compréhensible :
+.</p>
+<ul style="display:inline-block;">
+<li> Lors de la rédaction de votre annonce, prenez bien le temps de la relire afin de ne pas y laisser de « coquille ».</li>
+<li> Il est important de détailler au maximum l’espace que vous proposez et les pièces mises à disposition pour l’intendance. Si vous acceptez les livraisons de traiteur et/ou de matériel, il est également important de le préciser.</li>
+<li>Sélectionnez de belles photos et de bonne qualité, évitez les photos sombres, préférez un format paysage. Vous pouvez insérer, en plus de la photo principale, jusqu’à  <b>8 photos </b>. Alors n’hésitez pas, montrez l’espace sous tous les angles, les  autres pièces à disposition et si vous avez de la place, montrez l’espace en situation d’événement. Evitez les montages avec plusieurs photos.</li>
+
+</ul>
+
+
+								</div>
+							</div>
+						</div>
+
+
+						<div class="card">
+							<div class="card-header" role="tab">
+								<h5 class="mb-0">
+									<a class="collapsed" data-toggle="collapse" href="#collapse6_tips" aria-expanded="false">
+										<i class="indicator ti-plus"></i>Quand et comment serais-je payé(e) ?
+									</a>
+								</h5>
+							</div>
+							<div id="collapse6_tips" class="collapse" role="tabpanel" data-parent="#loueurs">
+								<div class="card-body">
+									<p>
+                                      
+                                      Pour chaque réservation que vous validez, le professionnel du cinéma doit régler la réservation sur la plateforme, ce qui vous assure la réservation, le paiement et sa bonne foi. <br>
+<span style="color:#fc5b62;">nom de site </span> reversera, par virement, sur votre compte bancaire (indiqué dans votre tableau de bord), le montant de votre loyer, de l’hébergement et des frais de ménage le cas échéant moins la commission dans les 2 jours ouvrés qui suivent l’événement. <br>
+Attention : il est impératif que toutes vos informations bancaires soient remplies.
+
+
+
+										</p>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="card">
+							<div class="card-header" role="tab">
+								<h5 class="mb-0">
+									<a class="collapsed" data-toggle="collapse" href="#collapse7_tips" aria-expanded="false">
+										<i class="indicator ti-plus"></i> Est-ce que la TVA s'applique lors d'un paiement sur nom de site ?
+									</a>
+								</h5>
+							</div>
+							<div id="collapse7_tips" class="collapse" role="tabpanel" data-parent="#loueurs">
+								<div class="card-body">
+									<p>
+                                      
+               La TVA s’applique sur les frais de service (nom de site).<br>
+               Si vous êtes un professionnel, vous devez prendre en compte que le montant de votre loyer est TTC.<br>
+               Pourquoi (nom de site) peut vous demander votre pièce d'identité ?<br>
+Chez<b>nom de site </b>, nous prenons toutes les dispositions pour rendre notre communauté toujours plus sûre. C'est la raison pour laquelle, avant une réservation de logement, d'expérience ou avant une publication d'annonce, nous pouvons également vous demander de communiquer une pièce d'identité officielle.<br>
+Comme expliqué ci-dessous, ces mesures nous permettent de garantir la sécurité du site nom de site, de lutter contre la fraude, et plus encore - et vous n'aurez à la suivre qu'une fois.
+
+
+
+
+
+
+
+
+									</p>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="card">
+							<div class="card-header" role="tab">
+								<h5 class="mb-0">
+									<a class="collapsed" data-toggle="collapse" href="#collapse8_tips" aria-expanded="false">
+										<i class="indicator ti-plus"></i>À quel moment vous devez fournir une pièce d'identité ? 
+									</a>
+								</h5>
+							</div>
+							<div id="collapse8_tips" class="collapse" role="tabpanel" data-parent="#loueurs">
+								<div class="card-body">
+									<p>Cela peut arriver pour plusieurs raisons. Certains loueurs exigent par exemple que les professionnels du cinéma fournissent une pièce d'identité officielle avant de réserver un lieu ou un service.
+									</p><br>
+									<h5>Types de pièces d'identité</h5>
+									<p>Selon votre lieu de résidence et votre pays d'origine, vous devez ajouter l'une des pièces d'identité officielles suivantes :</p><br>
+									<ul style="display:inline-block;">
+										<li>Permis de conduire</li>
+										<li>Passeport</li>
+										<li>Visa</li>
+										<li>Carte nationale d'identité</li>
+									</ul>
+									<span style="color:#fc5b62;">Noté bien l’autorisation de filmer est obligatoire avant tout <b>tournage</b>.</span><br>
+									<h5>Vie privée</h5>
+									<p>
+
+									Nous prenons très au sérieux le respect de la vie privée. Les informations que vous nous communiquez au cours de ce processus d'ajout de votre pièce d'identité officielle sont régies par notre Politique de confidentialité et nous sont transmises ainsi qu’à nos partenaires tiers par SSL (le même cryptage sécurisé que celui utilisé par les sites web pour transmettre des numéros de cartes de crédit).  
+
+									</p>
+
+								</div>
+							</div>
+						</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+					</div>
+					
+					
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+					<h4 class="nomargin_top">Questions posées par les professionnels du cinéma (locataires)</h4>
+					<div role="tablist" class="add_bottom_45 accordion_2" id="professionels">
+						<div class="card">
+							<div class="card-header" role="tab">
+								<h5 class="mb-0">
+									<a data-toggle="collapse" href="#collapseOne_reccomendations" aria-expanded="true"><i class="indicator ti-plus"></i>Comment trouver le lieu / service  qui correspond à mes besoins ?</a>
+								</h5>
+							</div>
+
+							<div id="collapseOne_reccomendations" class="collapse" role="tabpanel" data-parent="#professionels">
+								<div class="card-body">
+									<p>Sur la page d’accueil du site http://sqli-services.com/hss/Tournage/web/ , vous pouvez préciser dans le module de recherche : </p>
+								     <ul style="display:inline:block;">
+                                       <li>La localisation</li>
+                                       <li>La date de location souhaitée</li>
+                                       <li> Type de lieux </li>
+                                       <li> Décoration</li>
+                                       <li> Environnement</li>
+                                       <li> Equipement </li>
+                                       <li> Services (catering, location  matériels du tournage, location d’animaux, Costumes accessoires et  véhicules)</li>
+								     </ul>
+
+								     <p>Une fois ces éléments validés, vous avez la possibilité, via la page de résultats, d’ajouter des filtres supplémentaires, notamment :</p> 
+
+								     <ul>
+                                     <li>Le type d’espace : intérieur ou extérieur</li>
+                                     <li>Une fourchette tarifaire</li>
+                                     <li>La superficie de l’espace souhaitée</li>
+                                     <li>Le type d’événement : tournage du film, shooting  événements culturels</li>
+								     </ul>
+                                    
+
+								</div>
+							</div>
+						</div>
+						<!-- /card -->
+						<div class="card">
+							<div class="card-header" role="tab">
+								<h5 class="mb-0">
+									<a class="collapsed" data-toggle="collapse" href="#collapseTwo_reccomendations" aria-expanded="false">
+										<i class="indicator ti-plus"></i>Comment puis-je communiquer avec les hôtes ?
+									</a>
+								</h5>
+							</div>
+							<div id="collapseTwo_reccomendations" class="collapse" role="tabpanel" data-parent="#professionels">
+								<div class="card-body">
+									<p><b>(nom du site) </b> vous permet de communiquer avec les loueurs via une messagerie privée. La messagerie est cryptée afin de préserver la confidentialité de chacun, de fait il n’est pas autorisé de transmettre de coordonnées téléphoniques, postales, email ou de lien vers un site internet. <br>
+Vous pouvez échanger avec le loueur en cliquant sur le bouton « contacter le loueur » prévu à cet effet dans la page de son annonce <br>
+Cette messagerie privée est uniquement dédiée à un échange entre vous et le loueur concernant l’espace qui vous intéresse et ne peut en aucun être utilisée pour un autre usage.
+.</p>
+								</div>
+							</div>
+						</div>
+						<!-- /card -->
+						<div class="card">
+							<div class="card-header" role="tab">
+								<h5 class="mb-0">
+									<a class="collapsed" data-toggle="collapse" href="#collapseThree_reccomendations" aria-expanded="false">
+										<i class="indicator ti-plus"></i>Comment puis-je régler ma réservation ?
+									</a>
+								</h5>
+							</div>
+							<div id="collapseThree_reccomendations" class="collapse" role="tabpanel" data-parent="#professionels">
+								<div class="card-body">
+									<p>Le paiement d’une location est à effectuer en ligne, par carte bancaire.<br> 
+Vous devez régler l’intégralité de la réservation dans les 48 heures qui suivent l’acceptation de la réservation par le loueur  et impérativement avant le début de la location.<br>
+A partir du moment où le règlement a été effectué, votre espace est réservé à la date indiquée et les coordonnées de le loueur vous sont transmises.
+.</p>
+								</div>
+							</div>
+						</div>
+
+
+
+						<div class="card">
+							<div class="card-header" role="tab">
+								<h5 class="mb-0">
+									<a class="collapsed" data-toggle="collapse" href="#collapse4_reccomendations" aria-expanded="false">
+										<i class="indicator ti-plus"></i> Doit-on verser une caution lorsqu'on loue un espace sur nom du site ?
+									</a>
+								</h5>
+							</div>
+							<div id="collapse4_reccomendations" class="collapse" role="tabpanel" data-parent="#professionels">
+								<div class="card-body">
+									<p>Le loueur  a la possibilité de demander une caution. Celui-ci est libre de déterminer le montant et les modalités du dépôt de garantie. <b> La société SQLI Services ne sera pas partie de cet accord conclu exclusivement entre Le loueur et le professionnel du cinéma </b>.<br> 
+
+										Lorsqu’une caution est demandée, il est conseillé  de faire un état des lieux d’entrée et un état des lieux de sortie volontairement et contradictoirement. <a  target="_blank" href="{{asset('Document/formulaire.pdf')}}" >(formulaire PDF)</a>
+.</p>
+								</div>
+							</div>
+						</div>
+
+
+
+
+
+						<div class="card">
+							<div class="card-header" role="tab">
+								<h5 class="mb-0">
+									<a class="collapsed" data-toggle="collapse" href="#collapse5_reccomendations" aria-expanded="false">
+										<i class="indicator ti-plus"></i>  Quel est le minimum d'heure pour la location d'un espace ?
+									</a>
+								</h5>
+							</div>
+							<div id="collapse5_reccomendations" class="collapse" role="tabpanel" data-parent="#professionels">
+								<div class="card-body">
+									<p>Sauf indication du loueur dans son règlement intérieur, vous pouvez louer un espace 1 heure.</p>
+								</div>
+							</div>
+						</div>
+
+
+
+                    <div class="card">
+							<div class="card-header" role="tab">
+								<h5 class="mb-0">
+									<a class="collapsed" data-toggle="collapse" href="#collapse6_reccomendations" aria-expanded="false">
+										<i class="indicator ti-plus"></i>  Que se passe-t-il si mon hôte annule ma réservation ? 
+									</a>
+								</h5>
+							</div>
+							<div id="collapse6_reccomendations" class="collapse" role="tabpanel" data-parent="#professionels">
+								<div class="card-body">
+									<p>En cas d’annulation par le loueur d’une réservation confirmée et payée parle professionnel du cinéma, le professionnel du cinéma sera remboursé intégralement du prix de la location, de l’hébergement le cas échéant, des frais de ménage et de la commission (nom du site) .</p>
+								</div>
+							</div>
+						</div>
+
+
+
+
+
+                   	<div class="card">
+							<div class="card-header" role="tab">
+								<h5 class="mb-0">
+									<a class="collapsed" data-toggle="collapse" href="#collapse7_reccomendations" aria-expanded="false">
+										<i class="indicator ti-plus"></i>Que se passe-t-il si je souhaite annuler ma réservation ? 
+									</a>
+								</h5>
+							</div>
+							<div id="collapse7_reccomendations" class="collapse" role="tabpanel" data-parent="#professionels">
+								<div class="card-body">
+									 <h5>En cas d’annulation d’un locataire il faut se reporter aux conditions d’annulation stipulées dans l’annonce de l’hôte.</h5>
+									 <h6 style="text-decoration:underline">
+                                      Tant que la réservation n’a pas été confirmée et réglée, le locataire reste libre d’annuler sa réservation, sans aucun frais.
+									 </h6>
+
+									<p>Voici en détails les différentes conditions d’annulation applicables en fonction du choix de l’hôte sur son annonce :</p>
+									<h5 style="color: #007bff;">Conditions d’annulation flexibles :</h5>
+									<p>En cas de demande d’annulation d’une réservation confirmée et réglée, le locataire  sera remboursé dans les conditions suivantes : <br>
+
+                                   Si la Réservation validée est annulée au moins 15 (quinze) jours avant le début de la Période de location, le professionnel du cinéma (locataire)  sera remboursé de la totalité du Prix de Location et de l’hébergement.<br>
+
+                                   Si la Réservation validée est annulée entre 14 (quatorze) et 7 (sept) jours calendaires avant la Période de location, le locataire ne sera remboursé que de 60% du Prix de Location et de l’hébergement le cas échéant <br>
+
+
+                                   Si la Réservation validée est annulée moins de 7 (sept) jours avant le début de la Période de location, le locataire  ne recevra aucun remboursement du Prix de Location et de l’hébergement (ce prix restant acquis au loueur). <br>
+
+                                   Un  professionnel du cinéma (locataire)  annulant régulièrement des Réservations pourra être exclu du Site.
+
+
+
+
+
+									</p>
+
+
+
+                                  <h5 style="color: #007bff;">Conditions d’annulation modérées :</h5>
+									<p>
+                                     En cas de demande d’annulation d’une réservation confirmée et réglée, le professionnel du cinéma  sera remboursé dans les conditions suivantes :<br>
+
+                                     Si la Réservation validée est annulée plus de 30 (trente) jours calendaires avant le début de la Période de location, le professionnel du cinéma sera remboursé à 100% du Prix de la Location, des frais d’assurance obligatoires, des frais de ménage et d’hébergement le cas échéant. Le professionnel du cinéma ne sera pas remboursé de la Commission perçue par la société…. <br>
+
+                                     Si la Réservation validée est annulée entre 30 (trente) jours et 15 (quinze) jours calendaires avant le début de la Période de location, le professionnel du cinéma sera remboursé à 50% du Prix de Location, de l’hébergement le cas échéant. Le professionnel du cinéma sera remboursé à 100% des frais d’assurance obligatoire et de ménage le cas échéant. Le professionnel du cinéma ne sera pas remboursé de la Commission perçue par la société … <br>
+
+                                     Si la Réservation validée est annulée moins de 15 (quinze) jours calendaires avant le début de la Période de location, le professionnel du cinéma ne sera pas remboursé du Prix de Location, de l’hébergement le cas échéant. Le professionnel du cinéma sera remboursé à 100% des frais d’assurance obligatoire et de ménage le cas échéant. Le professionnel du cinéma  ne sera pas remboursé de la Commission perçue par la société … <br>
+
+                                     Un professionnel du cinéma annulant régulièrement des Réservations pourra être exclu du Site et, le cas échéant, de l’Application .
+
+									</p>
+
+									<h5 style="color: #007bff;">Conditions d’annulation flexibles :</h5>
+									<p>En cas de demande d’annulation d’une réservation confirmée et réglée, le professionnel du cinéma sera remboursé dans les conditions suivantes : <br>
+
+                                       Si la Réservation validée est annulée plus de 60 (soixante) jours calendaires avant le début de la Période de location, le professionnel du cinéma sera remboursé 50% du Prix de Location et de l’hébergement le cas échéant. Il sera remboursé à 100% des frais d’assurance obligatoire et des frais de ménage le cas échéant. Le professionnel du cinéma  ne sera pas remboursé de la Commission perçue par la société <br>
+Si la Réservation validée est annulée moins de 60 (soixante) jours calendaires avant le début de la Période de location, le professionnel du cinéma ne sera pas remboursé du Prix de Location, de l’hébergement le cas échéant. Le professionnel du cinéma sera remboursé à 100% des frais d’assurance obligatoires et des frais de ménage le cas échéant. Le professionnel du cinéma ne sera pas remboursé de la Commission perçue par la société. <br>
+
+Un  professionnel du cinéma annulant régulièrement des Réservations pourra être exclu du Site.
+
+									</p>
+
+								</div>
+							</div>
+						</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+						<!-- /card -->
+					</div>
+				
+					
+					
+					
+				</div>
+				<!-- /col -->
+			</div>
+			<!-- /row -->
+		</div>
+
+
+{% endblock %}

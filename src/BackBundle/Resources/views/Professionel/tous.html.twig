@@ -1,0 +1,412 @@
+{% extends '@Back/Default/templateProfessionel.html.twig' %}
+
+
+{% block section_haider %}
+<section class="content-header">
+        <h1>
+        Mes reservations
+     
+      </h1>
+      <ol class="breadcrumb">
+
+        <li><a href="#"><i class="fa fa-dashboard"></i>Tableau de bord</a></li>
+        <li class="active">Reservations Reçues</li>
+      </ol>
+    </section>
+{%endblock%}
+
+ {%block pageContainer%}  
+ 
+
+ 
+
+
+
+
+
+  <div class="row">
+<div class="col-md-12">
+
+
+
+<div class="box">
+            <div class="box-header">
+             <div style="display:flex;justify-content: space-between;"><h3 class="box-title pull pull-left">Mes reservations</h3> <div class="col-md-2" style="margin-right:0;padding-right:0;">
+                <select id="filter-select-professionel" class="form-control input-sm pull pull-right">
+              <option value="Tous">Tous</option>
+              <option value="En cour">En cour</option>
+              <option value="En attente">En attente</option>
+              <option value="Annuler">Annuler</option>
+              <option value="Expirer">Expirer</option>
+              </select></div></div>
+            
+
+
+
+
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table id="tablemesreservation" class="table table-bordered table-striped" >
+                <thead>
+                <tr>
+                  <th class="text-center">Annonce</th>
+                  <th class="text-center">Hote</th>
+                  <th class="text-center">Categories</th>
+                  <th class="text-center">Du</th>
+                 <th class="text-center">Au</th>
+                 <th class="text-center">Date de reservations</th>
+                  <th class="text-center">Tarif Totale (DT)</th>
+                   <th class="text-center">Status</th>
+                  <th class="text-center">Action</th>
+                </tr>
+                </thead>
+                
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="modal fade" tabindex="-1" id="annulerReservationModal" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Annuler Reservation</h4>
+      </div>
+      <div class="modal-body">
+        <p>Êtes-vous sûr d'annuler cet reservation ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="annulerRes"><span>Annuler</span><i id="spin-annuler-operation"></i></button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+{%block aside %}
+{%endblock%}
+
+
+
+{% block javascript %}
+
+<script>
+
+var tablesmesservation;
+$(document).ready(function($){
+ tablesmesservation=$("#tablemesreservation").DataTable({
+     columnDefs: [
+     { "width": "10%", "targets": 0 },
+     { "width": "10%", "targets": 1 },
+     { "width": "10%", "targets": 2 },
+     { "width": "10%", "targets": 3 },
+     { "width": "10%", "targets": 4 },
+     { "width": "10%", "targets": 5 },
+     { "width": "10%", "targets": 6 },
+     { "width": "10%", "targets": 7 },
+     { "width": "20%", "targets": 8 },
+   ,{ "orderable": false, "targets": 8 }
+  ],
+  'destroy':true,
+  'language': {
+            "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/French.json"
+        },
+   
+    'ajax':'{{path("mes_reservation_envoyer")}}',
+     'order': []
+});
+
+
+
+$('#link-tableau').removeClass('active');
+  $('#link-lieux').removeClass('active');
+  $('#link-calendar').removeClass('active');
+  $('#link-message').removeClass('active');
+  $('#link-profile').removeClass('active');
+  $('#link-reservation').addClass('active');
+
+
+
+
+
+
+
+
+
+
+
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function annulerReservationProfessionel(id){
+
+if(id){
+  $("#annulerRes").unbind('click').bind('click',function(){
+   
+     $('#annulerRes').prop('disabled',true);
+    $("#spin-annuler-operation").addClass('fa fa-spinner fa-spin fa-register');
+
+       $.ajax({
+                       
+                       url:"{{path('annuler_reservation')}}",
+                       type:'POST',
+                       data:{id:id},
+                       success:function (data,status,object)
+                       {
+
+                        var message=data.message;
+                       if(data.success==true)
+                          {
+
+                           $("#spin-annuler-operation").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#annulerRes').prop('disabled',false);
+
+                           $('#annulerReservationModal').modal('hide');
+                             tablesmesservation.ajax.reload(null,false);
+                                
+                              location.reload();
+
+                               toastr.success(message,'Success', {
+                                      
+                                      "closeButton": false,
+                                       "debug": false,
+                                        "newestOnTop": false,
+                                        "progressBar": true,
+                                        "positionClass": "toast-top-right",
+                                         "preventDuplicates": false,
+                                         "onclick": null,
+                                          "showDuration": "300",
+                                          "hideDuration": "1000",
+                                           "timeOut": "5000",
+                                           "extendedTimeOut": "1000",
+                                           "showEasing": "swing",
+                                           "hideEasing": "linear",
+                                           "showMethod": "fadeIn",
+                                        "hideMethod": "fadeOut"
+                              
+
+
+                               });
+
+                              
+
+                          }else{
+                          
+                             
+                           $("#spin-annuler-operation").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#annulerRes').prop('disabled',false);
+                             $('#annulerReservationModal').modal('hide');
+
+                               toastr.error(message,'Error', {
+                                      
+                                      "closeButton": false,
+                                       "debug": false,
+                                        "newestOnTop": false,
+                                        "progressBar": true,
+                                        "positionClass": "toast-top-right",
+                                         "preventDuplicates": false,
+                                         "onclick": null,
+                                          "showDuration": "300",
+                                          "hideDuration": "1000",
+                                           "timeOut": "5000",
+                                           "extendedTimeOut": "1000",
+                                           "showEasing": "swing",
+                                           "hideEasing": "linear",
+                                           "showMethod": "fadeIn",
+                                        "hideMethod": "fadeOut"
+                              
+
+
+                               });
+
+                         
+
+
+                          }
+
+              
+
+                       }
+
+
+
+                       });
+
+
+
+    });
+
+    }
+    }
+
+
+
+
+
+$('#filter-select-professionel').change(function(){
+
+var filter=$(this).val();
+
+
+
+ tablesmesservation.destroy();
+
+
+
+   tablesmesservation=$("#tablemesreservation").DataTable({
+     columnDefs: [
+    {
+        targets: -1,
+        className: 'dt-body-left',
+        
+    },{ "orderable": false, "targets": 8 }
+  ],
+  'destroy':true,
+  'language': {
+            "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/French.json"
+        },
+   
+    'ajax':{"url": "{{path("mes_reservation_envoyer")}}","type": "POST","data": {"etat":filter}},
+     'order': []
+});
+
+
+
+
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

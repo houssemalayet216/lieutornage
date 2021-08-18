@@ -1,0 +1,219 @@
+ {% extends '@Front/Default/template.html.twig' %}
+
+{% block title %} Annuaire  {% endblock %}
+	{% block stylesheet %}
+		<link href="{{asset('frontFolder/css/integration.css')}}" rel="stylesheet">
+
+			<style>
+		.card-min-height {
+    min-height:500px;
+	       }
+
+	       	.paginate-margin {
+    margin-left: 450px;
+	       }
+
+	       .box_grid figure a img{
+	       	height:150px;
+	       	width:150px;
+	       }
+
+
+   .box_grid figure {
+   
+    height: 150px;
+}
+
+
+
+ @media (max-width: 767px)
+{
+.paginate-margin {
+    margin-left: 0;
+}
+}
+	       </style>
+	{% endblock %}
+
+{% block pageContainer %}
+
+<div id="breadcrumb">
+			<div class="container">
+				<ul>
+					<li><a href="#">Accueil</a></li>
+					
+					<li>Annuaire</li>
+				</ul>
+			</div>
+		</div>
+
+
+
+
+
+	<div class="container margin_60_35">
+			<div class="col-lg-12">
+				<div class="row no-gutters custom-search-input-2 inner">
+					<div class="col-lg-4">
+						<div class="form-group">
+							<input class="form-control" type="text" placeholder="Nom de l'entreprise">
+							<i class="icon_search"></i>
+						</div>
+					</div>
+					<div class="col-lg-3">
+						<div class="form-group">
+							<input class="form-control" type="text" placeholder="ville ou adresse ">
+							<i class="icon_pin_alt"></i>
+						</div>
+					</div>
+					<div class="col-lg-3">
+						<select class="wide">
+							<option>Toutes</option>	
+							<option>Administrations</option>
+							<option>Assurances / Banques</option>
+							<option>Locations</option>
+							<option>Agences Artistiques</option>
+							<option>Hébergements et transports</option>
+                            <option>Divers</option>
+							
+						</select>
+					</div>
+					<div class="col-lg-2">
+						<input type="submit" class="btn_search" value="Chercher">
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /custom-search-input-2 -->
+			
+           
+
+			<div class="isotope-wrapper">
+			<div class="row">
+
+            <div class="col-md-8">
+
+
+
+
+           <div class="costum-gallery" style="width:100%;">
+
+
+           	<a  href="#">
+   <figure class="image"><img alt="Mitglieder" src="{{asset('frontFolder/img/annuaires/m1.png')}}" style="width: 300px; height: 225px;">
+    <figcaption>Administration
+     </figcaption>
+  </figure>
+</a>
+
+
+    <a  href="#">
+   <figure class="image"><img alt="Mitglieder" src="{{asset('frontFolder/img/annuaires/m2.jpg')}}" style="width: 300px; height: 225px;">
+    <figcaption>Assurances/Banques
+      </figcaption>
+  </figure>
+</a>
+
+ 
+   <a  href="#"> 
+  <figure class="image"><img alt="Mitglieder" src="{{asset('frontFolder/img/annuaires/m3.jpg')}}" style="width: 300px; height: 225px;">
+    <figcaption>Locations</figcaption>
+  </figure>
+</a>
+  
+  
+
+ 
+
+<figure class="image"><img alt="Mitglieder" src="{{asset('frontFolder/img/annuaires/m4.jpg')}}" style="width: 300px; height: 225px;">
+    <figcaption>Agences artistiques </figcaption>
+  </figure>
+
+ 
+
+
+   <figure class="image"><img alt="Mitglieder" src="{{asset('frontFolder/img/annuaires/m5.jpg')}}" style="width: 300px; height: 225px;">
+    <figcaption>Hébergements et transports </figcaption>
+  </figure>
+
+
+  <figure class="image"><img alt="Mitglieder" src="{{asset('frontFolder/img/annuaires/m6.jpg')}}" style="width: 300px; height: 225px;">
+    <figcaption dir="rtl">Divers
+      </figcaption>
+  </figure>
+
+
+           </div>
+
+
+
+
+
+
+
+
+            </div>
+
+            
+
+            <aside class="col-lg-4" id="sidebar">
+						<div class="box_detail booking" style="border:none;">
+
+         
+            	<a href="#" class=" add_top_30 btn_prestataire full-width purchase">Inscrivez-vous</a>
+			<a href="#" class="btn_prestataire full-width outline wishlist">Connexion </a>
+           </div>
+       </aside>
+
+
+
+
+
+
+
+
+
+
+				<!-- /box_grid -->
+			</div>
+		
+
+
+
+
+
+
+
+			</div>
+			<!-- /isotope-wrapper -->
+			
+			
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+{% block javascript %}
+
+{% endblock %}

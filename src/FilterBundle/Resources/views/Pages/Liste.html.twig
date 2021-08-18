@@ -1,0 +1,1191 @@
+ {% extends '@Front/Default/template.html.twig' %}
+
+	{% block stylesheet %}
+	<link href="{{asset('frontFolder/css/integration.css')}}" rel="stylesheet">
+	  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" media="all" rel="stylesheet" type="text/css"/>
+	<style>
+	#navmap > .is_stuck{
+		top:45px;
+	}
+
+	.fs-container .more-search-options-trigger {
+    position: relative;
+    top: 10px;
+}
+
+
+
+
+.margin-top-20 {
+    margin-top: 20px !important;
+}
+
+
+.afficher-plus {
+    font-size: 15px;
+    margin: 5px 0 2px 0;
+    display: inline-block;
+}
+
+.afficher-moins{
+	    font-size: 15px;
+    margin: 5px 0 2px 0;
+    display: inline-block;
+}
+
+.afficher-moins:before{
+  content: "\f056";
+    font-family: "FontAwesome";
+    padding-right: 7px;
+}
+
+
+.afficher-moins:after {
+    content: attr(data-close-title);
+}
+
+
+.afficher-plus:before {
+    content: "\f055";
+    font-family: "FontAwesome";
+    padding-right: 7px;
+}
+
+.afficher-plus:after {
+    content: attr(data-open-title);
+}
+
+    .hideselect{
+    	display:none;
+    }
+
+
+    .displayselect{
+    	display:block;
+    }
+
+
+
+   .nice-select.wide{
+   	margin-bottom: 10px;
+   	margin-top: 10px;
+   }
+
+   .caracteristique{
+   	margin-top: 8px;
+   }
+
+
+
+
+
+
+
+
+
+	</style>
+     {% endblock %}
+
+
+
+{% block title %} Liste des Lieux  {% endblock %}
+
+
+{% block pageContainer %}
+
+<div id="breadcrumb">
+			<div class="container">
+				<ul>
+					<li><a href="#">Accueil</a></li>
+					
+					<li>Liste des lieux</li>
+				</ul>
+			</div>
+		</div>
+
+
+
+<div id="nav-map" class="filters_listing sticky_horizontal" >
+			<div class="container">
+				<ul class="clearfix">
+					<li>
+						<div class="switch-field">
+							<input type="radio" id="all" name="listing_filter" value="all" checked data-filter="*" class="selected">
+							<label for="all">Tous</label>
+							<input type="radio" id="popular" name="listing_filter" value="popular" data-filter=".popular">
+							<label for="popular">Populaire</label>
+							<input type="radio" id="latest" name="listing_filter" value="latest" data-filter=".latest">
+							<label for="latest">Dernier</label>
+						</div>
+					</li>
+					<li>
+						<div class="layout_view">
+							<a href="#0" class="active"><i class="icon-th"></i></a>
+							<a href="hotels-list-sidebar.html"><i class="icon-th-list"></i></a>
+						</div>
+					</li>
+					<li>
+						<a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap" data-text-swap="Hide map" data-text-original="View on map">Voir sur la carte</a>
+					</li>
+				</ul>
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /filters -->
+		
+		<div class="collapse" id="collapseMap">
+			<div id="map" class="map"></div>
+		</div>
+		<!-- End Map -->
+
+		<div class="container margin_60_35">
+			<div class="row">
+				<aside class="col-lg-3" id="sidebar">
+                 <form action="{{path('recherche_lieux')}}" method="POST" id="chercher-lieux-form">
+                <div class="custom-search-input-2 inner-2">
+						<div class="form-group">
+							<input class="form-control" name="mot_recherche" id="mot_recherche" type="text" placeholder="Mot clé">
+							<i class="icon_search"></i>
+						</div>
+						<div class="form-group">
+							<input class="form-control"  id="ville_recherche" name="ville_recherche" type="text" placeholder="Ville">
+							<i class="icon_pin_alt"></i>
+						</div>
+
+						<span class="text-danger" id="data.ville"></span>
+
+
+						   <div class="form-group">
+						<select class="wide" id="categorie" name="categorie_recherche">
+							<option value="">Catégorie</option>
+							<option value="1">Habitations</option>
+							<option value="3">Commerces</option>
+							<option value="4">Lieux public</option>
+							<option value="5">Loisirs & sport</option>
+							<option value="6">Loisirs / festif</option>
+							<option value="7">Lieux audiovisual</option>
+							<option value="9">Affaires</option>
+							<option value="11">Extérieurs</option>
+						</select>
+
+						</div>
+
+						<span class="text-danger" id="data.categorie"></span>
+
+                         <div class="form-group">
+						<select class="wide " id="typeLieux" name="typlieux_recherche">
+							<option value="">Type de lieux</option>
+						
+						</select>
+						</div>
+                      
+
+
+                         <div id="recherche-avancees" class="hideselect">
+						
+						
+
+                        <div class="form-group" >
+						<select class="wide " style="margin-top:30px;" id="suface-totale" name="surface_totale_recherche" >
+							<option value="">surface Totale</option>
+							<option value="Inférieur à 100 m2">Inférieur à 100 m2</option>
+							<option value="Entre 101 et 149 m2">Entre 101 et 149 m2</option>
+							<option value="Entre 201 et 300 m2">Entre 201 et 300 m2</option>
+							<option value="Entre 150 et 200 m2">Entre 150 et 200 m2</option>
+							<option value="Entre 301 et 500 m2">Entre 301 et 500 m2</option>
+							<option value="Entre 501 et 1000 m2">Entre 501 et 1000 m2</option>
+							
+							<option value="Supérieur à 1000 m2">Supérieur à 1000 m2</option>
+							
+						</select>
+						</div>
+
+
+						  <div class="form-group" >
+						<select class="wide " style="margin-top:30px;" id="suface-piece" name="surface_piece_recherche">
+							<option value="">Surface du pièce</option>
+							<option value="Inférieur à 60 m2">Inférieur à 60 m2</option>
+							<option value="Supérieur à 60 m2">Supérieur à 60 m2</option>
+							<option value="Supérieur à 100 m2">Supérieur à 100 m2</option>
+					
+						</select>
+						</div>
+                        
+
+                             <div class="form-group" >
+						<select class="wide" style="margin-top:30px;" id="nbrpiece" name="nombre_piece_recherche" >
+							<option value="">Nombre de piéce</option>
+							<option value="1 à 5">1 à 5</option>
+							<option value="6 à 10">6 à 10</option>
+							<option value="11 à 20">11 à 20</option>
+							<option value="Supérieur à 20">Supérieur à 20</option>
+							
+
+
+			
+						</select>
+						</div>
+
+
+
+
+
+                        
+                             <div class="form-group" >
+						<select class="wide" style="margin-top:30px;" id="nbrpiece" name="nombre_niveau_recherche" >
+							<option value="">Nombre de niveau</option>
+							<option value="1">1 </option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">Plus de 5</option>
+							
+
+
+			
+						</select>
+						</div>
+                       
+
+
+
+
+
+
+
+                        </div>
+
+
+                        
+
+
+
+                      
+                        
+                         <a  id="collapse-recherche" class="afficher-plus margin-top-20" data-now="close" data-open-title="Recherche Avancée" data-close-title="Recherche Simple"></a>
+
+						<input type="submit" class="btn_search" value="Chercher" id="btn_rechercher_lieux" />
+					</div>
+
+                   </form>
+
+
+
+
+
+
+
+					<div id="filters_col">
+						<a data-toggle="collapse" href="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters" id="filters_col_bt">Filters </a>
+						<div class="collapse show" id="collapseFilters">
+							<div class="filter_type">
+								<h6>Environment</h6>
+								<ul id="env_container_filter">
+
+									 {% set env_id=""  %}
+
+									{% for environment in menu().environments %}
+								<li>
+
+                                      <div class="checkboxest">
+                        <label class="container_check">{{environment.titre}}
+                          <input type="checkbox" class="common_selector env" value="{{environment.id}}" name="env[]">
+                          <span class="checkmark"></span>
+                        </label>
+                    </div>
+
+
+
+
+									</li>
+
+
+                                    {% set env_id = environment.id %}
+
+									{%endfor%}
+									
+									
+
+							
+									
+								</ul>
+
+								<a  id="afficher-plus-environment" class="afficher-plus margin-top-20" data-now="close" data-open-title="afficher plus" data-env-id="{{env_id}}" data-close-title="Recherche Simple"></a>
+							</div>
+
+
+							<div class="filter_type">
+								<h6>Decorations</h6>
+								<ul id="dec_container_filter">
+                                    {% set dec_id=""  %}
+									{% for decoration in menu().decorations%}
+										<li>
+
+                                      <div class="checkboxest">
+                        <label class="container_check">{{decoration.titre}}
+                          <input type="checkbox" class="common_selector dec" value="{{decoration.id}}" name="dec[]">
+                          <span class="checkmark"></span>
+                        </label>
+                    </div>
+
+
+
+
+									</li>
+									{% set dec_id = decoration.id %}
+									{% endfor %}
+									
+									
+									
+								</ul>
+
+								<a  id="afficher-plus-decoration" class="afficher-plus margin-top-20" data-now="close" data-open-title="afficher plus" data-dec-id="{{dec_id}}" data-close-title="Recherche Simple"></a>
+							</div>
+
+
+							<div class="filter_type">
+								<h6>Equipements</h6>
+								<ul id="eq_container_filter">
+									{% set eq_id=""  %}
+										{% for equipement in menu().equipements%}
+								
+                                         		<li>
+
+                                      <div class="checkboxest">
+                        <label class="container_check">{{equipement.titre}}
+                          <input type="checkbox"  class="common_selector eq" value="{{equipement.id}}" name="eq[]">
+                          <span class="checkmark"></span>
+                        </label>
+                    </div>
+
+
+
+
+									</li>
+
+                                        {% set eq_id = equipement.id %}
+
+									{% endfor %}
+									
+									
+								</ul>
+
+									<a  id="afficher-plus-equipement" class="afficher-plus margin-top-20" data-now="close" data-open-title="afficher plus" data-eq-id="{{eq_id}}" data-close-title="Recherche Simple"></a>
+							</div>
+
+
+							<div class="filter_type">
+								<h6>Services</h6>
+								<ul id="ser_container_filter">
+                                     {% set ser_id=""  %}
+									{% for service in menu().services%}
+										<li>
+
+                                      <div class="checkboxest">
+                        <label class="container_check">{{service.titre}}
+                          <input type="checkbox"  class="common_selector ser" value="{{service.id}}" name="ser[]">
+                          <span class="checkmark"></span>
+                        </label>
+                    </div>
+
+
+
+
+									</li>
+
+									 {% set ser_id = service.id %}
+									{% endfor %}
+									
+									
+								</ul>
+								<a  id="afficher-plus-services" class="afficher-plus margin-top-20" data-now="close" data-open-title="afficher plus" data-ser-id="{{ser_id}}" data-close-title="Recherche Simple"></a>
+							</div>
+
+
+							
+							
+							<div class="filter_type">
+								<h6>avis </h6>
+								<ul>
+									<li>
+										<label>
+											<input type="checkbox" class="icheck"><span class="cat_star"><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i></span> <small>(25)</small>
+										</label>
+									</li>
+									<li>
+										<label>
+											<input type="checkbox" class="icheck"><span class="cat_star"><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i></span> <small>(26)</small>
+										</label>
+									</li>
+									<li>
+										<label>
+											<input type="checkbox" class="icheck"><span class="cat_star"><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i></span> <small>(25)</small>
+										</label>
+									</li>
+								</ul>
+							</div>
+						
+						</div>
+						<!--/collapse -->
+					</div>
+					<!--/filters col-->
+				</aside>
+				<!-- /aside -->
+
+				<div class="col-lg-9">
+					<div class="isotope-wrapper">
+						
+
+                        <div id="container_filter">
+                         
+                          <div class="row">
+
+                       {% if Annonces is defined and Annonces !=null  %}
+                        
+
+                        
+
+                        {%  if Annonces|length >0 %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        {% for annonce in Annonces %}
+
+
+                            {% set images=annonce.gallerie|first %}
+
+							<div class="col-md-6 isotope-item popular">
+								<div class="box_grid">
+									<figure>
+										<a href="#0" class="wish_bt"></a>
+										<a href="{{path('details_page',{id:annonce.id})}}"><img src="{{asset('Uploads/')}}{{images.image}}" class="img-fluid" alt="" width="800" height="533"><div class="read_more"><span>Voir détails</span></div></a>
+										
+										
+									</figure>
+									<div class="wrapper">
+										
+										<h3 style="margin-bottom:0;"><a href="{{path('details_page',{id:annonce.id})}}">{{annonce.titre}}</a></h3>
+										 {# <div class="cat_star"><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i></div> #}
+                                       
+							           <a href="#"><div ><span class="card-text-color"><i class="icon-location card-icon-color">  </i>{{annonce.adresse}} , {{annonce.ville}} ,{{annonce.cp}}  </span></div></a>
+
+                                        <p class="caracteristique">
+                                         {{annonce.description}}
+                                        </p>
+
+
+                                          <div class="card-div"><span class="card-text-color"> {{annonce.tarif}} DT/ {{annonce.typeTarification}} </span></div>
+
+										
+									</div>
+									<ul>
+										<li><a href="{{path('profile_locataire_page',{id:annonce.user.id})}}" style="color:#888888"><i class="icon-user card-icon-color"></i> Houssem alayet</a></li>
+										<li><span class="card-text-color"><i class="icon-calendar-empty card-icon-color" ></i> {{time(annonce.createAt|date("Y-m-d H:i:s"))}}</span></li>
+									</ul>
+								</div>
+							</div>
+                            
+							{% endfor %}
+
+                           </div>
+            
+                             {% else %}
+
+              	<div class="text-center" style="margin-left:150px;color:#d9534f;"><h5>Aucun annonce trouvée !</h5></div>
+						{% endif %}
+						   {% endif %}
+						</div>
+
+
+						</div>
+
+                                       {% if Annonces is defined %}
+						             <div class="text-center nav-gation" style="margin-left:250px;">
+            <div  class="text-center">{{ knp_pagination_render(Annonces) }}</div>
+          </div>
+                                 {% endif %}
+
+
+            
+           
+            
+
+
+       
+				</div>
+				<!-- /isotope-wrapper -->
+			
+			{# 	<p class="text-center"><a href="#" {% if limit is defined and limit !=null %} data-limit="{{limit}}" {% endif %} class="btn_1 rounded add_top_30">Load more</a></p> #}
+{# 
+            	<nav aria-label="...">
+						<ul class="pagination pagination-sm">
+							<li class="page-item disabled">
+								<a class="page-link" href="#" tabindex="-1">Previous</a>
+							</li>
+							<li class="page-item"><a class="page-link" href="#">1</a></li>
+							<li class="page-item"><a class="page-link" href="#">2</a></li>
+							<li class="page-item"><a class="page-link" href="#">3</a></li>
+							<li class="page-item">
+								<a class="page-link" href="#">Next</a>
+							</li>
+						</ul>
+					</nav>
+ #}
+
+
+
+
+				</div>
+				<!-- /col -->
+			</div>		
+		</div>
+
+
+
+	{% endblock %}
+
+	{% block javascript %}
+
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9vrkLJKSv1SFSa-_ojqx3s8Q-uHM4U5Q&libraries=places&"></script>
+	<script src="{{asset('frontFolder/js/markerclusterer.js')}}"></script>
+	<script src="{{asset('frontFolder/js/map_hotels.js')}}"></script>
+	<script src="{{asset('frontFolder/js/infobox.js')}}"></script>
+	
+	<!-- Masonry Filtering -->
+	<script src="{{asset('frontFolder/js/isotope.min.js')}}"></script>
+    <style type="text/css">
+
+#loading_recherche{
+               text-align: center;
+               background:url(' {{asset('frontFolder/img/loader.gif')}}') no-repeat center;
+               height:150px;
+                    } 
+
+    </style>
+
+
+
+
+   <script>
+    $(window).load(function(){
+	  var $container = $('.isotope-wrapper');
+	  $container.isotope({ itemSelector: '.isotope-item', layoutMode: 'masonry' });
+	});
+
+	$('.filters_listing').on( 'click', 'input', 'change', function(){
+	  var selector = $(this).attr('data-filter');
+	  $('.isotope-wrapper').isotope({ filter: selector });
+	});
+	</script>
+	
+	<!-- Range Slider -->
+	<script>
+		 $("#range").ionRangeSlider({
+            hide_min_max: true,
+            keyboard: true,
+            min: 30,
+            max: 180,
+            from: 60,
+            to: 130,
+            type: 'double',
+            step: 1,
+            prefix: "Km ",
+            grid: false
+        });
+
+
+
+
+    $('#collapse-recherche').click(function(){
+      
+        
+        $etat=$(this).data('now');
+    	if($etat=='close')
+    	{
+
+    	
+    	$('#recherche-avancees').removeClass('hideselect');
+    	
+        $(this).data('now','open');
+        $(this).removeClass('afficher-plus');
+        $(this).addClass('afficher-moins');
+
+
+    	}
+
+    	if($etat=='open'){
+    	
+         $('#recherche-avancees').addClass('hideselect');
+         
+        $(this).data('now','close');
+         $(this).removeClass('afficher-moins');
+        $(this).addClass('afficher-plus');
+      
+    	}
+      
+    });
+
+     
+        $(document).on('click', '#afficher-plus-environment', function(){ 
+
+         var last_env_id = $(this).data("env-id");
+          $.ajax({  
+                url:"{{path('load_more_environment')}}",  
+                method:"POST",  
+                data:{last_env_id:last_env_id},  
+                 
+                success:function(data)  
+                {  
+                     if(data.output != ''&& data.output != null)  
+                     {  
+                        console.log(data.cle);
+                           $('#afficher-plus-environment').data('env-id',data.cle);
+                          /*$('#env_container_filter').append(data); */
+                          $("#env_container_filter li").last().html(data.output); 
+                          
+
+
+                     }  
+                     else  
+                     {  
+
+                     	$('#afficher-plus-environment').addClass('hideselect'); 
+                           
+                     }  
+                }  
+           });    
+
+
+     });
+
+
+
+     $(document).on('click', '#afficher-plus-decoration', function(){ 
+
+         var last_dec_id = $(this).data("dec-id");
+          $.ajax({  
+                url:"{{path('load_more_decoration')}}",  
+                method:"POST",  
+                data:{last_dec_id:last_dec_id},  
+                 
+                success:function(data)  
+                {  
+                     if(data.output != ''&& data.output != null)  
+                     {  
+                        console.log(data.cle);
+                           $('#afficher-plus-decoration').data('dec-id',data.cle);
+                          /*$('#env_container_filter').append(data); */
+                          $("#dec_container_filter li").last().html(data.output); 
+                          
+
+
+                     }  
+                     else  
+                     {  
+
+                     	$('#afficher-plus-decoration').addClass('hideselect'); 
+                           
+                     }  
+                }  
+           });    
+
+
+     });
+
+
+
+
+     $(document).on('click', '#afficher-plus-equipement', function(){ 
+
+         var last_eq_id = $(this).data("eq-id");
+          $.ajax({  
+                url:"{{path('load_more_equipement')}}",  
+                method:"POST",  
+                data:{last_eq_id:last_eq_id},  
+                 
+                success:function(data)  
+                {  
+                     if(data.output != ''&& data.output != null)  
+                     {  
+                        console.log(data.cle);
+                           $('#afficher-plus-equipement').data('eq-id',data.cle);
+                          /*$('#env_container_filter').append(data); */
+                          $("#eq_container_filter li").last().html(data.output); 
+                          
+
+
+                     }  
+                     else  
+                     {  
+
+                     	$('#afficher-plus-equipement').addClass('hideselect'); 
+                           
+                     }  
+                }  
+           });    
+
+
+     });
+
+
+        $(document).on('click', '#afficher-plus-services', function(){ 
+
+         var last_ser_id = $(this).data("ser-id");
+          $.ajax({  
+                url:"{{path('load_more_services')}}",  
+                method:"POST",  
+                data:{last_ser_id:last_ser_id},  
+                 
+                success:function(data)  
+                {  
+                     if(data.output != ''&& data.output != null)  
+                     {  
+                        console.log(data.cle);
+                           $('#afficher-plus-services').data('ser-id',data.cle);
+                          /*$('#env_container_filter').append(data); */
+                          $("#ser_container_filter li").last().html(data.output); 
+                          
+
+
+                     }  
+                     else  
+                     {  
+
+                     	$('#afficher-plus-services').addClass('hideselect'); 
+                           
+                     }  
+                }  
+           });    
+
+
+     });
+
+
+
+
+
+$('#categorie').on('change',function(){
+
+ var opt=$('#categorie option:selected').val();
+ $("#typeLieux").html(''); 
+$('select').niceSelect('update');
+ if(opt != null && opt!= '')
+ {
+
+   $.ajax({  
+                url:"{{path('afficher_categories')}}",  
+                method:"POST",  
+                data:{opt:opt},  
+                 
+                success:function(data)  
+                {  
+                     if(data.output != ''&& data.output != null)  
+                     {  
+                        
+                           
+                          $("#typeLieux").html(data.output); 
+                          $('select').niceSelect('update');
+
+
+                     }else{
+                       
+                       $("#typeLieux").html('<option value="">Aucun élement</option>'); 
+                          $('select').niceSelect('update');
+
+
+                     }  
+                      
+                }  
+           });    
+
+
+
+
+
+
+ }
+
+});
+
+
+
+
+
+    
+
+
+
+	</script>
+
+
+
+<script type="text/javascript">
+
+$( document ).ready(function() {
+
+
+
+
+
+$(document).on('click','.navigation-recherche',function(){
+
+var page=$(this).attr("id");
+
+load_recherche(page);
+
+
+});
+
+
+
+$(document).on('click','.navigation-filter',function(){
+
+var page=$(this).attr("id");
+
+filter_data(page);
+
+
+});
+
+
+
+
+
+
+
+
+
+
+
+function load_recherche(page)
+
+{
+
+var ville_recherche=$('#ville_recherche').val();
+var categorie_recherche=$('#categorie').val();
+ var mot_recherche=$('#mot_recherche').val();
+var typlieux_recherche=$('#typeLieux').val();
+
+console.log(ville_recherche +' '+categorie_recherche );
+
+
+
+  var formAnnonce=document.getElementById("chercher-lieux-form");
+ 
+
+  $.ajax({
+                       dataType:"json",
+                       url:$("#chercher-lieux-form").attr('action'),
+                       type:$("#chercher-lieux-form").attr('method'),
+                       data:{page:page,ville_recherche:ville_recherche,categorie_recherche:categorie_recherche,mot_recherche:mot_recherche,typlieux_recherche:typlieux_recherche},
+                     
+                        beforeSend: function() {
+                         $('#container_filter').html('<div id="loading_recherche" style="text-align:center; display:none;"></div>');
+
+
+
+                        },
+                       success:function (data,status,object)
+                       {
+
+                       
+                    
+                       if(data.success==true)
+                          {
+
+
+                         
+                              
+                             
+                                ;
+                              $('#chercher-lieux-form')[0].reset();
+                                $('#container_filter').html('<div class="row">'+data.output+'</div>');
+                                
+
+
+                                $('.nav-gation').html('');
+
+                            
+                             window.scrollTo(0, 0); 
+
+                            
+
+                         
+
+                               
+                          $('#btn-ajouter-lieux').prop('disabled',false); 
+                            
+
+                          }
+
+                          else{
+
+                             
+                                var message=data.message;
+                            
+                             window.scrollTo(0, 0);
+
+                             $("#container_filter").html('<div style="text-align:center;margin-top:80px;"> <h3>'+ message +' </h3></div>');
+
+                             
+
+
+                                     
+                          $('#btn-ajouter-lieux').prop('disabled',false); 
+
+
+                           
+
+                          }
+                                
+
+                        
+                        
+                          
+                          
+                          }
+
+
+
+
+
+                       });
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+ $('#btn_rechercher_lieux').click(function(e){
+
+
+  
+
+
+
+
+
+                  e.preventDefault();
+                    /*$('#btn_rechercher_lieux').prop('disabled',true);*/
+                  /*$("#spin-ajouter-lieux").addClass('fa fa-spinner fa-spin fa-register');*/
+
+
+
+                
+     
+
+
+  var ville=$('#ville_recherche').val();
+    var categorie=$('#categorie').val();
+               
+
+
+
+   if(ville=="")
+                  {
+                       document.getElementById('data.ville').textContent='Champ obligatoire ';
+                     
+                  }
+                  
+
+                    if(categorie=="")
+                  {
+                       document.getElementById('data.categorie').textContent='Champ obligatoire ';
+                     
+                  }
+
+               
+
+
+ $('#ville_recherche').change(function(){
+                  
+                 if($.trim(document.getElementById('data.ville').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.ville').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#categorie').change(function(){
+                  
+                 if($.trim(document.getElementById('data.categorie').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.categorie').textContent="";
+                                  }
+                    
+                                 });
+
+     
+
+
+
+if(ville !=''&&categorie!='' && ville!=null && categorie !='')
+{
+                
+                        $('#container_filter').html('<div id="loading_recherche" style="text-align:center; display:none;"></div>');
+
+                    
+
+
+
+load_recherche();
+
+
+
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+                  });
+
+
+		
+
+
+
+function filter_data(page)
+{
+
+
+$('#container_filter').html('<div id="loading_recherche" style=""></div>');
+var action='fetch_data';
+var environment=get_filter('env');
+var decoration=get_filter('dec');
+var equipement=get_filter('eq');
+var service=get_filter('ser');
+$.ajax({
+url:"{{path('filter_lieux')}}",
+method:"POST",
+data:{action:action,environment:environment,decoration:decoration,equipement:equipement,service:service,page:page},
+success:function(data)
+{
+if(data.success==true)
+{
+      
+	 $('#container_filter').html('<div class="row">'+data.output+'</div>');
+	  $('.nav-gation').html('');
+        window.scrollTo(0, 0);
+
+}else{
+
+
+ var message=data.message;
+                             
+
+
+                             $("#container_filter").html('<div style="text-align:center;margin-top:80px;"> <h3>'+ message +' </h3></div>');
+
+                             $('.nav-gation').html('');
+                             window.scrollTo(0, 0);
+
+
+}
+
+	
+}
+
+
+
+});
+
+}
+
+function get_filter(class_name)
+{
+
+	var filter =[];
+	$('.'+class_name+':checked').each(function(){
+     filter.push($(this).val());
+	});
+
+
+	return filter;
+}
+
+$('.common_selector').click(function(){
+ window.scrollTo(0, 0);
+filter_data();
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+});
+
+
+
+
+</script>
+
+
+
+	{% endblock %}

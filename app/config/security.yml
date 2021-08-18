@@ -1,0 +1,74 @@
+security:
+    encoders:
+        FOS\UserBundle\Model\UserInterface: bcrypt
+
+    role_hierarchy:
+        ROLE_PARTICULIER:  ROLE_PARTICULIER
+        ROLE_PROFESSIONEL: ROLE_PROFESSIONEL
+        ROLE_SUPER_ADMIN:  ROLE_ADMIN
+        
+        
+
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username_email
+
+    firewalls:
+
+
+          
+
+
+
+
+
+
+
+
+        
+        admin_area:
+            pattern:    ^/admin/
+            anonymous:  ~
+            provider:   fos_userbundle
+            form_login:
+                default_target_path: /admin/dassbord
+                always_use_default_target_path: true
+                check_path: /admin/login_check
+                login_path: /admin/login
+                remember_me: true
+            logout:
+                path:   /admin/logout
+                target: /admin/login
+
+        main:
+            pattern: ^/
+            form_login:
+                provider: fos_userbundle
+                csrf_token_generator: security.csrf.token_manager
+                
+                always_use_default_target_path: true
+                default_target_path: /user/home
+                
+
+
+            logout:       true
+            anonymous:    true
+        
+        
+
+
+
+
+    access_control:
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/proposition/register-lieu, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/proposition/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/proposition/login_check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/proposition/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/proposition/, role: ROLE_PARTICULIER }
+       
+      
+       

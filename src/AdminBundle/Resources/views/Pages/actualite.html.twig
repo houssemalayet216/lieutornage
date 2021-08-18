@@ -1,0 +1,956 @@
+{% extends '@Admin/Default/templateAdmin.html.twig' %}
+{% block stylesheet %}
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.7/css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block section_haider %}
+<section class="content-header">
+     
+      <ol class="breadcrumb">
+
+        <li><a href="#"><i class="fa fa-dashboard"></i>Tableau de bord</a></li>
+        <li class="active">Actualités</li>
+      </ol>
+    </section>
+{%endblock%}
+
+ {%block pageContainer %} 
+ 
+
+ 
+
+
+
+ <section class="content">
+
+  <div class="row">
+<div class="col-md-12">
+
+
+
+<div class="box">
+            <div class="box-header">
+              <div style="display:flex;justify-content: space-between;">
+
+               <div class="col-md-2">
+                <select id="filter-select" class="form-control input-sm pull pull-right">
+              <option value="Nouveauté">Nouveauté</option>
+              <option value="Evenment">Evenement</option>
+              
+              </select>
+    
+
+            </div>
+             
+             <div class="pull pull-right">
+
+    {{ render(controller(
+        'AdminBundle:Default:ajouterActualite'
+       
+    )) }}
+
+
+</div>
+
+
+
+
+
+
+
+
+
+          </div>
+            
+
+
+
+
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table id="tableactualite" class="table table-bordered table-striped" >
+                <thead>
+                <tr>
+
+                  <th class="text-center">Image</th>
+                  <th class="text-center">Catégorie</th>
+                  <th class="text-center">DatePublication</th>
+                 
+                  <th class="text-center">Action</th>
+                </tr>
+                </thead>
+                
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+
+
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="modal fade" tabindex="-1" id="supprimerActualiteModal" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Supprimer actualité</h4>
+      </div>
+      <div class="modal-body">
+        <p>Êtes-vous sûr de supprimer cet annnoce ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" id="supprimerAct"><span>Supprimer</span><i id="spin-supprimer-actualite"></i></button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->  
+
+
+
+
+
+ 
+
+
+</section>
+
+
+
+{% endblock %}
+
+
+{%block aside %}
+{%endblock%}
+
+
+
+
+
+
+
+
+{% block javascript%}
+
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.7/js/fileinput.js" type="text/javascript"></script>
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.6/js/locales/fr.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.7/themes/fa/theme.js" type="text/javascript"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" type="text/javascript"></script>
+
+<script>
+
+
+$("#file-1").fileinput({
+             language: "fr",
+             showUpload: false,
+           showRemove: false,
+            required: true,
+            theme: 'fa',
+            allowedFileExtensions: ['jpg', 'png', 'gif'],
+            overwriteInitial: false,
+            maxFileSize:2000
+           
+
+        });
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+
+       var tableactualite;
+$(document).ready(function($){
+ tableactualite=$("#tableactualite").DataTable({
+     columnDefs: [
+    
+        { "width": "20%", "targets": 0 },
+        { "width": "20%", "targets": 1 },
+        { "width": "20%", "targets": 2 },
+        { "width": "40%", "targets": 3 }
+        
+    ,{ "orderable": false, "targets": 3}
+  ],
+  'destroy':true,
+
+    'ajax':{"url":"{{path("liste_actualite")}}"},
+    
+ 
+     'order': []
+});
+
+
+
+
+$('#link-tableau').removeClass('active');
+  $('#link-user').removeClass('active');
+  $('#link-reference').removeClass('active');
+  $('#link-message').removeClass('active');
+ 
+  $('#link-actualite').addClass('active');
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {% for flashMessage in app.session.flashbag.get('ModificationSuccess') %}
+
+
+                           toastr.success('{{flashMessage}}','Success',{
+                                      
+                                     "closeButton": false,
+                                       "debug": false,
+                                        "newestOnTop": false,
+                                        "progressBar": true,
+                                        "positionClass": "toast-top-right",
+                                         "preventDuplicates": false,
+                                         "onclick": null,
+                                          "showDuration": "300",
+                                          "hideDuration": "1000",
+                                           "timeOut": "5000",
+                                           "extendedTimeOut": "1000",
+                                           "showEasing": "swing",
+                                           "hideEasing": "linear",
+                                           "showMethod": "fadeIn",
+                                          "hideMethod": "fadeOut"
+                              
+
+
+                                        });
+
+  
+
+  
+   
+
+        {% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ $('#btn-add-actualite').click(function(e){
+                  e.preventDefault();
+                    $('#btn-add-actualite').prop('disabled',true);
+                  $("#spin-add-actualite").addClass('fa fa-spinner fa-spin fa-register');
+
+
+                    var titre=$('#titre-actualite').val();
+                 
+                  var description=$('#editor1').val();// to get the value
+
+                  var type=$('#type-actualite').val();
+
+
+                  
+                  
+                
+                    
+                  
+                var errorOffreArray=["data.titre","data.description","data.image","data.type"];
+
+                     
+                    var formoffre = document.getElementById("add-actualite-form");
+
+
+
+
+
+                    
+                    if(titre=="")
+                  {
+                       document.getElementById('data.titre').textContent='Ce champ ne doit pas etre vide ';
+                     $("#spin-add-actualite").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn-add-actualite').prop('disabled',false); 
+                  }
+                  
+
+                    if(description=="")
+                  {
+                       document.getElementById('data.description').textContent='Ce champ ne doit pas entre vide ';
+                     $("#spin-add-actualite").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn-add-actualite').prop('disabled',false); 
+                  }
+
+
+                  
+
+
+                 
+                  
+
+                    if(type=="")
+                  {
+                       document.getElementById('data.produit').textContent='Ce champ ne doit pas entre vide ';
+                     $("#spin-add-actualite").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn-add-actualite').prop('disabled',false); 
+                  }
+
+
+
+
+
+
+
+                        $('#titre-actualite').change(function(){
+                  
+                 if($.trim(document.getElementById('data.titre').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.titre').textContent="";
+                                  }
+                    
+                                 });
+
+
+                                 $('#editor1').change(function(){
+                  
+                 if($.trim(document.getElementById('data.description').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.description').textContent="";
+                                  }
+                    
+                                 });
+
+
+                    
+           
+
+
+
+                     
+
+
+                                 $('#type-actualite').change(function(){
+                  
+                 if($.trim(document.getElementById('data.type').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.type').textContent="";
+                                  }
+                    
+                                 });
+
+                      
+
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                 if(titre!=="" &&description!=="" &&type!=="")
+               {
+               
+
+                      $.ajax({
+                       dataType:"json",
+                       url:$("#add-actualite-form").attr('action'),
+                       type:$("#add-actualite-form").attr('method'),
+                        data:new FormData(formoffre),
+                       contentType:false,
+                       processData:false,
+                       cache:false,
+                       success:function (data,status,object)
+                       {
+
+                       
+                       var message=data.message;
+                       if(data.success==true)
+                          {
+
+
+                         
+                               errorOffreArray.forEach(function(error){
+                                  if($.trim(document.getElementById(error).textContent) !== "")
+
+                                  {
+                                    document.getElementById(error).textContent="";
+                                  }
+                               });
+                             
+                               
+                            $('#myModal').modal('hide');
+                                tableactualite.ajax.reload(null,true);
+                              $('#add-actualite-form')[0].reset();
+                            
+
+                            toastr.success(message,'Success', {
+                                      
+                                      "closeButton": false,
+                                       "debug": false,
+                                        "newestOnTop": false,
+                                        "progressBar": true,
+                                        "positionClass": "toast-top-right",
+                                         "preventDuplicates": false,
+                                         "onclick": null,
+                                          "showDuration": "300",
+                                          "hideDuration": "1000",
+                                           "timeOut": "5000",
+                                           "extendedTimeOut": "1000",
+                                           "showEasing": "swing",
+                                           "hideEasing": "linear",
+                                           "showMethod": "fadeIn",
+                                        "hideMethod": "fadeOut"
+                              
+
+
+                               });
+
+                                $("#spin-add-actualite").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn-add-actualite').prop('disabled',false); 
+                            
+
+                          }
+
+                          else{
+
+                             toastr.error(message,'Error', {
+                                      
+                                      "closeButton": false,
+                                       "debug": false,
+                                        "newestOnTop": false,
+                                        "progressBar": true,
+                                        "positionClass": "toast-top-right",
+                                         "preventDuplicates": false,
+                                         "onclick": null,
+                                          "showDuration": "300",
+                                          "hideDuration": "1000",
+                                           "timeOut": "5000",
+                                           "extendedTimeOut": "1000",
+                                           "showEasing": "swing",
+                                           "hideEasing": "linear",
+                                           "showMethod": "fadeIn",
+                                        "hideMethod": "fadeOut"
+                              
+
+
+                               });
+
+                                      $("#spin-add-actualite").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn-add-actualite').prop('disabled',false); 
+
+
+                            if(data.errors)
+                            {
+
+                              $("#spin-add-actualite").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn-add-actualite').prop('disabled',false); 
+                             
+                             console.log(data.errors);
+
+                              data.errors.forEach(function(error)
+                              {
+
+                               document.getElementById(error.elementId).textContent=error.errorMessage;
+                              });
+
+
+                               $("#spin-add-actualite").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn-add-actualite').prop('disabled',false);  
+
+                            }
+
+                          }
+                                
+
+                        
+                        
+                          
+                          
+                          },
+                          error:function (data,status,object)
+                          {
+                             
+
+                           toastr.error(data.message,'Error', {
+                                      
+                                      "closeButton": false,
+                                       "debug": false,
+                                        "newestOnTop": false,
+                                        "progressBar": true,
+                                        "positionClass": "toast-top-right",
+                                         "preventDuplicates": false,
+                                         "onclick": null,
+                                          "showDuration": "300",
+                                          "hideDuration": "1000",
+                                           "timeOut": "5000",
+                                           "extendedTimeOut": "1000",
+                                           "showEasing": "swing",
+                                           "hideEasing": "linear",
+                                           "showMethod": "fadeIn",
+                                        "hideMethod": "fadeOut"
+                              
+
+
+                               });
+
+
+
+
+                         $("#spin-add-actualite").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#btn-add-actualite').prop('disabled',false); 
+                          }
+
+
+
+
+
+
+
+
+                       });
+
+
+
+
+
+
+
+
+
+
+
+                    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  });
+
+
+
+
+
+
+
+
+
+
+
+
+$('#close-modale-add').on("click",function(){
+  $('#add-actualite-form')[0].reset();
+  var errorfArray=["data.titre","data.description","data.image","data.type"];
+
+  errorfArray.forEach(function(error){
+
+                               if($.trim(document.getElementById(error).textContent) !== "")
+
+                                  {
+                                    document.getElementById(error).textContent="";
+                                  }
+
+                              });
+
+
+
+});
+
+
+
+
+
+$('#close-up-add-modale').on("click",function(){
+  $('#add-actualite-form')[0].reset();
+ var errorfArray=["data.titre","data.description","data.image","data.type"];
+
+  errorfArray.forEach(function(error){
+
+                               if($.trim(document.getElementById(error).textContent) !== "")
+
+                                  {
+                                    document.getElementById(error).textContent="";
+                                  }
+
+                              });
+                             
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+});
+
+
+
+
+
+$('#filter-select').change(function(){
+
+var filter=$(this).val();
+
+
+
+ tableactualite.destroy();
+
+
+
+   tableactualite=$("#tableactualite").DataTable({
+     columnDefs: [
+    {
+        targets: -1,
+        className: 'dt-body-left',
+        
+    },{ "orderable": false, "targets": 8 }
+  ],
+  'destroy':true,
+   
+    'ajax':{"url": "{{path("liste_actualite")}}","type": "POST","data": {"etat":filter}},
+     'order': []
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+});
+
+
+
+
+
+
+
+function supprimerActualite(id){
+
+if(id){
+  $("#supprimerAct").unbind('click').bind('click',function(){
+   
+     $('#supprimerAct').prop('disabled',true);
+    $("#spin-supprimer-actualite").addClass('fa fa-spinner fa-spin fa-register');
+
+       $.ajax({
+                       
+                       url:"{{path('delete_actualite')}}",
+                       type:'POST',
+                       data:{id:id},
+                       success:function (data,status,object)
+                       {
+
+                        var message=data.message;
+                       if(data.success==true)
+                          {
+
+                           $("#spin-supprimer-actualite").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#supprimerAct').prop('disabled',false);
+
+                           $('#supprimerActualiteModal').modal('hide');
+                               tableactualite.ajax.reload(null,false);
+                                
+                              
+
+                               toastr.success(message,'Success', {
+                                      
+                                      "closeButton": false,
+                                       "debug": false,
+                                        "newestOnTop": false,
+                                        "progressBar": true,
+                                        "positionClass": "toast-top-right",
+                                         "preventDuplicates": false,
+                                         "onclick": null,
+                                          "showDuration": "300",
+                                          "hideDuration": "1000",
+                                           "timeOut": "5000",
+                                           "extendedTimeOut": "1000",
+                                           "showEasing": "swing",
+                                           "hideEasing": "linear",
+                                           "showMethod": "fadeIn",
+                                        "hideMethod": "fadeOut"
+                              
+
+
+                               });
+
+                              
+
+                          }else{
+                          
+                             
+                           $("#spin-supprimer-actualite").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#supprimerAct').prop('disabled',false);
+                             $('#supprimerActualiteModal').modal('hide');
+
+                               toastr.error(message,'Error', {
+                                      
+                                      "closeButton": false,
+                                       "debug": false,
+                                        "newestOnTop": false,
+                                        "progressBar": true,
+                                        "positionClass": "toast-top-right",
+                                         "preventDuplicates": false,
+                                         "onclick": null,
+                                          "showDuration": "300",
+                                          "hideDuration": "1000",
+                                           "timeOut": "5000",
+                                           "extendedTimeOut": "1000",
+                                           "showEasing": "swing",
+                                           "hideEasing": "linear",
+                                           "showMethod": "fadeIn",
+                                        "hideMethod": "fadeOut"
+                              
+
+
+                               });
+
+                         
+
+
+                          }
+
+              
+
+                       }
+
+
+
+                       });
+
+
+
+    });
+
+    }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

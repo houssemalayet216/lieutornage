@@ -1,0 +1,91 @@
+
+{% extends '@Back/Default/templateParticulier.html.twig' %}
+
+
+{% block section_haider %}
+<section class="content-header">
+        <h1>
+        Profile client
+     
+      </h1>
+      <ol class="breadcrumb">
+
+        <li><a href="#"><i class="fa fa-dashboard"></i>Tableau de bord</a></li>
+        <li class="active">Profile client</li>
+      </ol>
+    </section>
+{%endblock%}
+
+ {%block pageContainer %} 
+ 
+
+ <div class="row">
+<div class="col-md-12">
+
+   <div class=" col-md-offset-2 col-md-8">
+          <!-- Widget: user widget style 1 -->
+          <div class="box box-widget widget-user">
+            <!-- Add the bg color to the header using any of the bg-* classes -->
+            <div class="widget-user-header bg-aqua-active">
+              <h3 class="widget-user-username">{{user.nom}} {{user.prenom}}</h3>
+              {% if user.fonction != null%}
+              <h5 class="widget-user-desc">{{user.fonction}}</h5>
+              {% endif %}
+            </div>
+            <div class="widget-user-image">
+              <img class="img-circle" src="{{asset('frontFolder/img/avatar.jpg')}}" alt="User Avatar">
+            </div>
+            <div class="box-footer">
+              <div class="row">
+                <div class="col-sm-4 border-right">
+                  <div class="description-block">
+                   
+                    <h5 class="description-header">Adresse </h5>
+                      <span class="description-text" style="text-transform:lowercase;">{{user.ville}} ,{{user.adresse}},{{user.cp}}</span>
+                   
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-4 border-right">
+                  <div class="description-block">
+                    <h5 class="description-header">Téléphone</h5>
+                    <span class="description-text">{{user.telephone}}</span>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-4">
+                  <div class="description-block">
+                    <h5 class="description-header">Email</h5>
+                    <span class="description-text" style="text-transform:lowercase;">{{user.email}}</span>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+
+                <div style="margin-bottom:20px;margin-top:50px;text-align:center;"><button class="btn btn-info">Envoyer message</button></div>
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+            </div>
+          </div>
+          <!-- /.widget-user -->
+        </div>
+
+
+
+</div>
+</div>
+
+
+
+
+
+
+{% endblock %}
+
+{%block aside %}
+{%endblock%}
+
+{%block javascript%}
+{% endblock %}

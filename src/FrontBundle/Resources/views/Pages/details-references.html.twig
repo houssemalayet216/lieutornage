@@ -1,0 +1,121 @@
+{% extends '@Front/Default/template.html.twig' %}
+
+{% block title %} Actualités  {% endblock %}
+	{% block stylesheet %}
+		<link href="{{asset('frontFolder/css/integration.css')}}" rel="stylesheet">
+		<link   href="{{asset('frontFolder/css/blog.css')}}" rel="stylesheet"  >
+
+			<style>
+		.card-min-height {
+    min-height:500px;
+	       }
+
+	       	.paginate-margin {
+    margin-left: 450px;
+	       }
+
+ @media (max-width: 767px)
+{
+.paginate-margin {
+    margin-left: 0;
+}
+}
+	       </style>
+	{% endblock %}
+
+{% block pageContainer %}
+
+<div id="breadcrumb">
+			<div class="container">
+				<ul>
+					<li><a href="#">Accueil</a></li>
+					
+					<li>Références</li>
+					<li>Détails</li>
+				</ul>
+			</div>
+		</div>
+
+
+	<div class="container margin_60_35">
+			<div class="row">
+				<div class="col-lg-9">
+					<div class="bloglist singlepost">
+						<p><img alt="" class="img-fluid" src="{{asset('Uploads/')}}{{reference.image}}"></p>
+						<h1>{{reference.titre}}</h1>
+						<div class="postmeta">
+							<ul>
+								
+								<li><a href="#"><i class="icon-calendar-outlilne"></i> {{reference.premiersortie|date("d/m/Y")}}</a></li>
+								<li><a href="#"><i class="icon-map-1 "></i> {{reference.pays}}</a></li>
+							
+							</ul>
+						</div>
+						<!-- /post meta -->
+						<div class="post-content">
+							
+
+							<p>{{reference.description}}</p>
+						</div>
+						<!-- /post -->
+					</div>
+
+				</div>
+					<!-- /single-post -->
+
+				
+				
+				<!-- /col -->
+
+				<aside class="col-lg-3">
+					
+					<!-- /widget -->
+					<div class="widget">
+						<div class="widget-title">
+							<h4>Derniers annonces</h4>
+						</div>
+						<ul class="comments-list">
+
+							{%for ref in references %}
+							<li>
+								<div class="alignleft">
+									<a href="{{path('detail_reference_page',{id:ref.id})}}"><img src="{{asset('Uploads/')}}{{ref.image}}" alt=""></a>
+								</div>
+								<small>{{ref.type}}</small>
+								<h3><a href="{{path('detail_reference_page',{id:ref.id})}}" title="">{{ref.titre}}</a></h3>
+							</li>
+							{% endfor %}
+						</ul>
+					</div>
+					<!-- /widget -->
+					<div class="widget">
+						<div class="widget-title">
+							<h4> Categories</h4>
+						</div>
+						<ul class="cats">
+							<li><a href="#">Cinéma/Télévision <span>(12)</span></a></li>
+							<li><a href="#">Evenmentiel<span>(21)</span></a></li>
+							<li><a href="#">Publicité<span>(21)</span></a></li>
+						</ul>
+					</div>
+					<!-- /widget -->
+					
+					<!-- /widget -->
+				</aside>
+				<!-- /aside -->
+			</div>
+			<!-- /row -->
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+	{% endblock %}

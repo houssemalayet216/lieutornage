@@ -1,0 +1,129 @@
+{% extends '@Front/Default/template.html.twig' %}
+
+{% block title %} Réservation  {% endblock %}
+	{% block stylesheet %}
+		<link href="{{asset('frontFolder/css/integration.css')}}" rel="stylesheet">
+
+		
+	{% endblock %}
+
+{% block pageContainer %}
+
+<div id="breadcrumb">
+			<div class="container">
+				<ul>
+					<li><a href="#">Accueil</a></li>
+					
+					<li>Reservation</li>
+				</ul>
+			</div>
+		</div>
+
+
+		<div class="bg_color_1">
+			<div class="container margin_60_35">
+              
+              {% if message is defined %}
+
+               <div class="alert alert-success alert-dismissible fade show" role="alert">
+               {{message}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+              {% endif %}
+            
+
+
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="box_cart">
+						<table class="table table-striped cart-list">
+							<thead>
+								<tr>
+									<th>
+										Loueur professionel
+									</th>
+									<th>
+										Lieux
+									</th>
+									<th>
+										Du
+									</th>
+									<th>
+										Au
+									</th>
+
+									<th>
+										Total
+									</th>
+
+									<th>
+										Date Réservation
+									</th>
+
+									<th>
+										Status
+									</th>
+
+								</tr>
+							</thead>
+							<tbody>
+
+                           {% for res in reservations %}
+
+								<tr>
+									<td>
+
+								{{res.loueur.nom}} {{res.loueur.prenom}}
+
+									</td>
+									<td>
+									 {% for cat in res.annonce.categorie %}
+									 <span class="badge badge-success">{{cat.titre}}</span>
+									 {% endfor %} 
+									</td>
+									<td>
+										{{res.datedebut|date("d/m/Y")}}
+									</td>
+									<td>
+									 {{res.datefin|date("d/m/Y")}}
+									</td>
+
+									<td>
+									{{res.tarifTotal}} DT
+									</td>
+
+									<td>
+									 {{res.datereservation|date("d/m/Y")}}
+									</td>
+
+									<td>
+									 <span class="badge badge-primary"> {{res.etat}} </span>
+									</td>
+								</tr>
+
+							{% endfor %}
+								
+							</tbody>
+						</table>
+						
+						<!-- /cart-options -->
+					</div>
+					</div>
+					<!-- /col -->
+					
+				
+				</div>
+			
+
+                		             <div class="text-center nav-gation" style="margin-left:250px;">
+            <div  class="text-center">{{ knp_pagination_render(reservations) }}</div>
+          </div>
+               
+
+		</div>
+
+
+{% endblock %}

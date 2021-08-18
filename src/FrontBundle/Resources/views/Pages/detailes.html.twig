@@ -1,0 +1,1368 @@
+
+
+
+ {% extends '@Front/Default/template.html.twig' %}
+
+{% block title %} Details {% endblock %}
+	{% block stylesheet %}  
+
+<link href="{{asset('frontFolder/css/integration.css')}}" rel="stylesheet">
+ <link href="{{asset('frontFolder/css/slider-pro.min.css')}}" rel="stylesheet">
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" media="all" rel="stylesheet" type="text/css"/>
+ 
+
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+
+<style type="text/css">
+
+
+  .avis {
+     -webkit-border-radius: 3px !important; 
+    -moz-border-radius: none;
+    -ms-border-radius: none;
+     border-radius: 3px !important;  
+     padding-top: 15px;
+     padding-bottom: 15px;
+}
+
+
+
+
+
+
+.contact-details li {
+margin-bottom:  10px;
+
+}
+
+
+.agent-title {
+    position: relative;
+    display: block;
+    margin-bottom: 30px;
+}
+
+
+.agent-title .agent-photo {
+    float: left;
+    display: block;
+}
+
+
+
+
+.agent-title .agent-photo img {
+    border-radius: 50%;
+    max-width: 72px;
+}
+
+.agent-widget h4 {
+    color: #333;
+    margin: 0px 0 6px 0;
+}
+
+.agent-details span {
+    color: #999;
+}
+
+.agent-details span i {
+    font-size: 18px;
+    position: relative;
+    top: 3px;
+    margin-right: 10px;
+}
+
+
+
+
+
+.agent-details {
+    margin-left: 92px;
+    display: block;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
+
+
+
+.contact-details i {
+color:#3f4079;
+font-size: 20px;
+top:-10px;
+
+}
+
+select.form-control:not([size]):not([multiple]) {
+     height:46px; 
+}
+
+.booking select {
+     display: block; 
+}
+
+
+.box_style_2 {
+    background: #fff;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    margin-bottom: 25px;
+    padding: 20px;
+    position: relative;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+
+.box_style_1 img {
+    
+    margin-top: 10px;
+   
+      border-radius: 50%;
+    max-width: 50px;
+}
+.box_style_2 i{
+	color:#3f4079;
+}
+
+.box_style_2 h4 {
+    font-size: 18px;
+
+}
+
+.box_style_2 a.phone, .box_style_4 a.phone {
+    font-size: 26px;
+    display: block;
+    margin-bottom: 30px;
+   
+}
+
+
+
+.box_style_1 {
+    background: #fff;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    border: 1px solid #ddd;
+    margin-bottom: 25px;
+    padding: 30px;
+    position: relative;
+    color: #666;
+}
+
+.box_style_1  h4{
+    -webkit-font-smoothing: antialiased;
+    color: #333;
+    font-size: 18px;
+}
+
+
+h4 span, h5 span, h6 span {
+    color: #e04f67;
+}
+
+.box_style_1 p {
+    margin: 0 0 20px 0;
+}
+
+hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid #ddd;
+}
+
+ul#contact-info {
+    list-style: none;
+    margin: 0 0 0 0;
+    padding: 0;
+}
+
+
+.box_style_1 a {
+    color: #51bce6;
+    text-decoration: none;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+</style>
+
+
+	 {% endblock %}
+
+{% block pageContainer %}
+
+<div id="breadcrumb">
+			<div class="container">
+				<ul>
+					<li><a href="#">Accueil</a></li>
+					<li><a href="#">Annonce</a></li>
+					<li>Détails</li>
+				</ul>
+			</div>
+		</div>
+
+
+			<div class="container margin_80_55">
+
+
+     
+             	<div class="row ">
+				<div class="col-xl-8 col-lg-8 col-md-offset-8" >
+					<nav id="secondary_nav">
+						<div class="container">
+							<ul class="clearfix">
+								<li><a href="#section_1" class="active">Informations générale</a></li>
+								<li><a href="#section_2">Avis</a></li>
+							
+							</ul>
+						</div>
+					</nav>
+					<div id="section_1">
+						<div class="box_general_3">
+							<div class="profile">
+								<div class="row">
+
+									 {% set images=annonce.gallerie|first %}
+									<div class="col-lg-5 col-md-4">
+										<figure>
+											<img src="{{asset('Uploads/')}}{{images.image}}" alt="" class="img-fluid">
+										</figure>
+									</div>
+									<div class="col-lg-7 col-md-8">
+										{# <small>Primary care - Internist</small> #}
+										<div style="display:flex;justify-content: space-between;"><h1 style="margin-bottom:0px;">{{annonce.titre}}</h1>   </div>
+
+										 
+
+                        
+										<span class="rating">
+											<i class="icon_star voted"></i>
+											<i class="icon_star voted"></i>
+											<i class="icon_star voted"></i>
+											<i class="icon_star voted"></i>
+											<i class="icon_star"></i></span>
+										
+									
+
+ 
+											 
+
+
+											  <ul class="contact-details">
+
+                                                <li>
+												<i class=" pe-7s-map-marker"></i> <strong>Adresse:</strong>
+												{{annonce.ville}}, {{annonce.adresse}} ,{{annonce.cp}} 
+												
+											</li>
+                                           
+
+                        <li><i class=" icon_set_1_icon-91"></i> <strong>Téléphone:</strong> <span>{{annonce.user.telephone}}</span></li>
+                      
+                        <li><i class="icon_set_1_icon-84"></i> <strong>E-Mail:</strong> <span><a style="color:#274abb;" href="mailto:contact@m-logistique.com">{{annonce.user.email}}</a></span></li>
+
+                      <li><span><b>{{annonce.tarif}} DT {{annonce.typeTarification}}</b></span></li>
+                       
+                    </ul>
+
+
+												
+										
+									</div>
+								</div>
+							</div>
+                              
+                            	<hr>
+
+
+                               <div class="indent_title_in">
+								<i class="pe-7s-photo"></i>
+								<h3>Gallerie</h3>
+								
+							</div>
+							<div class="wrapper_indent">
+								 <div id="Img_carousel" class="slider-pro">
+                <div class="sp-slides">
+                
+                 {% for images in annonce.gallerie   %}
+                    <div class="sp-slide">
+                        <img alt="Image" class="sp-image" src="{{asset('Uploads/')}}{{images.image}}"
+                        data-src="{{asset('Uploads/')}}{{images.image}}" 
+                        data-small="{{asset('Uploads/')}}{{images.image}}" 
+                        data-medium="{{asset('Uploads/')}}{{images.image}}" 
+                        data-large="{{asset('Uploads/')}}{{images.image}}" 
+                        data-retina="{{asset('Uploads/')}}{{images.image}}">
+                    </div>
+                  {% endfor %}
+
+                   
+                </div>
+                <div class="sp-thumbnails">
+                	{% for photos in annonce.gallerie  %}
+                    <img alt="Image" class="sp-thumbnail" src="{{asset('Uploads/')}}{{photos.image}}">
+                         {% endfor %}
+                
+                </div>
+            </div>
+
+								
+								
+								<!-- /row-->
+							</div>
+							<!-- /wrapper indent -->
+
+							<hr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							
+							<!-- /profile -->
+							<div class="indent_title_in">
+								<i class="pe-7s-news-paper"></i>
+								<h3>Description</h3>
+								
+							</div>
+							<div class="wrapper_indent">
+								<p>{{annonce.description}}.</p>
+								
+								
+								<!-- /row-->
+							</div>
+							<!-- /wrapper indent -->
+
+							<hr>
+
+							<div class="indent_title_in">
+							   <i class="pe-7s-home"></i>
+								<h3>Caractéristique</h3>
+								
+							</div>
+							<div class="wrapper_indent">
+								<div class="row">
+							      <div class="col-md-6">
+								<div style="display:flex;    line-height: 1.5rem;
+    "> <span><strong>Suface Totale</strong></span> <span style="color: #717171;margin-left:15px;"> {{annonce.surfaceTotale}}</span></div>
+								<div style="display:flex;    line-height: 1.5rem;
+   "><span><strong>Surface du piéce</strong></span> <span style="color: #717171;margin-left:15px;"> {{annonce.surfacePiece}}</span></div>
+							</div>
+
+							<div class="col-md-6">
+									<div style="display:flex;    line-height: 1.5rem;
+    color: #717171;"> <span><strong>Nombre de pièce</strong></span>  <span style="color: #717171;margin-left:15px;"> {{annonce.nbrPiece}}</span></div>
+								<div style="display:flex;    line-height: 1.5rem;
+    color: #717171;"><span><strong>Nombre de niveau</strong></span> <span style="color: #717171;margin-left:15px;"> {{annonce.nbrNiveau}}</span></div>
+							</div>
+						</div>
+
+							</div>
+							<!--  End wrapper indent -->
+
+							<hr>
+                            {% if  annonce.environment |length > 0 or annonce.decoration |length > 0 or annonce.equipement |length > 0 or annonce.service |length > 0   %}
+							<div class="indent_title_in">
+								<i class="pe-7s-note2"></i>
+								<h3>Spécification</h3>
+								
+							</div>
+							<div class="wrapper_indent">
+								
+                             <div class="row">
+                                {% if annonce.environment |length > 0  %}
+								<div class="col-md-3">
+								 <h6>Environments</h6>
+								 <ul class="bullets">
+								 	{% for env in annonce.environment %}
+											<li>{{env.titre}} </li>
+											
+
+											{% endfor %}
+										</ul>
+								</div>
+
+							{% endif %}
+
+
+                                {% if annonce.decoration |length > 0  %}
+                                <div class="col-md-3">
+								 <h6>Decorations</h6>
+								 <ul class="bullets">
+											{% for dec in annonce.decoration %}
+											<li>{{dec.titre}} </li>
+											
+
+											{% endfor %}
+										</ul>
+										</ul>
+								</div>
+							{% endif %}
+
+
+
+                               {% if annonce.equipement |length > 0  %}
+								<div class="col-md-3">
+								 <h6>Equipements</h6>
+								 <ul class="bullets">
+										
+                                        {% for eq in annonce.equipement %}
+											<li>{{eq.titre}} </li>
+											
+
+											{% endfor %}
+
+										</ul>
+								</div>
+
+								{%endif%}
+
+
+
+                               {% if annonce.service |length > 0  %}
+								<div class="col-md-3">
+								 <h6>Services</h6>
+								 <ul class="bullets">
+											
+											  {% for sr in annonce.service %}
+											<li>{{sr.titre}} </li>
+											
+
+											{% endfor %}
+
+
+
+										</ul>
+								</div>
+
+							{% endif %}
+
+
+
+							</div>
+
+							</div>  
+
+                
+
+
+                           <hr>
+
+                       {% endif %}
+
+							
+
+							<div class="indent_title_in">
+								<i class="pe-7s-map-2"></i>
+								<h3>Localisation</h3>
+								
+							</div>
+							<div class="wrapper_indent">
+								
+                             
+									<div id="map" class="map map_single add_bottom_30"></div>
+								
+								</div>
+
+
+								 <hr>
+                           
+
+							
+
+
+
+
+
+
+
+                      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							
+						
+						</div>
+						<!-- /section_1 -->
+					</div>
+					<!-- /box_general -->
+
+					<div id="section_2">
+						<div class="box_general_3">
+							<div class="reviews-container">
+								<div class="row">
+									<div class="col-lg-3">
+										<div id="review_summary">
+											<strong>4.7</strong>
+											<div class="rating">
+												<i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i>
+											</div>
+											<small>Based on 4 reviews</small>
+										</div>
+									</div>
+									<div class="col-lg-9">
+										<div class="row">
+											<div class="col-lg-10 col-9">
+												<div class="progress">
+													<div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+												</div>
+											</div>
+											<div class="col-lg-2 col-3"><small><strong>5 stars</strong></small></div>
+										</div>
+										<!-- /row -->
+										<div class="row">
+											<div class="col-lg-10 col-9">
+												<div class="progress">
+													<div class="progress-bar" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+												</div>
+											</div>
+											<div class="col-lg-2 col-3"><small><strong>4 stars</strong></small></div>
+										</div>
+										<!-- /row -->
+										<div class="row">
+											<div class="col-lg-10 col-9">
+												<div class="progress">
+													<div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+												</div>
+											</div>
+											<div class="col-lg-2 col-3"><small><strong>3 stars</strong></small></div>
+										</div>
+										<!-- /row -->
+										<div class="row">
+											<div class="col-lg-10 col-9">
+												<div class="progress">
+													<div class="progress-bar" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+												</div>
+											</div>
+											<div class="col-lg-2 col-3"><small><strong>2 stars</strong></small></div>
+										</div>
+										<!-- /row -->
+										<div class="row">
+											<div class="col-lg-10 col-9">
+												<div class="progress">
+													<div class="progress-bar" role="progressbar" style="width: 0" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+												</div>
+											</div>
+											<div class="col-lg-2 col-3"><small><strong>1 stars</strong></small></div>
+										</div>
+										<!-- /row -->
+									</div>
+								</div>
+								<!-- /row -->
+
+								<hr>
+
+								
+								<!-- End review-box -->
+                                  <div id="content-reviews">
+
+                                  	{% for rev in avis %}
+
+								<div class="review-box clearfix">
+									<figure class="rev-thumb"><img src="http://via.placeholder.com/150x150.jpg" alt="">
+									</figure>
+									<div class="rev-content">
+										<div class="rating">
+
+											{%if rev.avis > 4 %}
+											<i class="icon-star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i>
+											{% else %}
+												
+                                                 {% for i in 0..rev.avis|length %} 
+												<i class="icon-star voted"></i>
+												{% endfor %}
+
+										{% endif %}
+										</div>
+										<div class="rev-info">
+											{{rev.nomcomplete}} – {{rev.datepublication|date("d/m/Y")}}
+										</div>
+										<div class="rev-text">
+											<p>
+												{{rev.message}}
+											</p>
+										</div>
+									</div>
+								</div>
+
+								{% endfor %}
+
+
+
+								
+
+
+
+							</div>
+								<!-- End review-box -->
+
+
+
+
+                             <hr>
+                             <div class="add-review">
+								<h5>Envoyer vos commentaire</h5>
+								<form method="POST" action="{{path('avis_annonce')}}" id="form-avis">
+									<div class="row">
+										<input type="hidden" name="id" id="id" value="{{annonce.id}}" >
+										<div class="form-group col-md-6">
+											<label>Nom et prenom *</label>
+											<input type="text" name="nom" id="nom" placeholder="" class="form-control">
+											<span class="text-danger" id="data.nom"></span>
+										</div>
+										<div class="form-group col-md-6">
+											<label>Email *</label>
+											<input type="email" name="email" id="email" class="form-control">
+											<span class="text-danger" id="data.email"></span>
+										</div>
+										<div class="form-group col-md-6">
+											<label>Evaluation </label>
+											<div class="custom-select-form">
+											<select name="avis" id="avis" class="wide">
+												<option value="1">1 (bas)</option>
+												<option value="2">2</option>
+												<option value="3">3</option>
+												<option value="4">4</option>
+												<option value="5" selected>5 (moyen)</option>
+												<option value="6">6</option>
+												<option value="7">7</option>
+												<option value="8">8</option>
+												<option value="9">9</option>
+												<option value="10">10 (élevé)</option>
+											</select>
+
+											<span class="text-danger" id="data.avis"></span>
+											</div>
+										</div>
+										<div class="form-group col-md-12">
+											<label>Avis</label>
+											<textarea name="message" id="message" class="form-control" style="height:130px;"></textarea>
+											<span class="text-danger" id="data.message"></span>
+										</div>
+										<div class="form-group col-md-12 add_top_20">
+											<button type="submit" class="btn_1 avis" id="submit-review" style="padding-top:15px;padding-bottom:15px;">Enregistrer</button>
+										</div>
+									</div>
+								</form>
+							</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							</div>
+							<!-- End review-container -->
+						</div>
+					</div>
+					<!-- /section_2 -->
+				</div>
+
+
+
+
+
+
+
+
+
+
+
+               <aside class="col-xl-4 col-lg-4" id="sidebar">
+					<div class="box_general_3 booking">
+						<div class="title" style="text-align:center;">
+							<h6>Vérifier disponibilités</h6>
+						
+						</div>
+						<div class="row">
+                             <div id="message-disponibilite"></div>
+							</div>
+							
+							
+                         <input type="hidden" value="{{annonce.id}}" id="id-annonce">
+
+                          <div class="row">
+								<div class="col-lg-12">
+									<labe>Du</labe>
+									<div class="form-group" id="input_date">
+										<input class="form-control dates" type="text" id="dates-debut" name="dates-debut" placeholder="Du">
+										<i class="icon_calendar"></i>
+										
+									</div>
+									<span class="text-danger" id="data.debut"></span>
+								</div>
+							</div>
+
+
+
+							<div class="row">
+								<div class="col-lg-12">
+									<labe>Au</labe>
+									<div class="form-group">
+										<input class="form-control dates" type="text" id="dates-fin" name="dates-fin" placeholder="Au">
+											<i class="icon_calendar"></i>
+
+										
+									</div>
+									<span class="text-danger" id="data.fin"></span>
+								</div>
+							</div>
+
+							
+
+
+							
+							<div style="position:relative;"><a href="{{path('reservation_page')}}" id="verifierDisponibilite" class="btn_1 full-width purchase">Valider</a></div>
+						</form>
+					</div>
+
+
+                    
+                   
+
+                   <div class="box_style_1">
+				<span class="tape"></span>
+				<div class="text-center" style="margin-bottom:30px;">
+                <img src="http://logistique.sqli-services.com/media/cache/scale/rc/2qSEsayO/images/placeholders/user.png" alt=""><h4><a href="#">{{annonce.user.civilite}}{{annonce.user.nom}} {{annonce.user.prenom}}</a></h4>
+                 <p>({{annonce.user.typeHote}})</p>
+            </div>
+
+
+				<hr>
+				<h4>Addresse <span><i class="icon-pin pull-right"></i></span></h4>
+				<p>
+					{{annonce.user.ville}} {{annonce.user.adresse}} {{annonce.user.cp}}
+				</p>
+				<hr>
+				<h4>Info <span><i class="icon-pin pull-right"></i></span></h4>
+				<ul id="contact-info">
+					<li>{{annonce.user.telephone}}</li>
+					<li><a href="#">{{annonce.user.email}}</a></li>
+				</ul>
+			</div>
+
+
+
+                     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+					<!-- /box_general -->
+				</aside>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		    </div>		
+
+
+
+
+
+
+{% endblock %}
+
+
+{% block javascript %}
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9vrkLJKSv1SFSa-_ojqx3s8Q-uHM4U5Q&libraries=places&"></script>
+
+	<script src="{{asset('frontFolder/js/map_single_hotel.js')}}"></script>
+
+	
+	
+ 
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+	<script src="{{asset('frontFolder/js/jquery.sliderPro.min.js')}}"></script>
+
+<script type="text/javascript">
+	$( document ).ready(function( $ ) {
+		$( '#Img_carousel' ).sliderPro({
+			width: 960,
+			height: 500,
+			fade: true,
+			arrows: true,
+			buttons: false,
+			fullScreen: false,
+			smallSize: 500,
+			startSlide: 0,
+			mediumSize: 1000,
+			largeSize: 3000,
+			thumbnailArrows: true,
+			autoplay: false
+		});
+
+  
+
+  	
+	/*$('.dates').daterangepicker({
+
+		"locale": {
+        "format": "DD/MM/YYYY"},
+		"singleDatePicker": true,
+		"autoApply": false,
+		parentEl:'#input_date',
+		timePicker: false,
+		"autoUpdateInput": true,
+        minDate:'today',
+		
+		"linkedCalendars": false,
+		"showCustomRangeLabel": false
+	}, function(start, end, label) {
+	  console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+	});
+	 */
+  
+
+  $('.dates').datepicker({
+  	format: 'dd/mm/yyyy',
+  	minDate: new Date()
+  });
+
+  $('#dates-fin').change(function(){
+    
+     
+    var debut=$('#dates-debut').val();
+    var fin=$(this).val();
+    var id=$('#id-annonce').val();
+
+    if(debut =='' || debut == null)
+    {
+
+    document.getElementById('data.debut').textContent='Champ obligatoire ';
+
+     
+
+    }
+
+    if($.trim(document.getElementById('data.fin').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.fin').textContent="";
+                                  }
+
+    $('#dates-debut').change(function(){
+                  
+                 if($.trim(document.getElementById('data.debut').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.debut').textContent="";
+                                  }
+                    
+                                 });
+
+
+
+
+
+
+
+ var from = debut.split("/");
+var db = new Date(from[2], from[1]-1 , from[0]);
+
+var fromf = fin.split("/");
+var fn = new Date(fromf[2], fromf[1]-1 , fromf[0]);
+
+var currentTime = new Date();
+console.log(currentTime);
+console.log(db);
+
+var cu=compareDate(currentTime,db);
+console.log(cu);
+
+var cp=compareDate(db,fn);
+console.log(cp)
+
+if(cp==true||cu==true)
+{
+  $('#verifierDisponibilite').attr('disabled','disabled');
+  document.getElementById('data.fin').textContent='Champs incorrects . ';
+
+}else{
+$('#verifierDisponibilite').removeAttr('disabled');	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+    if(cp==false&&debut !==null && fin !==null&&cu==false){
+
+    	$('#verifierDisponibilite').attr('disabled','disabled');
+        $.ajax({
+         url:"{{path('verifier_disponibilite')}}",
+         method:"POST",
+         data:{debut:debut,fin:fin,id:id},
+         success:function (data,status,object)
+            {
+             
+            $('#verifierDisponibilite').removeAttr('disabled'); 
+            if(data.success==true)
+            {
+
+             $('#message-disponibilite').html('<div class="alert alert-success alert-dismissible fade show" role="alert">'
+  +data.message+
+  '<button type="button" class="close" data-dismiss="alert" aria-label="Close">'+
+    '<span aria-hidden="true">&times;</span>'+
+  '</button></div>');
+
+             $('#verifierDisponibilite').text('Réserver')
+            
+
+            }else{
+
+            $('#message-disponibilite').html('<div class="alert alert-danger alert-dismissible fade show" role="alert">'
+  +data.message+
+  '<button type="button" class="close" data-dismiss="alert" aria-label="Close">'+
+    '<span aria-hidden="true">&times;</span>'+
+  '</button></div>');
+
+             $('#verifierDisponibilite').css('display','none');
+
+
+
+            }
+          
+          
+
+
+            }
+
+        });
+
+    }	
+
+
+  });
+
+
+
+$('#verifierDisponibilite').click(function(e){
+
+	e.preventDefault();
+
+     var debut=$('#dates-debut').val();
+     var fin=$('#dates-fin').val();
+     var id=$('#id-annonce').val();
+
+	 if(debut =='' || debut == null)
+    {
+
+    document.getElementById('data.debut').textContent='Champ obligatoire ';
+
+     
+
+    }
+
+     if(fin =='' || fin == null)
+    {
+
+    document.getElementById('data.fin').textContent='Champ obligatoire ';
+
+     
+
+    }
+
+
+    $('#dates-debut').change(function(){
+                  
+                 if($.trim(document.getElementById('data.debut').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.debut').textContent="";
+                                  }
+                    
+                                 });
+
+
+    $('#dates-fin').change(function(){
+                  
+                 if($.trim(document.getElementById('data.fin').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.fin').textContent="";
+                                  }
+                    
+                                 });
+
+
+
+
+
+
+
+
+if( debut!==null && fin !==null)
+{
+
+
+  $('#verifierDisponibilite').attr('disabled','disabled');
+        $.ajax({
+         url:"{{path('add_in_session')}}",
+         method:"POST",
+         data:{debut:debut,fin:fin,id:id},
+         success:function (data,status,object)
+            {
+             
+            $('#verifierDisponibilite').removeAttr('disabled'); 
+            if(data.success==true)
+            {
+               
+             window.location = document.getElementById('verifierDisponibilite').href;
+              
+            }else{
+
+                
+                 $('#message-disponibilite').html('<div class="alert alert-danger alert-dismissible fade show" role="alert">'
+  +data.message+
+  '<button type="button" class="close" data-dismiss="alert" aria-label="Close">'+
+    '<span aria-hidden="true">&times;</span>'+
+  '</button></div>');
+
+
+
+
+            }
+
+    }
+});
+
+
+
+
+
+
+
+
+
+}	
+
+
+
+
+
+
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	});
+
+
+
+  
+
+function compareDate(db,df)
+{
+
+var compare=db>df;
+return compare;
+
+
+
+
+}
+
+
+
+
+$('#submit-review').click(function(e){
+e.preventDefault();
+
+
+
+var nom=$("#nom").val();
+console.log(nom);
+
+var email=$("#email").val();
+console.log(email);
+var avis=$("#avis").val();
+console.log(avis);
+var message=$("#message").val();
+console.log(message);
+var formavis=document.getElementById("form-avis");
+
+if(nom='')
+{
+document.getElementById('data.nom').textContent='Champ obligatoire ';
+}
+
+if(avis='')
+{
+document.getElementById('data.avis').textContent='Champ obligatoire ';
+}
+
+
+if(message='')
+{
+document.getElementById('data.message').textContent='Champ obligatoire ';
+}
+
+
+
+
+
+
+    $('#nom').change(function(){
+                  
+                 if($.trim(document.getElementById('data.nom').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.nom').textContent="";
+                                  }
+                    
+                                 });
+
+
+    $('#avis').change(function(){
+                  
+                 if($.trim(document.getElementById('data.avis').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.avis').textContent="";
+                                  }
+                    
+                                 });
+
+
+
+$('#message').change(function(){
+                  
+                 if($.trim(document.getElementById('data.message').textContent) !== "")
+
+                                  {
+                                    document.getElementById('data.message').textContent="";
+                                  }
+                    
+                                 });
+
+
+
+
+
+
+$.ajax({
+         dataType:"json",
+         url:$("#form-avis").attr('action'),
+         type:$("#form-avis").attr('method'),
+         data:new FormData(formavis),
+         contentType:false,
+         processData:false,
+         cache:false,
+         success:function (data,status,object)
+            {
+               if(data.success==true)
+               {
+
+                  $('#form-avis')[0].reset();
+               	$('#content-reviews').html(data.output);
+               }
+
+
+            }
+             
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+});
+
+
+
+
+
+</script>
+{% endblock %}

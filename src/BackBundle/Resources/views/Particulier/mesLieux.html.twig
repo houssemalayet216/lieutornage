@@ -1,0 +1,311 @@
+
+
+{% extends '@Back/Default/templateParticulier.html.twig' %}
+
+{% block section_haider %}
+<section class="content-header">
+        <h1>
+        Mes Lieux
+     
+      </h1>
+      <ol class="breadcrumb">
+
+        <li><a href="#"><i class="fa fa-dashboard"></i>Tableau de bord</a></li>
+        <li class="active">Mes Lieux</li>
+      </ol>
+    </section>
+{%endblock%}
+
+ {%block pageContainer %} 
+ 
+
+ 
+
+
+
+
+
+  <div class="row">
+<div class="col-md-12">
+
+
+
+<div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Mes Lieux</h3><br/>
+            
+
+
+
+
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+
+
+
+
+       <table id="tablemeslieux" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  
+                  <th class="text-center">Image</th>
+                  <th class="text-center">Catégorie</th>
+                  
+                 <th class="text-center">Type Tarification</th>
+                  <th class="text-center">Tarif (DT)</th>
+                  <th class="text-center">Date de publication</th>
+                  <th class="text-center ">Action</th>
+                </tr>
+                </thead>
+                
+              </table>
+
+
+            </div>
+          </div>
+
+
+
+
+
+<div class="modal fade" tabindex="-1" id="supprimerAnnonceModal" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Supprimer Annonce</h4>
+      </div>
+      <div class="modal-body">
+        <p>Êtes-vous sûr de supprimer cette annonce ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" id="suppAnnonce"><span>Supprimer</span><i id="spin-supprimer-operation"></i></button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal --> 
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+
+{% endblock %}
+
+{%block aside %}
+{%endblock%}
+
+
+{% block javascript %}
+
+<script>
+
+  var Lieux;
+
+    $(document).ready(function($){
+
+  Lieux=$("#tablemeslieux").DataTable({
+     columnDefs: [
+    {
+
+        targets: -1,
+        className: 'dt-body-left'
+    },{ "orderable": false, "targets": 5 }
+  ],
+  'destroy':true,
+  'language': {
+            "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/French.json"
+        },
+   
+    'ajax':'{{path('mes_lieux')}}',
+     'order': []
+});
+
+
+
+
+
+
+
+
+   $('#link-tableau').removeClass('active');
+  $('#link-reservation').removeClass('active');
+  $('#link-calendar').removeClass('active');
+  $('#link-message').removeClass('active');
+  $('#link-profile').removeClass('active');
+  $('#link-lieux').addClass('active');
+
+ });
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+function supprimerAnnonce(id){
+
+if(id){
+  $("#suppAnnonce").unbind('click').bind('click',function(){
+   
+     $('#suppAnnonce').prop('disabled',true);
+    $("#spin-supprimer-operation").addClass('fa fa-spinner fa-spin fa-register');
+
+       $.ajax({
+                       
+                       url:"{{path('delete_lieux')}}",
+                       type:'POST',
+                       data:{id:id},
+                       success:function (data,status,object)
+                       {
+
+                        var message=data.message;
+                       if(data.success==true)
+                          {
+
+                           $("#spin-supprimer-operation").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#suppAnnonce').prop('disabled',false);
+
+                           $('#supprimerAnnonceModal').modal('hide');
+                               Lieux.ajax.reload(null,false);
+                                
+                             
+
+                               toastr.success(message,'Success', {
+                                      
+                                      "closeButton": false,
+                                       "debug": false,
+                                        "newestOnTop": false,
+                                        "progressBar": true,
+                                        "positionClass": "toast-top-right",
+                                         "preventDuplicates": false,
+                                         "onclick": null,
+                                          "showDuration": "300",
+                                          "hideDuration": "1000",
+                                           "timeOut": "5000",
+                                           "extendedTimeOut": "1000",
+                                           "showEasing": "swing",
+                                           "hideEasing": "linear",
+                                           "showMethod": "fadeIn",
+                                        "hideMethod": "fadeOut"
+                              
+
+
+                               });
+
+                              
+
+                          }else{
+                          
+                             
+                           $("#spin-supprimer-operation").removeClass('fa fa-spinner fa-spin fa-register');
+                          $('#suppAnnonce').prop('disabled',false);
+                             $('#supprimerAnnonceModal').modal('hide');
+
+                               toastr.error(message,'Error', {
+                                      
+                                      "closeButton": false,
+                                       "debug": false,
+                                        "newestOnTop": false,
+                                        "progressBar": true,
+                                        "positionClass": "toast-top-right",
+                                         "preventDuplicates": false,
+                                         "onclick": null,
+                                          "showDuration": "300",
+                                          "hideDuration": "1000",
+                                           "timeOut": "5000",
+                                           "extendedTimeOut": "1000",
+                                           "showEasing": "swing",
+                                           "hideEasing": "linear",
+                                           "showMethod": "fadeIn",
+                                        "hideMethod": "fadeOut"
+                              
+
+
+                               });
+
+                         
+
+
+                          }
+
+              
+
+                       }
+
+
+
+                       });
+
+
+
+    });
+
+    }
+    }
+
+
+
+
+    {% for flashMessage in app.session.flashbag.get('ModificationSuccess') %}
+
+
+                           toastr.success('{{flashMessage}}','Success',{
+                                      
+                                     "closeButton": false,
+                                       "debug": false,
+                                        "newestOnTop": false,
+                                        "progressBar": true,
+                                        "positionClass": "toast-top-right",
+                                         "preventDuplicates": false,
+                                         "onclick": null,
+                                          "showDuration": "300",
+                                          "hideDuration": "1000",
+                                           "timeOut": "5000",
+                                           "extendedTimeOut": "1000",
+                                           "showEasing": "swing",
+                                           "hideEasing": "linear",
+                                           "showMethod": "fadeIn",
+                                          "hideMethod": "fadeOut"
+                              
+
+
+                                        });
+
+  
+
+  
+   
+
+        {% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+{% endblock %}

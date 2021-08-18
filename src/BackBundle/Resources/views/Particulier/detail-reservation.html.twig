@@ -1,0 +1,222 @@
+{% extends '@Back/Default/templateParticulier.html.twig' %}
+
+{% block section_haider %}
+<section class="content-header">
+     
+      <ol class="breadcrumb">
+
+        <li><a href="#"><i class="fa fa-dashboard"></i>Tableau de bord</a></li>
+        <li class="active">Détails reservation</li>
+      </ol>
+    </section>
+{%endblock%}
+
+ {%block pageContainer %} 
+ 
+
+ 
+
+
+
+
+  <section class="content">
+  <div class="row">
+<div class="col-md-3">
+
+  <div class="box box-primary">
+            <div class="box-body box-profile">
+            	{% if reservation.client.photo %}
+              <img class="profile-user-img img-responsive img-circle" src="{{asset('')}}Uploads/{{reservation.client.photo}}" alt="User profile picture">
+          {% else %}
+          	<img class="profile-user-img img-responsive img-circle" src="{{asset('frontFolder/img/avatar.jpg')}}" alt="User profile picture">
+          {% endif %}
+
+              <h3 class="profile-username text-center">{{reservation.client.nom}} {{reservation.client.prenom}}</h3>
+
+              <p class="text-muted text-center">{% if reservation.client.fonction != null %} {{reservation.client.fonction}} {% endif %} {%if reservation.client.societe != null %} à {{reservation.client.societe}} {% endif %}</p>
+
+              <ul class="list-group list-group-unbordered">
+                <li class="list-group-item">
+                  <b>Adresse</b> <span class="pull-right">{{reservation.client.ville}},{{reservation.client.adresse}},{{reservation.client.cp}}</span>
+                </li>
+                <li class="list-group-item">
+                  <b>Téléphone</b> <span class="pull-right">{{reservation.client.telephone}}</span>
+                </li>
+                <li class="list-group-item">
+                  <b>Email</b> <span class="pull-right">{{reservation.client.email}}</span>
+                </li>
+              </ul>
+
+              <a href="#" class="btn btn-primary btn-block">Envoyer message</a>
+            </div>
+            <!-- /.box-body -->
+          </div>
+
+</div>
+
+<div class="col-md-9">
+
+
+
+
+  <div class="box box-info">
+            <div class="box-header with-border">
+             <div style="text-align:center;"> <h3 class="box-title" >Détails de reservation</h3></div>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="table-responsive">
+                <table class="table no-margin">
+                 
+               
+                  <tr>
+                    <td>Du</td>
+                     <td>{{reservation.datedebut|date("d/m/Y")}}</td>
+                  </tr>
+
+                    <tr>
+                    <td>Au</td>
+                     <td>{{reservation.datefin|date("d/m/Y")}}</td>
+                  </tr>
+                  
+
+                   <tr>
+                    <td>Date de reservation</td>
+                     <td>{{reservation.datereservation|date("d/m/Y")}}</td>
+                  </tr>
+
+                  <tr>
+                    <td>Tatif Totale (DT)</td>
+                     <td>{{reservation.tarifTotal}}</td>
+                  </tr>
+
+                  <tr>
+                    <td>Etat </td>
+                     <td>
+                     	{% if reservation.etat=='En attente'%}
+                     	<span class="label label-warning">{{reservation.etat}}</span>
+                     {% elseif reservation.etat=='En cour' %}
+                         <span class="label label-info">{{reservation.etat}}</span>
+                     	{% else %}
+                     		<span class="label label-danger">{{reservation.etat}}</span>
+                     {% endif %}
+
+                     </td>
+                  </tr>
+                
+                {% if reservation.equipement|length >0 %}
+
+                  <tr>
+                    <td>Equipements </td>
+                    {%for eq in reservation.equipement %}
+                     <td><span>{{eq.titre}}</span></td>
+                 {% endfor %}
+                    
+                  </tr>
+                  {% endif %}
+
+                  {% if reservation.service|length >0 %}
+                  <tr>
+                    <td>Services </td>
+                      {%for sr in reservation.service %}
+                     <td><span>{{sr.titre}}</span></td>
+                 {% endfor %}
+                  </tr>
+                  {% endif %}
+                  
+                </table>
+              </div>
+              <!-- /.table-responsive -->
+            </div>
+         
+          
+          </div>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+	{%endblock%}
+
+	{% block aside %}
+
+	{% endblock %}
+
+	{% block javascript %}
+
+
+
+
+
+<script>
+$(document).ready(function(){
+
+ $('#link-tableau').removeClass('active');
+  $('#link-lieux').removeClass('active');
+  $('#link-calendar').removeClass('active');
+  $('#link-message').removeClass('active');
+  $('#link-profile').removeClass('active');
+  $('#link-reservation').addClass('active');
+
+
+  
+});
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+{% endblock %}
